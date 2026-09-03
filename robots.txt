@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://drayn.online/sitemap.xml

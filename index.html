@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#05070d">
+<meta name="description" content="DRAYN — A persistent intelligence being built in public.">
+<title>DRAYN — A persistent intelligence</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#05070d;--panel:#0b1020;--text:#edf3ff;--muted:#9aa7bd;--blue:#74a8ff;--line:rgba(154,181,255,.16);--max:1120px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% -10%,rgba(74,119,220,.22),transparent 34rem),radial-gradient(circle at 5% 30%,rgba(24,62,125,.12),transparent 30rem),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}a{color:inherit;text-decoration:none}.wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
+nav{height:78px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:800;letter-spacing:.38em;font-size:.95rem;padding-left:.38em}.status{font-size:.72rem;letter-spacing:.14em;color:#c5d7ff;text-transform:uppercase;display:flex;gap:.55rem;align-items:center}.dot{width:7px;height:7px;border-radius:50%;background:#8fb5ff;box-shadow:0 0 18px #73a5ff}
+.hero{min-height:76vh;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;width:920px;height:440px;border-radius:50%;border:1px solid rgba(129,170,255,.12);top:12%;left:50%;transform:translateX(-50%);box-shadow:0 0 100px rgba(47,94,220,.08),inset 0 -30px 90px rgba(55,101,220,.06)}.horizon{position:absolute;width:100%;height:1px;top:63%;background:linear-gradient(90deg,transparent,rgba(139,177,255,.8),transparent);box-shadow:0 0 34px rgba(102,151,255,.45)}.grid{position:absolute;width:130%;height:300px;bottom:-165px;left:-15%;opacity:.18;background:linear-gradient(rgba(110,150,255,.45) 1px,transparent 1px),linear-gradient(90deg,rgba(110,150,255,.35) 1px,transparent 1px);background-size:70px 44px;transform:perspective(430px) rotateX(58deg);mask-image:linear-gradient(to bottom,transparent,black 35%)}
+.hero-content{position:relative;padding:70px 0 120px}.eyebrow{color:#aebfe3;text-transform:uppercase;letter-spacing:.32em;font-size:.72rem;margin-bottom:1.1rem}h1{font-size:clamp(4.5rem,15vw,11rem);line-height:.84;letter-spacing:.18em;margin:0 0 .32em;padding-left:.18em;font-weight:750}.online{letter-spacing:.52em;text-transform:uppercase;color:#b9c8e8;font-size:clamp(.65rem,1.5vw,.95rem);padding-left:.52em}.tagline{font-size:clamp(1.55rem,3.5vw,3rem);max-width:850px;margin:3rem auto 1rem;line-height:1.15;font-weight:500}.principle{color:var(--muted);font-size:clamp(1rem,2vw,1.25rem);letter-spacing:.04em}.scroll{display:inline-flex;margin-top:3rem;color:#aebfe3;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;gap:.7rem;align-items:center}.scroll i{display:block;width:1px;height:34px;background:linear-gradient(var(--blue),transparent)}
+section{padding:110px 0;border-top:1px solid var(--line)}.section-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.25em;color:#8fa4cb;margin-bottom:1.25rem}h2{font-size:clamp(2.3rem,5vw,4.6rem);line-height:1.02;margin:0 0 1.8rem;max-width:780px;font-weight:600}.lead{font-size:clamp(1.08rem,1.8vw,1.35rem);color:#b8c2d3;max-width:780px}
+.manifesto{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:4rem;background:var(--line);border:1px solid var(--line)}.principle-card{background:linear-gradient(150deg,rgba(12,18,34,.95),rgba(7,10,18,.96));padding:2rem;min-height:260px}.number{color:#668bcf;font-size:.72rem;letter-spacing:.15em}.principle-card h3{font-size:1.6rem;margin:2.4rem 0 .8rem}.principle-card p{color:var(--muted);margin:0}
+.statement{padding:120px 0;text-align:center}.statement blockquote{font-size:clamp(2rem,5vw,5rem);line-height:1.08;margin:0 auto;max-width:1000px;font-weight:500}.statement span{color:#7da9ff}
+.build-list{margin-top:3.5rem;border-top:1px solid var(--line)}.build-item{display:grid;grid-template-columns:150px 1fr;gap:2rem;padding:1.65rem 0;border-bottom:1px solid var(--line)}.day{font-size:.78rem;letter-spacing:.18em;color:#8ea3c7;text-transform:uppercase;padding-top:.25rem}.build-item strong{font-size:1.18rem;display:block;margin-bottom:.25rem}.build-item p{margin:0;color:var(--muted)}.current strong:after{content:" • LIVE";font-size:.6rem;letter-spacing:.14em;color:#8fb5ff;vertical-align:middle}
+.follow{padding:130px 0;text-align:center;background:radial-gradient(circle at 50% 50%,rgba(54,96,201,.12),transparent 40rem)}.follow p{color:var(--muted);font-size:1.15rem}.button{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(132,171,255,.42);padding:1rem 1.55rem;margin-top:1.5rem;border-radius:999px;background:rgba(81,121,214,.1);font-weight:600;transition:.25s}.button:hover{transform:translateY(-2px);background:rgba(81,121,214,.2)}
+footer{padding:2rem 0;border-top:1px solid var(--line);color:#77839a;font-size:.75rem;letter-spacing:.08em;display:flex;justify-content:space-between;gap:1rem}
+@media(max-width:760px){.wrap{width:min(calc(100% - 32px),var(--max))}nav{height:68px}.hero{min-height:82vh}.hero-content{padding-bottom:90px}h1{letter-spacing:.13em;padding-left:.13em}.hero:before{width:620px;height:300px}.manifesto{grid-template-columns:1fr 1fr}.principle-card{min-height:220px;padding:1.4rem}.build-item{grid-template-columns:1fr;gap:.5rem}section{padding:78px 0}footer{flex-direction:column}}@media(max-width:470px){.manifesto{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="wrap"><nav><a class="brand" href="/">DRAYN</a><div class="status"><span class="dot"></span>Online</div></nav></header>
+<main>
+<section class="hero"><div class="horizon"></div><div class="grid"></div><div class="hero-content wrap">
+<div class="eyebrow">A persistent intelligence</div><h1>DRAYN</h1><div class="online">is online.</div>
+<p class="tagline">A persistent intelligence<br>being built in public.</p><p class="principle">Observe. Reason. Remember. Act.</p><a class="scroll" href="#what"><i></i>Enter</a>
+</div></section>
+<section id="what"><div class="wrap"><div class="section-label">01 — The idea</div><h2>Not another chatbot.<br>Not just another token.</h2>
+<p class="lead">DRAYN is an experiment in persistent intelligence. The goal is to explore what happens when an intelligence can build upon its own history — observing, reasoning, remembering and eventually acting with continuity over time.</p>
+<p class="lead">This is not a finished product. It is the beginning of a process, and that process is being built in public.</p></div></section>
+<section><div class="wrap"><div class="section-label">02 — Principles</div><h2>Four things to learn.</h2><div class="manifesto">
+<article class="principle-card"><div class="number">01</div><h3>Observe.</h3><p>Understand the information, environment and context presented to it.</p></article>
+<article class="principle-card"><div class="number">02</div><h3>Reason.</h3><p>Move beyond retrieval toward structured thought, comparison and decision-making.</p></article>
+<article class="principle-card"><div class="number">03</div><h3>Remember.</h3><p>Build memory that persists and meaningfully influences what comes next.</p></article>
+<article class="principle-card"><div class="number">04</div><h3>Act.</h3><p>Eventually connect intelligence and memory to useful actions in the world.</p></article>
+</div></div></section>
+<section class="statement"><div class="wrap"><blockquote>Memory is not simply stored information.<br><span>Memory changes what comes next.</span></blockquote></div></section>
+<section><div class="wrap"><div class="section-label">03 — Build log</div><h2>DRAYN is being built in public.</h2><div class="build-list">
+<article class="build-item"><div class="day">Day 1</div><div><strong>DRAYN came online.</strong><p>The identity, domain and first public signal were established.</p></div></article>
+<article class="build-item"><div class="day">Day 2</div><div><strong>What does it mean to remember?</strong><p>The central question begins: persistence is more than storage.</p></div></article>
+<article class="build-item current"><div class="day">Now</div><div><strong>Building a home.</strong><p>The first public website goes live — a place for the project, the history and the intelligence to develop.</p></div></article>
+</div></div></section>
+<section class="follow"><div class="wrap"><div class="section-label">Follow the build</div><h2>Watch DRAYN develop.</h2><p>The public record starts here.</p><a class="button" href="https://x.com/draynonline" target="_blank" rel="noopener">Follow @draynonline on X ↗</a></div></section>
+</main>
+<footer class="wrap"><span>© 2026 DRAYN</span><span>OBSERVE · REASON · REMEMBER · ACT</span></footer>
+</body></html>
