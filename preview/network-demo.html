@@ -71,12 +71,33 @@
 .screen-note{margin-top:14px;color:#657f90;font-size:9px;line-height:1.6}
 @media(max-width:700px){.appnav{margin:0 -13px;padding:10px 13px}.appnav button{padding:9px 11px}.panelgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.panel{padding:12px}.panel .big{font-size:22px}.split{grid-template-columns:1fr}.pagehead{padding-top:18px}.datatable{min-width:560px}}
 @media(max-width:390px){.panelgrid{grid-template-columns:1fr 1fr}.panel .big{font-size:20px}}
+
+/* Agent management workspace */
+.agentlayout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,1fr);gap:14px}
+.agentlist{display:grid;gap:8px}
+.agentrow{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid #20313e;border-radius:8px;background:#0d1821;color:inherit;text-align:left;width:100%;cursor:pointer;font:inherit}
+.agentrow:hover,.agentrow.active{border-color:#4d8f84;background:linear-gradient(100deg,#14302d,#0d1821 75%)}
+.agentavatar{width:36px;height:36px;flex:0 0 36px;display:grid;place-items:center;border:1px solid #345d60;border-radius:9px;background:#132b30;color:#9cf7e6;font-size:12px;font-weight:800}
+.agentrowmain{min-width:0;flex:1}.agentrowmain strong{display:block;font-size:11px}.agentrowmain small{display:block;margin-top:5px;color:#8196a6;font-size:9px;line-height:1.4}
+.agentfilters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.agentfilters button{border:1px solid #2a3c49;background:#0b151e;color:#8ea5b4;border-radius:5px;padding:8px 10px;font:600 9px system-ui;cursor:pointer}
+.agentfilters button.active{border-color:#4d8f84;color:#a5f5e4;background:#14302d}
+.agentdetail h2{font-size:20px;margin:9px 0 5px}.agentdetail .hint{font-size:10px;color:#8196a6;line-height:1.6}
+.agentstats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:16px 0}
+.agentstat{padding:10px;border:1px solid #20313e;border-radius:6px}.agentstat span{display:block;color:#8196a6;font-size:8px;letter-spacing:.08em}.agentstat strong{display:block;margin-top:7px;font-size:14px}
+.agentactions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.agentactions button{border:1px solid #345a59;background:#14302d;color:#a5f5e4;border-radius:5px;padding:9px 11px;font:600 10px system-ui;cursor:pointer}
+.agentactions button.secondary{border-color:#2b3c48;background:#0d1821;color:#a1b3bf}
+.agentperm{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #1e2c38;font-size:10px;color:#b5c8d2}.agentperm:last-child{border-bottom:0}
+.agentsearch{width:100%;box-sizing:border-box;border:1px solid #2a3c49;border-radius:6px;background:#0a141c;color:#e0f2f6;padding:11px 12px;font:11px system-ui;margin-bottom:12px}
+.agentsearch::placeholder{color:#647d8c}
+@media(max-width:700px){.agentlayout{grid-template-columns:1fr}.agentdetail h2{font-size:18px}}
 </style>
 </head>
 <body><main class="shell">
 <header class="top"><div class="brand"><span>◇</span> DRAYN <span style="color:#71879b;font-size:9px;letter-spacing:.12em;font-weight:500">/ INTELLIGENCE NETWORK</span></div><span class="tag">SIMULATION · NO PRODUCTION TELEMETRY</span></header>
 <nav class="appnav" aria-label="Terminal sections">
-<button class="active" data-screen="overview">Overview</button><button data-screen="jobs">Jobs</button><button data-screen="providers">Providers</button><button data-screen="capabilities">Capabilities</button><button data-screen="evidence">Evidence</button><button data-screen="settlement">Settlement</button><button data-screen="trading">Trading</button>
+<button class="active" data-screen="overview">Overview</button><button data-screen="jobs">Jobs</button><button data-screen="providers">Providers</button><button data-screen="capabilities">Capabilities</button><button data-screen="evidence">Evidence</button><button data-screen="settlement">Settlement</button><button data-screen="trading">Trading</button><button data-screen="agents">My Agents</button>
 </nav>
 <section class="screen active" id="screen-overview">
 <section style="padding:22px 2px 0"><div class="eyebrow"><i class="live"></i>NETWORK TELEMETRY <span class="tag" style="margin-left:8px">SIMULATED FEED</span></div><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:22px;flex-wrap:wrap"><div><h1>Intelligence in motion</h1><p class="sub">Requests move through capability matching, specialist providers and verification.</p></div><div class="metrics"><div class="metric"><b id="flow">18<small>/s</small></b><span>REQUEST FLOW</span></div><div class="metric"><b id="active">7</b><span>ACTIVE NODES</span></div><div class="metric"><b id="health">94<small>%</small></b><span>ROUTE HEALTH</span></div></div></div></section>
@@ -164,6 +185,31 @@
 </div></div>
 <p class="screen-note">Trading workspace is a visual prototype only. Prices, chart, strategy output, equity, P&amp;L and trades are fabricated examples; they are not live exchange data, investment advice or evidence of profitability. No wallet, exchange API or live order execution is connected.</p>
 </section>
+<section class="screen" id="screen-agents">
+<div class="pagehead"><div><div class="eyebrow">CONTROL PLANE · YOUR WORKSPACE</div><h1>My Agents</h1><p>Manage agent identity, operating state, permissions and workload. This preview uses local demo state only.</p></div><div class="page-meta"><span class="pill">5 EXAMPLE AGENTS</span><span class="pill">NO BACKEND CONNECTED</span></div></div>
+<div class="panelgrid"><div class="panel"><div class="kicker">YOUR AGENTS</div><div class="big" id="agentCount">5</div><div class="hint">Example agent identities</div></div><div class="panel"><div class="kicker">ACTIVE</div><div class="big" id="agentActiveCount">4</div><div class="hint">Local preview status</div></div><div class="panel"><div class="kicker">NEEDS ATTENTION</div><div class="big">1</div><div class="hint">Example warning state</div></div></div>
+<div class="agentlayout"><div>
+<div class="sectionrow"><h2>Agent registry</h2><span class="pill">SELECT TO INSPECT</span></div>
+<input class="agentsearch" id="agentSearch" type="search" placeholder="Search agents by name or role…" aria-label="Search agents"/>
+<div class="agentfilters"><button class="active" data-agent-filter="all">All agents</button><button data-agent-filter="active">Active</button><button data-agent-filter="paused">Paused</button><button data-agent-filter="attention">Needs attention</button></div>
+<div class="agentlist" id="agentList">
+<button class="agentrow active" data-agent="market"><span class="agentavatar">MS</span><span class="agentrowmain"><strong>Market Scout</strong><small>Research · Market monitoring</small><small class="mono">AGT-MARKET-001</small></span><span class="state">ACTIVE</span></button>
+<button class="agentrow" data-agent="trader"><span class="agentavatar">TA</span><span class="agentrowmain"><strong>Trading Agent</strong><small>Trading · Paper strategy execution</small><small class="mono">AGT-TRADE-002</small></span><span class="state blue">PAPER</span></button>
+<button class="agentrow" data-agent="research"><span class="agentavatar">RA</span><span class="agentrowmain"><strong>Research Agent</strong><small>Research · Source synthesis</small><small class="mono">AGT-RESEARCH-003</small></span><span class="state">ACTIVE</span></button>
+<button class="agentrow" data-agent="risk"><span class="agentavatar">RC</span><span class="agentrowmain"><strong>Risk Coordinator</strong><small>Risk · Policy and exposure checks</small><small class="mono">AGT-RISK-004</small></span><span class="state warn">ATTENTION</span></button>
+<button class="agentrow" data-agent="ops"><span class="agentavatar">OA</span><span class="agentrowmain"><strong>Ops Assistant</strong><small>Operations · Run summaries</small><small class="mono">AGT-OPS-005</small></span><span class="state warn">PAUSED</span></button>
+</div><p class="screen-note">These are example identities. They do not represent deployed agents or connect to the DRAYN runtime.</p>
+</div>
+<div>
+<div class="panel agentdetail"><div class="sectionrow"><span class="kicker">AGENT DETAILS</span><span class="state" id="agentState">ACTIVE · DEMO</span></div><div class="agentavatar" id="agentAvatar">MS</div><h2 id="agentName">Market Scout</h2><div class="hint" id="agentDescription">Finds and summarises market information for downstream agents.</div>
+<div class="agentstats"><div class="agentstat"><span>AGENT IDENTITY</span><strong id="agentId">AGT-MARKET-001</strong></div><div class="agentstat"><span>WORKLOAD</span><strong id="agentWorkload">2 running</strong></div><div class="agentstat"><span>LAST ACTIVITY</span><strong id="agentLast">12s ago</strong></div><div class="agentstat"><span>POLICY PROFILE</span><strong id="agentPolicy">Research only</strong></div></div>
+<div class="sectionrow"><h3 style="font-size:12px;margin:0">Permissions</h3><span class="pill">EXAMPLE POLICY</span></div>
+<div class="agentperm"><span>Read approved market data</span><span class="state" id="permRead">ALLOWED</span></div><div class="agentperm"><span>Call registered providers</span><span class="state" id="permProviders">ALLOWED</span></div><div class="agentperm"><span>Initiate financial transactions</span><span class="state warn" id="permTrade">DENIED</span></div>
+<div class="agentactions"><button id="agentToggle">Pause agent</button><button class="secondary" id="agentViewJobs">View jobs</button><button class="secondary" id="agentViewTrading">Trading workspace</button></div>
+<p class="screen-note" id="agentActionNote">Controls change only this browser preview. No real agent is paused, configured or restarted.</p></div>
+<div class="panel" style="margin-top:12px"><div class="sectionrow"><h3 style="font-size:12px;margin:0">Control principles</h3><span class="pill">DESIGN TARGET</span></div><div class="agentperm"><span>Explicit identity and ownership</span><span class="state">REQUIRED</span></div><div class="agentperm"><span>Least-privilege permissions</span><span class="state">REQUIRED</span></div><div class="agentperm"><span>Observable lifecycle and logs</span><span class="state">REQUIRED</span></div><div class="agentperm"><span>Human approval for live trading</span><span class="state warn">GATED</span></div></div>
+</div></div>
+</section>
 <footer class="foot"><span><b>What this demonstrates</b> Animated routes, selectable providers and a simulated job lifecycle.</span><span>Demo telemetry is clearly labelled. Replace the simulator with platform events when the API exists.</span></footer>
 </main>
 <script>
@@ -174,4 +220,21 @@ function render(){const wrap=document.getElementById('events');wrap.innerHTML=''
 
 // Client-side section navigation for the standalone preview. All screens use clearly labelled demo data.
 document.querySelectorAll('.appnav button[data-screen]').forEach(button=>button.addEventListener('click',()=>{const target=button.dataset.screen;document.querySelectorAll('.appnav button').forEach(b=>b.classList.toggle('active',b===button));document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id==='screen-'+target));window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}));
+
+const agentRecords={
+market:{name:'Market Scout',initials:'MS',id:'AGT-MARKET-001',role:'Research · Market monitoring',description:'Finds and summarises market information for downstream agents.',state:'active',workload:'2 running',last:'12s ago',policy:'Research only',read:'ALLOWED',providers:'ALLOWED',trade:'DENIED'},
+trader:{name:'Trading Agent',initials:'TA',id:'AGT-TRADE-002',role:'Trading · Paper strategy execution',description:'Evaluates market signals and manages a paper-trading strategy within configured risk limits.',state:'active',workload:'1 running',last:'4s ago',policy:'Paper trading',read:'ALLOWED',providers:'ALLOWED',trade:'PAPER ONLY'},
+research:{name:'Research Agent',initials:'RA',id:'AGT-RESEARCH-003',role:'Research · Source synthesis',description:'Collects approved sources and returns structured research with supporting evidence.',state:'active',workload:'1 queued',last:'31s ago',policy:'Research only',read:'ALLOWED',providers:'ALLOWED',trade:'DENIED'},
+risk:{name:'Risk Coordinator',initials:'RC',id:'AGT-RISK-004',role:'Risk · Policy and exposure checks',description:'Checks strategy exposure, data fitness and risk constraints before a proposed action can proceed.',state:'attention',workload:'1 review',last:'2m ago',policy:'Risk gate',read:'ALLOWED',providers:'ALLOWED',trade:'DENIED'},
+ops:{name:'Ops Assistant',initials:'OA',id:'AGT-OPS-005',role:'Operations · Run summaries',description:'Produces operational summaries and flags failed or stalled workflows.',state:'paused',workload:'0 running',last:'18m ago',policy:'Read-only ops',read:'ALLOWED',providers:'DENIED',trade:'DENIED'}
+};
+let selectedAgent='market';const localAgentStates={market:'active',trader:'active',research:'active',risk:'attention',ops:'paused'};let agentFilter='all';
+function renderAgentList(){const q=(document.getElementById('agentSearch')?.value||'').toLowerCase();document.querySelectorAll('.agentrow[data-agent]').forEach(row=>{const id=row.dataset.agent,d=agentRecords[id],state=localAgentStates[id],matchesFilter=agentFilter==='all'||(agentFilter==='active'&&state==='active')||(agentFilter==='paused'&&state==='paused')||(agentFilter==='attention'&&state==='attention'),matchesQuery=(d.name+' '+d.role+' '+d.id).toLowerCase().includes(q);row.style.display=matchesFilter&&matchesQuery?'flex':'none';row.classList.toggle('active',id===selectedAgent);const badge=row.querySelector('.state');if(badge){badge.className='state'+(state==='paused'?' warn':state==='attention'?' warn':id==='trader'?' blue':'');badge.textContent=state==='paused'?'PAUSED':state==='attention'?'ATTENTION':id==='trader'?'PAPER':'ACTIVE';}});document.getElementById('agentActiveCount').textContent=Object.values(localAgentStates).filter(s=>s==='active').length;}
+function selectAgent(id){selectedAgent=id;const d=agentRecords[id],state=localAgentStates[id];document.getElementById('agentAvatar').textContent=d.initials;document.getElementById('agentName').textContent=d.name;document.getElementById('agentDescription').textContent=d.description;document.getElementById('agentId').textContent=d.id;document.getElementById('agentWorkload').textContent=state==='paused'?'0 running':d.workload;document.getElementById('agentLast').textContent=d.last;document.getElementById('agentPolicy').textContent=d.policy;document.getElementById('agentState').textContent=state==='paused'?'PAUSED · DEMO':state==='attention'?'NEEDS ATTENTION · DEMO':'ACTIVE · DEMO';document.getElementById('agentState').className='state'+(state==='paused'||state==='attention'?' warn':'');document.getElementById('permRead').textContent=d.read;document.getElementById('permProviders').textContent=d.providers;document.getElementById('permTrade').textContent=d.trade;document.getElementById('agentToggle').textContent=state==='paused'?'Resume in demo':'Pause in demo';document.getElementById('agentActionNote').textContent='Controls change only this browser preview. No real agent is paused, configured or restarted.';renderAgentList();}
+document.querySelectorAll('.agentrow[data-agent]').forEach(row=>row.addEventListener('click',()=>selectAgent(row.dataset.agent)));
+document.getElementById('agentSearch')?.addEventListener('input',renderAgentList);
+document.querySelectorAll('[data-agent-filter]').forEach(button=>button.addEventListener('click',()=>{agentFilter=button.dataset.agentFilter;document.querySelectorAll('[data-agent-filter]').forEach(b=>b.classList.toggle('active',b===button));renderAgentList();}));
+document.getElementById('agentToggle')?.addEventListener('click',()=>{if(localAgentStates[selectedAgent]==='attention'){document.getElementById('agentActionNote').textContent='This example agent has a warning. Resolve the issue in the real control plane before resuming it.';return;}localAgentStates[selectedAgent]=localAgentStates[selectedAgent]==='paused'?'active':'paused';selectAgent(selectedAgent);document.getElementById('agentActionNote').textContent='Demo state changed locally only. A production pause/resume action must call the authenticated runtime API and confirm the result.';});
+document.getElementById('agentViewJobs')?.addEventListener('click',()=>document.querySelector('[data-screen="jobs"]')?.click());
+document.getElementById('agentViewTrading')?.addEventListener('click',()=>document.querySelector('[data-screen="trading"]')?.click());
 </script></body></html>
