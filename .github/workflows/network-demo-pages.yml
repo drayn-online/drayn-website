@@ -1,10 +1,13 @@
-name: Network Demo Preview
+name: DRAYN Website Preview
 
 on:
   push:
     branches:
       - network-demo-preview
     paths:
+      - 'index.html'
+      - 'login.html'
+      - 'favicon.svg'
       - 'preview/network-demo.html'
       - '.github/workflows/network-demo-pages.yml'
   workflow_dispatch:
@@ -15,7 +18,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: network-demo-preview
+  group: drayn-website-preview
   cancel-in-progress: true
 
 jobs:
@@ -31,10 +34,13 @@ jobs:
           ref: network-demo-preview
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Prepare standalone preview
+      - name: Prepare complete website
         run: |
-          mkdir -p _site
-          cp preview/network-demo.html _site/index.html
+          mkdir -p _site/preview
+          cp index.html _site/index.html
+          cp login.html _site/login.html
+          cp favicon.svg _site/favicon.svg
+          cp preview/network-demo.html _site/preview/network-demo.html
           touch _site/.nojekyll
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
