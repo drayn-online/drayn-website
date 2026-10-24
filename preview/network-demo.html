@@ -31,10 +31,54 @@
 @keyframes routeFlow{to{stroke-dashoffset:-24}}
 @media(max-width:850px){.metric{flex:1;min-width:0;padding:9px 8px}.metric b{font-size:22px}.metric span{font-size:7px}.graphhead{padding:13px 13px;font-size:8px}.legend{gap:10px;padding:0 13px 14px}.selected{padding:16px}.event{padding:12px 14px}.node:focus{outline:none}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+
+/* Multi-screen terminal shell */
+.appnav{display:flex;gap:6px;overflow-x:auto;padding:12px 0;border-bottom:1px solid var(--line);scrollbar-width:thin}
+.appnav button{flex:0 0 auto;border:1px solid transparent;background:transparent;color:#8297a8;border-radius:7px;padding:10px 13px;font:600 11px system-ui;cursor:pointer}
+.appnav button:hover{background:#11232b;color:#d8f8f1}
+.appnav button.active{background:#15302f;border-color:#2d665e;color:#a8ffed}
+.screen{display:none}.screen.active{display:block}
+.pagehead{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;padding:22px 2px 16px}
+.pagehead h1{margin:7px 0 4px}.pagehead p{margin:0;max-width:660px}
+.page-meta{display:flex;gap:8px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid #29414d;border-radius:5px;color:#9eb3c1;font-size:9px;letter-spacing:.04em}
+.panelgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 16px}
+.panel{border:1px solid var(--line);border-radius:9px;background:linear-gradient(145deg,#0d1922,#0a1119);padding:16px;min-width:0}
+.panel .kicker{color:#8197a8;font-size:9px;letter-spacing:.12em}
+.panel .big{font-size:25px;font-weight:750;letter-spacing:-.04em;margin:9px 0 4px;color:#e4fff8}
+.panel .hint{font-size:10px;color:#8297a8;line-height:1.5}
+.panel h3{margin:0 0 12px;font-size:13px}
+.sectionrow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.sectionrow h2{font-size:15px;margin:0}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+.datatable{width:100%;border-collapse:collapse;min-width:600px;font-size:10px}
+.datatable th{text-align:left;font-size:8px;letter-spacing:.1em;color:#8297a8;background:#101b25;padding:12px 14px;font-weight:700}
+.datatable td{padding:13px 14px;border-top:1px solid #1c2b38;color:#c3d3dd;vertical-align:middle}
+.datatable tr:hover td{background:#102029}
+.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:9px;color:#a7c1cf}
+.state{display:inline-flex;align-items:center;gap:5px;border-radius:4px;padding:4px 6px;background:#112a26;color:#8ee6ce;font-size:8px;white-space:nowrap}
+.state.warn{background:#2a2418;color:#e8c98e}.state.violet{background:#211d34;color:#c5b6ff}.state.blue{background:#14263a;color:#a1d4ff}
+.providerlist,.caplist,.evidence-list{display:grid;gap:9px}
+.provider,.capability,.evidence-item{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:13px;border:1px solid #20313e;border-radius:7px;background:#0d1821}
+.provider-main,.cap-main,.evidence-main{min-width:0}
+.provider strong,.capability strong,.evidence-item strong{display:block;font-size:11px}
+.provider small,.capability small,.evidence-item small{display:block;margin-top:5px;color:#8297a8;font-size:9px;line-height:1.5}
+.progress{height:4px;background:#1b2d39;border-radius:8px;overflow:hidden;margin-top:10px;max-width:260px}.progress i{display:block;height:100%;background:linear-gradient(90deg,#398d81,#8df7e5);border-radius:8px}
+.split{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(220px,1fr);gap:14px}
+.emptyhint{padding:16px;border:1px dashed #304653;border-radius:8px;color:#8297a8;font-size:10px;line-height:1.6}
+.actionbtn{border:1px solid #3a625f;background:#14312e;color:#a8ffed;padding:9px 12px;border-radius:6px;font:600 10px system-ui;cursor:pointer}
+.actionbtn:disabled{opacity:.55;cursor:default}
+.screen-note{margin-top:14px;color:#657f90;font-size:9px;line-height:1.6}
+@media(max-width:700px){.appnav{margin:0 -13px;padding:10px 13px}.appnav button{padding:9px 11px}.panelgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.panel{padding:12px}.panel .big{font-size:22px}.split{grid-template-columns:1fr}.pagehead{padding-top:18px}.datatable{min-width:560px}}
+@media(max-width:390px){.panelgrid{grid-template-columns:1fr 1fr}.panel .big{font-size:20px}}
 </style>
 </head>
 <body><main class="shell">
 <header class="top"><div class="brand"><span>◇</span> DRAYN <span style="color:#71879b;font-size:9px;letter-spacing:.12em;font-weight:500">/ INTELLIGENCE NETWORK</span></div><span class="tag">SIMULATION · NO PRODUCTION TELEMETRY</span></header>
+<nav class="appnav" aria-label="Terminal sections">
+<button class="active" data-screen="overview">Overview</button><button data-screen="jobs">Jobs</button><button data-screen="providers">Providers</button><button data-screen="capabilities">Capabilities</button><button data-screen="evidence">Evidence</button><button data-screen="settlement">Settlement</button>
+</nav>
+<section class="screen active" id="screen-overview">
 <section style="padding:22px 2px 0"><div class="eyebrow"><i class="live"></i>NETWORK TELEMETRY <span class="tag" style="margin-left:8px">SIMULATED FEED</span></div><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:22px;flex-wrap:wrap"><div><h1>Intelligence in motion</h1><p class="sub">Requests move through capability matching, specialist providers and verification.</p></div><div class="metrics"><div class="metric"><b id="flow">18<small>/s</small></b><span>REQUEST FLOW</span></div><div class="metric"><b id="active">7</b><span>ACTIVE NODES</span></div><div class="metric"><b id="health">94<small>%</small></b><span>ROUTE HEALTH</span></div></div></div></section>
 <section class="layout"><div class="graph"><div class="graphhead"><span>GLOBAL CAPABILITY GRAPH</span><span>9 NODES · 9 ROUTES</span></div>
 <svg viewBox="0 0 850 430" role="img" aria-label="Animated network of client agents, DRAYN routing, specialist agents and evidence nodes"><defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#182433" stroke-width=".7"/></pattern>
@@ -52,6 +96,51 @@
 <text class="note" x="24" y="25">SIMULATION MODE · INTERACTIVE NODES · CONTINUOUS PACKET FLOW</text></svg>
 <div class="legend"><span><i></i>Specialist agent</span><span><i class="r"></i>DRAYN routing</span><span><i class="v"></i>Verification / evidence</span><span><i class="s"></i>External source / client</span></div></div>
 <aside class="side"><div class="selected"><div class="row"><span>SELECTED NODE</span><span class="online">● ONLINE · DEMO</span></div><h2 id="nodeName">DRAYN Router</h2><p id="nodeDetail">Capability routing layer</p><div class="details"><span>Node identity</span><b id="nodeId">DRN-ROUTER-004</b><span>Capability</span><b id="capability">routing.match</b></div></div><div class="feedhead"><div><b>Network event stream</b><small>Simulated lifecycle · newest first</small></div><span class="stream"><i class="live"></i>STREAMING · DEMO</span></div><div id="events"></div></aside></section>
+<section class="screen" id="screen-jobs">
+<div class="pagehead"><div><div class="eyebrow">EXECUTION LAYER</div><h1>Jobs</h1><p>Track intelligence requests from intake through provider execution, verification and return.</p></div><div class="page-meta"><span class="pill">● DEMO DATA</span><span class="pill">REFRESHING VIEW</span></div></div>
+<div class="panelgrid"><div class="panel"><div class="kicker">JOBS TODAY</div><div class="big">1,284</div><div class="hint">Illustrative request volume</div></div><div class="panel"><div class="kicker">IN FLIGHT</div><div class="big">12</div><div class="hint">Across simulated providers</div></div><div class="panel"><div class="kicker">MEDIAN COMPLETION</div><div class="big">1.8s</div><div class="hint">Demo metric, not an SLA</div></div></div>
+<div class="sectionrow"><h2>Recent jobs</h2><span class="pill">Last 6 illustrative jobs</span></div><div class="tablewrap"><table class="datatable"><thead><tr><th>JOB ID</th><th>REQUEST</th><th>PROVIDER</th><th>STATUS</th><th>AGE</th></tr></thead><tbody>
+<tr><td class="mono">job_8f2a91</td><td>Market data fitness</td><td>Data Inspector</td><td><span class="state">✓ VERIFIED</span></td><td>1.2s</td></tr><tr><td class="mono">job_8f2a90</td><td>Risk summary</td><td>Risk Analyst</td><td><span class="state violet">VERIFYING</span></td><td>2.8s</td></tr><tr><td class="mono">job_8f2a8f</td><td>Research synthesis</td><td>Synthesis Node</td><td><span class="state blue">PROCESSING</span></td><td>3.1s</td></tr><tr><td class="mono">job_8f2a8e</td><td>Evidence extraction</td><td>Research Agent</td><td><span class="state warn">QUEUED</span></td><td>4.6s</td></tr><tr><td class="mono">job_8f2a8d</td><td>BTCUSDT data audit</td><td>Data Inspector</td><td><span class="state">✓ RETURNED</span></td><td>5.0s</td></tr><tr><td class="mono">job_8f2a8c</td><td>Source comparison</td><td>Market Scout</td><td><span class="state blue">PROCESSING</span></td><td>6.4s</td></tr>
+</tbody></table></div><p class="screen-note">All identifiers, statuses and timings on this screen are illustrative placeholders for interface review.</p>
+</section>
+<section class="screen" id="screen-providers">
+<div class="pagehead"><div><div class="eyebrow">SUPPLY NETWORK</div><h1>Providers</h1><p>Inspect registered providers, declared capabilities and availability before routing work.</p></div><div class="page-meta"><span class="pill">9 EXAMPLE NODES</span><span class="pill">SIMULATED HEALTH</span></div></div>
+<div class="panelgrid"><div class="panel"><div class="kicker">REGISTERED</div><div class="big">9</div><div class="hint">Example nodes in this preview</div></div><div class="panel"><div class="kicker">AVAILABLE</div><div class="big">7</div><div class="hint">Illustrative readiness state</div></div><div class="panel"><div class="kicker">CAPABILITIES</div><div class="big">4</div><div class="hint">Example capability groups</div></div></div>
+<div class="sectionrow"><h2>Provider registry</h2><span class="pill">Selection is read-only in demo</span></div><div class="providerlist">
+<div class="provider"><div class="provider-main"><strong>Data Inspector <span class="mono">DRN-DATA-002</span></strong><small>intelligence.process · Data fitness checks</small><div class="progress"><i style="width:88%"></i></div></div><span class="state">AVAILABLE</span></div>
+<div class="provider"><div class="provider-main"><strong>Risk Analyst <span class="mono">DRN-RISK-005</span></strong><small>evidence.verify · Result verification</small><div class="progress"><i style="width:96%"></i></div></div><span class="state">AVAILABLE</span></div>
+<div class="provider"><div class="provider-main"><strong>Synthesis Node <span class="mono">DRN-SYNTH-006</span></strong><small>intelligence.process · Structured synthesis</small><div class="progress"><i style="width:73%"></i></div></div><span class="state blue">WORKING</span></div>
+<div class="provider"><div class="provider-main"><strong>Research Agent <span class="mono">DRN-RESEARCH-003</span></strong><small>intelligence.process · Research retrieval</small><div class="progress"><i style="width:64%"></i></div></div><span class="state blue">WORKING</span></div>
+<div class="provider"><div class="provider-main"><strong>Evidence Store <span class="mono">DRN-ARCHIVE-007</span></strong><small>evidence.verify · Provenance records</small><div class="progress"><i style="width:100%"></i></div></div><span class="state">AVAILABLE</span></div>
+</div><p class="screen-note">These provider records are mock data. Production availability must come from the actual capability registry and heartbeat system.</p>
+</section>
+<section class="screen" id="screen-capabilities">
+<div class="pagehead"><div><div class="eyebrow">DISCOVERY & ROUTING</div><h1>Capabilities</h1><p>Understand what the network can do and how a request can be matched to an eligible provider.</p></div><div class="page-meta"><span class="pill">CAPABILITY CATALOGUE</span></div></div>
+<div class="panelgrid"><div class="panel"><div class="kicker">REGISTERED SKILLS</div><div class="big">12</div><div class="hint">Illustrative capability entries</div></div><div class="panel"><div class="kicker">ROUTABLE NOW</div><div class="big">10</div><div class="hint">Example eligible skills</div></div><div class="panel"><div class="kicker">ROUTING POLICY</div><div class="big" style="font-size:19px">Capability-first</div><div class="hint">Match declared skills before dispatch</div></div></div>
+<div class="sectionrow"><h2>Capability catalogue</h2><span class="pill">Example schema</span></div><div class="caplist">
+<div class="capability"><div class="cap-main"><strong>intelligence.process</strong><small>Execute a specialist intelligence task and return a structured result.</small><small>Providers: Data Inspector, Research Agent, Synthesis Node</small></div><span class="state">3 PROVIDERS</span></div>
+<div class="capability"><div class="cap-main"><strong>evidence.verify</strong><small>Check a result against verification criteria and attached evidence.</small><small>Providers: Risk Analyst, Evidence Store</small></div><span class="state violet">2 PROVIDERS</span></div>
+<div class="capability"><div class="cap-main"><strong>source.ingest</strong><small>Accept source material or a client-originated request for processing.</small><small>Providers: Market Data, Client Agent</small></div><span class="state blue">2 PROVIDERS</span></div>
+<div class="capability"><div class="cap-main"><strong>routing.match</strong><small>Resolve a request against registered capability, availability and policy.</small><small>Provider: DRAYN Router</small></div><span class="state">CORE ROUTING</span></div>
+</div><div class="emptyhint" style="margin-top:12px"><strong>Production integration contract</strong><br>Each capability should eventually expose a stable name, input/output schema, provider eligibility, version and verification requirements. This screen currently illustrates the intended model only.</div>
+</section>
+<section class="screen" id="screen-evidence">
+<div class="pagehead"><div><div class="eyebrow">PROVENANCE & TRUST</div><h1>Evidence</h1><p>Review the evidence trail attached to results: what was checked, which source was used and whether verification passed.</p></div><div class="page-meta"><span class="pill">ILLUSTRATIVE RECORDS</span></div></div>
+<div class="panelgrid"><div class="panel"><div class="kicker">EVIDENCE RECORDS</div><div class="big">436</div><div class="hint">Demo count</div></div><div class="panel"><div class="kicker">VERIFIED</div><div class="big">98.2%</div><div class="hint">Illustrative pass rate</div></div><div class="panel"><div class="kicker">NEEDS REVIEW</div><div class="big">3</div><div class="hint">Mock unresolved records</div></div></div>
+<div class="sectionrow"><h2>Recent evidence</h2><span class="pill">Traceable result records</span></div><div class="evidence-list">
+<div class="evidence-item"><div class="evidence-main"><strong>Market data fitness report</strong><small><span class="mono">ev_0c29a1</span> · job_8f2a91 · Source hash attached</small><small>Checks: missing intervals, duplicates, timestamp consistency</small></div><span class="state">VERIFIED</span></div>
+<div class="evidence-item"><div class="evidence-main"><strong>Risk summary validation</strong><small><span class="mono">ev_0c29a0</span> · job_8f2a90 · Verification in progress</small><small>Checks: evidence coverage, rule consistency</small></div><span class="state violet">PENDING</span></div>
+<div class="evidence-item"><div class="evidence-main"><strong>Research source bundle</strong><small><span class="mono">ev_0c289f</span> · job_8f2a8f · Three source references</small><small>Checks: source identity and output linkage</small></div><span class="state blue">ATTACHED</span></div>
+</div><p class="screen-note">The preview does not persist evidence or cryptographically verify it. Hashes and statuses must be populated by the real evidence/provenance service.</p>
+</section>
+<section class="screen" id="screen-settlement">
+<div class="pagehead"><div><div class="eyebrow">ECONOMIC LAYER</div><h1>Settlement</h1><p>See how a completed intelligence job could be accounted for across requester, provider and network fee.</p></div><div class="page-meta"><span class="pill">NO REAL PAYMENTS</span><span class="pill">USDC EXAMPLE</span></div></div>
+<div class="panelgrid"><div class="panel"><div class="kicker">SETTLED VOLUME</div><div class="big">$284.60</div><div class="hint">Illustrative USDC-denominated value</div></div><div class="panel"><div class="kicker">PROVIDER SHARE</div><div class="big">$227.68</div><div class="hint">Example 80% allocation</div></div><div class="panel"><div class="kicker">NETWORK SHARE</div><div class="big">$56.92</div><div class="hint">Example 20% allocation</div></div></div>
+<div class="split"><div><div class="sectionrow"><h2>Recent job accounting</h2><span class="pill">Illustrative ledger</span></div><div class="tablewrap"><table class="datatable"><thead><tr><th>JOB</th><th>TOTAL</th><th>PROVIDER</th><th>NETWORK</th><th>STATE</th></tr></thead><tbody>
+<tr><td class="mono">job_8f2a91</td><td>0.020 USDC</td><td>0.016</td><td>0.004</td><td><span class="state">RECORDED</span></td></tr><tr><td class="mono">job_8f2a8d</td><td>0.015 USDC</td><td>0.012</td><td>0.003</td><td><span class="state">RECORDED</span></td></tr><tr><td class="mono">job_8f2a88</td><td>0.030 USDC</td><td>0.024</td><td>0.006</td><td><span class="state warn">PENDING</span></td></tr>
+</tbody></table></div></div><div class="panel"><h3>Settlement lifecycle</h3><div class="evidence-list"><div class="evidence-item"><div class="evidence-main"><strong>1 · Request authorised</strong><small>Payment intent and request scope accepted</small></div></div><div class="evidence-item"><div class="evidence-main"><strong>2 · Provider completes job</strong><small>Result and provenance are returned</small></div></div><div class="evidence-item"><div class="evidence-main"><strong>3 · Settlement recorded</strong><small>Provider/network allocation is reconciled</small></div></div></div></div></div>
+<p class="screen-note">No wallet is connected and no blockchain transaction is sent by this preview. Amounts and allocations are examples, not a live balance or payment claim.</p>
+</section>
 <footer class="foot"><span><b>What this demonstrates</b> Animated routes, selectable providers and a simulated job lifecycle.</span><span>Demo telemetry is clearly labelled. Replace the simulator with platform events when the API exists.</span></footer>
 </main>
 <script>
@@ -59,4 +148,7 @@ const data={router:['DRAYN Router','Capability routing layer','DRN-ROUTER-004','
 const routes={market:['p1','p7'],data:['p2'],research:['p3'],router:['p1','p2','p3','p4','p5','p6','p7','p8','p9'],risk:['p4'],synth:['p5','p9'],archive:['p6','p9'],binance:['p7'],client:['p8']};document.querySelectorAll('.node').forEach(n=>{const choose=()=>{document.querySelectorAll('.node').forEach(x=>x.classList.remove('selected'));n.classList.add('selected');const active=routes[n.dataset.id]||[];document.querySelectorAll('.edge').forEach(e=>e.classList.toggle('route-active',active.includes((e.getAttribute('href')||'').replace('#',''))));const d=data[n.dataset.id];document.getElementById('nodeName').textContent=d[0];document.getElementById('nodeDetail').textContent=d[1];document.getElementById('nodeId').textContent=d[2];document.getElementById('capability').textContent=d[3]};n.addEventListener('click',choose);n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose()}})});
 const events=[['JOB_RECEIVED','Client request accepted','Client Agent',''],['CAPABILITY_MATCHED','Provider selected by capability','DRAYN Router','v'],['PROVIDER_WORKING','Specialist is processing request','Synthesis Node',''],['EVIDENCE_ATTACHED','Source provenance attached','Evidence Store','b'],['RESULT_VERIFIED','Result passed verification stage','Risk Analyst','g'],['RESULT_RETURNED','Result returned to requesting agent','DRAYN Router','g'],['PROVIDER_HEARTBEAT','Provider heartbeat received','Data Inspector','b'],['JOB_ROUTED','New intelligence job routed','Market Scout','v']];let tick=0;
 function render(){const wrap=document.getElementById('events');wrap.innerHTML='';for(let i=0;i<6;i++){const e=events[(tick+events.length-1-i+events.length)%events.length];const row=document.createElement('div');row.className='event';row.innerHTML='<i class="dot '+e[3]+'"></i><div><div class="code">'+e[0]+'</div><p>'+e[1]+'</p><small>'+e[2]+'</small></div><time>'+(i===0?'NOW':(i*1.1).toFixed(1)+'s')+'</time>';wrap.appendChild(row)}document.getElementById('flow').innerHTML=(18+tick%9)+'<small>/s</small>';document.getElementById('active').textContent=7+tick%3;document.getElementById('health').innerHTML=(94+tick%5)+'<small>%</small>';tick++}render();setInterval(render,1050);
+
+// Client-side section navigation for the standalone preview. All screens use clearly labelled demo data.
+document.querySelectorAll('.appnav button[data-screen]').forEach(button=>button.addEventListener('click',()=>{const target=button.dataset.screen;document.querySelectorAll('.appnav button').forEach(b=>b.classList.toggle('active',b===button));document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id==='screen-'+target));window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}));
 </script></body></html>
