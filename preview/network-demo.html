@@ -136,116 +136,8 @@
 <section class="my-network-head"><div class="eyebrow"><i class="live"></i>MY NETWORK <span class="tag" style="margin-left:8px">DEMO DATA</span></div><h1>Your agents. DRAYN. Your nodes.</h1><p class="sub">Your workspace view, with agents above DRAYN and provider nodes beneath it. Toggle either layer, then select any component to inspect its role. Node types are shown as a secondary label.</p>
 <div class="network-controls" role="group" aria-label="Network layers"><label><input id="showAgents" type="checkbox" checked> <span class="layer-key agent-key"></span> Agents <b>5</b></label><label><input id="showNodes" type="checkbox" checked> <span class="layer-key node-key"></span> Nodes <b>4</b></label><span class="layer-hint">Select a component to inspect</span></div></section>
 <section class="layout"><div class="graph"><div class="graphhead"><span>YOUR NETWORK</span><span>AGENTS → DRAYN → NODES</span></div>
-<svg id="myNetworkGraph" viewBox="0 0 1000 760" role="img" aria-label="Isometric 3D intelligence network: digital agents on elevated platforms connected by luminous data streams to distributed compute infrastructure">
-<defs>
- <linearGradient id="sceneBg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06131f"/><stop offset=".48" stop-color="#09283a"/><stop offset="1" stop-color="#06101b"/></linearGradient>
- <radialGradient id="sceneLight"><stop stop-color="#19e9ee" stop-opacity=".23"/><stop offset="1" stop-color="#19e9ee" stop-opacity="0"/></radialGradient>
- <linearGradient id="deckTop" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#123b50"/><stop offset=".45" stop-color="#0b263a"/><stop offset="1" stop-color="#071827"/></linearGradient>
- <linearGradient id="deckSide" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#17637a"/><stop offset="1" stop-color="#07121f"/></linearGradient>
- <linearGradient id="person" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c2fff8"/><stop offset="1" stop-color="#27b8d2"/></linearGradient>
- <linearGradient id="stream" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#4ce9ff" stop-opacity=".15"/><stop offset=".5" stop-color="#83fff0"/><stop offset="1" stop-color="#4ce9ff" stop-opacity=".2"/></linearGradient>
- <filter id="sceneGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
- <filter id="bloom"><feGaussianBlur stdDeviation="13"/></filter>
- <pattern id="isoGrid" width="44" height="44" patternUnits="userSpaceOnUse" patternTransform="skewY(-26) scale(1 .78)"><path d="M44 0H0V44" fill="none" stroke="#1c6074" stroke-width=".7" opacity=".42"/></pattern>
- <g id="human"><rect x="-24" y="-48" width="48" height="31" rx="4" fill="#092235" stroke="#48cde1" stroke-width="1.3"/><path d="M-17 -40H16M-17 -34H-4M7 -34H16" stroke="#286a84" stroke-width="1"/><circle cy="-21" r="7" fill="url(#person)" filter="url(#sceneGlow)"/><path d="M-12 -2Q-11 -15 0 -15Q11 -15 12 -2M-8 -4V3M8 -4V3" fill="none" stroke="#8bfff4" stroke-width="3" stroke-linecap="round"/></g>
- <g id="platform"><path d="M-82 0L0 -31L82 0L0 35Z" fill="#061521" stroke="#1e7287" stroke-width="1.5"/><path d="M-82 0L0 35L82 0L82 12L0 48L-82 12Z" fill="url(#deckSide)" stroke="#15546b"/><path d="M-82 0L0 -31L82 0L0 35Z" fill="url(#deckTop)" stroke="#4de6e3" stroke-width="1.7"/><path d="M-60 0L0 -23L60 0L0 25Z" fill="none" stroke="#287b91" stroke-dasharray="3 5"/></g>
- <g id="serverStack"><path d="M-45 -12L0 -29L45 -12L0 5Z" fill="#0c2a3a" stroke="#28788d"/><path d="M-45 -12L0 5L45 -12L45 11L0 29L-45 11Z" fill="#0a1b2a" stroke="#1e6378"/><path d="M-33 -11L0 -23L33 -11L0 2Z" fill="#102f42" stroke="#328da0"/><path d="M-33 -11L0 2L33 -11" fill="none" stroke="#5ceef0" stroke-width="1.3"/><path d="M-26 2V9L0 20L26 9V2" fill="none" stroke="#245d75"/><circle cx="0" cy="-8" r="3" fill="#77fff1" filter="url(#sceneGlow)"/></g>
-</defs>
-<rect width="1000" height="760" fill="url(#sceneBg)"/>
-<rect width="1000" height="760" fill="url(#isoGrid)" opacity=".75"/>
-<ellipse cx="500" cy="376" rx="455" ry="290" fill="url(#sceneLight)"/>
-<g opacity=".32" fill="none" stroke="#1b6176" stroke-width="1">
- <path d="M-50 225L500 45L1050 225L500 445Z"/><path d="M-50 300L500 120L1050 300L500 520Z"/><path d="M-50 375L500 195L1050 375L500 595Z"/><path d="M-50 450L500 270L1050 450L500 670Z"/>
- <path d="M110 0L660 220L110 440M280 0L830 220L280 440M450 0L1000 220L450 440M0 150L550 370L0 590M170 150L720 370L170 590M340 150L890 370L340 590"/>
-</g>
-<!-- rear infrastructure establishes scale and physical depth -->
-<g opacity=".95">
- <g transform="translate(320 205) scale(1.08)"><use href="#serverStack"/><use href="#serverStack" transform="translate(65 14) scale(.88)"/><use href="#serverStack" transform="translate(-63 16) scale(.82)"/></g>
- <g transform="translate(690 212) scale(1.08)"><use href="#serverStack"/><use href="#serverStack" transform="translate(64 14) scale(.86)"/><use href="#serverStack" transform="translate(-62 15) scale(.82)"/></g>
- <path d="M180 250L320 205L460 250L320 295Z M540 250L690 212L840 250L690 300Z" fill="#071725" stroke="#1c5369" stroke-width="2"/>
-</g>
-<!-- deep network mesh: many crossings, not spokes to a central badge -->
-<g class="network-mesh" fill="none" stroke-linecap="round">
- <g stroke="#1b7a94" stroke-width="1.25" opacity=".78">
-  <path d="M90 352L178 406L258 362L338 420L418 367L500 425L580 365L662 420L744 360L832 414L918 350"/>
-  <path d="M90 352L210 480L338 420L390 530L500 425L610 515L744 360L790 480L918 350"/>
-  <path d="M178 406L210 480L300 555L390 530L500 600L610 515L700 560L790 480L832 414"/>
-  <path d="M258 362L300 555M418 367L390 530M580 365L610 515M662 420L700 560M338 420L500 600L744 360"/>
-  <path d="M90 352L338 420L580 365L832 414L918 350M178 406L418 367L662 420L790 480M258 362L500 425L744 360"/>
-  <path d="M210 480L338 420L500 425L700 560M300 555L418 367L610 515L832 414M390 530L580 365L790 480"/>
- </g>
- <g stroke="#4eeeff" stroke-width="2.1" opacity=".82" filter="url(#sceneGlow)">
-  <path d="M102 350C210 382 255 460 390 530S650 485 898 350"/>
-  <path d="M160 410C280 350 390 405 500 425S720 365 850 415"/>
-  <path d="M235 362C330 445 415 510 500 600S685 470 770 360"/>
-  <path d="M90 352C220 480 330 350 500 425S760 510 918 350"/>
-  <path d="M178 406C300 330 400 470 610 515S790 420 832 414"/>
- </g>
-</g>
-<g fill="#a4fff8" filter="url(#sceneGlow)">
- <circle cx="90" cy="352" r="4"/><circle cx="178" cy="406" r="4"/><circle cx="258" cy="362" r="4"/><circle cx="338" cy="420" r="5"/><circle cx="418" cy="367" r="4"/><circle cx="500" cy="425" r="6"/><circle cx="580" cy="365" r="4"/><circle cx="662" cy="420" r="4"/><circle cx="744" cy="360" r="5"/><circle cx="832" cy="414" r="4"/><circle cx="918" cy="350" r="4"/><circle cx="210" cy="480" r="4"/><circle cx="300" cy="555" r="4"/><circle cx="390" cy="530" r="5"/><circle cx="500" cy="600" r="4"/><circle cx="610" cy="515" r="5"/><circle cx="700" cy="560" r="4"/><circle cx="790" cy="480" r="4"/>
-</g>
-<!-- selectability retained; stations occupy different positions and depths around the mesh -->
-<g id="agentLayer">
- <g class="node agent-node" data-id="market" tabindex="0" role="button" aria-label="Market Scout agent" transform="translate(135 300)">
-  <ellipse cy="9" rx="105" ry="32" fill="#20d9ef" opacity=".22" filter="url(#bloom)"/><use href="#platform" transform="translate(0 15)"/><use href="#human" transform="translate(0 -20)"/>
-  <rect class="agent-shape" x="-59" y="10" width="118" height="24" rx="6"/><text class="label" y="21" text-anchor="middle">Market Scout</text><text class="status" y="30" text-anchor="middle">RESEARCH</text>
- </g>
- <g class="node agent-node" data-id="data" tabindex="0" role="button" aria-label="Data Inspector agent" transform="translate(325 255) scale(.88)">
-  <ellipse cy="12" rx="94" ry="28" fill="#20d9ef" opacity=".18" filter="url(#bloom)"/><use href="#platform" transform="translate(0 15)"/><use href="#human" transform="translate(0 -20)"/>
-  <rect class="agent-shape" x="-59" y="10" width="118" height="24" rx="6"/><text class="label" y="21" text-anchor="middle">Data Inspector</text><text class="status" y="30" text-anchor="middle">DATA QUALITY</text>
- </g>
- <g class="node agent-node" data-id="research" tabindex="0" role="button" aria-label="Research Agent" transform="translate(665 252) scale(.88)">
-  <ellipse cy="12" rx="94" ry="28" fill="#20d9ef" opacity=".18" filter="url(#bloom)"/><use href="#platform" transform="translate(0 15)"/><use href="#human" transform="translate(0 -20)"/>
-  <rect class="agent-shape" x="-59" y="10" width="118" height="24" rx="6"/><text class="label" y="21" text-anchor="middle">Research Agent</text><text class="status" y="30" text-anchor="middle">SYNTHESIS</text>
- </g>
- <g class="node agent-node" data-id="trader" tabindex="0" role="button" aria-label="Trading Agent" transform="translate(855 300)">
-  <ellipse cy="9" rx="105" ry="32" fill="#20d9ef" opacity=".22" filter="url(#bloom)"/><use href="#platform" transform="translate(0 15)"/><use href="#human" transform="translate(0 -20)"/>
-  <rect class="agent-shape" x="-59" y="10" width="118" height="24" rx="6"/><text class="label" y="21" text-anchor="middle">Trading Agent</text><text class="status" y="30" text-anchor="middle">PAPER TRADING</text>
- </g>
- <g class="node agent-node" data-id="risk" tabindex="0" role="button" aria-label="Risk Coordinator agent" transform="translate(500 205) scale(.72)">
-  <ellipse cy="10" rx="90" ry="28" fill="#20d9ef" opacity=".17" filter="url(#bloom)"/><use href="#platform" transform="translate(0 15)"/><use href="#human" transform="translate(0 -20)"/>
-  <rect class="agent-shape" x="-59" y="10" width="118" height="24" rx="6"/><text class="label" y="21" text-anchor="middle">Risk Coordinator</text><text class="status" y="30" text-anchor="middle">RISK GATE</text>
- </g>
-</g>
-<!-- central intelligence nexus is integrated into the network floor, not a large logo badge -->
-<g class="node router" data-id="router" tabindex="0" role="button" aria-label="DRAYN coordination hub">
- <circle cx="500" cy="445" r="61" fill="#1df4ec" opacity=".14" filter="url(#bloom)"/>
- <circle cx="500" cy="445" r="31" fill="#092a39" stroke="#52f4ed" stroke-width="2" filter="url(#sceneGlow)"/>
- <circle cx="500" cy="445" r="24" fill="none" stroke="#8afff5" stroke-dasharray="2 4"/>
- <path d="M500 425V435M489 436H511" stroke="#c5fff9" stroke-width="1.5"/>
- <text x="500" y="449" text-anchor="middle" fill="#f0fffc" font-size="17" font-weight="800">D</text><text x="500" y="461" text-anchor="middle" fill="#b1fff5" font-size="6" letter-spacing="1">DRAYN</text>
-</g>
-<!-- luminous streams continue through the mesh into independent provider platforms -->
-<g fill="none" stroke-linecap="round" filter="url(#sceneGlow)">
- <path class="edge hot" d="M135 333C170 410 220 485 255 575" stroke="#58f4ef" stroke-width="2.3" opacity=".85"/>
- <path class="edge" d="M325 287C335 390 355 465 420 590" stroke="#56cde9" stroke-width="2" opacity=".82"/>
- <path class="edge hot" d="M665 286C650 390 635 475 580 590" stroke="#58f4ef" stroke-width="2.3" opacity=".85"/>
- <path class="edge" d="M855 333C820 410 780 485 745 575" stroke="#56cde9" stroke-width="2" opacity=".82"/>
- <path class="edge" d="M500 230C490 340 500 430 500 560" stroke="#58f4ef" stroke-width="1.8" opacity=".72"/>
-</g>
-<g id="nodeLayer">
- <g class="node provider-node" data-id="synth" tabindex="0" role="button" aria-label="Inference provider node" transform="translate(255 604)">
-  <ellipse cy="8" rx="84" ry="25" fill="#32dcff" opacity=".17" filter="url(#bloom)"/><use href="#platform" transform="translate(0 8) scale(.88)"/>
-  <g transform="translate(0 -10)"><use href="#serverStack" transform="scale(1.1)"/></g>
-  <path class="provider-shape" d="M-53 -17H31L48 -7V19H-36L-53 9Z"/><path d="M-42 -8H24M-42 -2H11M-42 4H27" stroke="#63eaff" stroke-width="1.7"/><text class="label" x="-2" y="15" text-anchor="middle" font-size="10">INFERENCE</text>
- </g>
- <g class="node provider-node" data-id="data" tabindex="0" role="button" aria-label="Data provider node" transform="translate(420 655) scale(.84)">
-  <ellipse cy="8" rx="84" ry="25" fill="#32dcff" opacity=".17" filter="url(#bloom)"/><use href="#platform" transform="translate(0 8) scale(.88)"/><use href="#serverStack" transform="translate(0 -8) scale(1.1)"/>
-  <path class="provider-shape" d="M-53 -17H31L48 -7V19H-36L-53 9Z"/><path d="M-42 -8H24M-42 -2H11M-42 4H27" stroke="#63eaff" stroke-width="1.7"/><text class="label" x="-2" y="15" text-anchor="middle" font-size="10">DATA</text>
- </g>
- <g class="node provider-node" data-id="risk" tabindex="0" role="button" aria-label="Verification provider node" transform="translate(580 655) scale(.84)">
-  <ellipse cy="8" rx="84" ry="25" fill="#32dcff" opacity=".17" filter="url(#bloom)"/><use href="#platform" transform="translate(0 8) scale(.88)"/><use href="#serverStack" transform="translate(0 -8) scale(1.1)"/>
-  <path class="provider-shape" d="M-53 -17H31L48 -7V19H-36L-53 9Z"/><path d="M-42 -8H24M-42 -2H11M-42 4H27" stroke="#63eaff" stroke-width="1.7"/><text class="label" x="-2" y="15" text-anchor="middle" font-size="10">VERIFY</text>
- </g>
- <g class="node provider-node" data-id="archive" tabindex="0" role="button" aria-label="Evidence provider node" transform="translate(745 604)">
-  <ellipse cy="8" rx="84" ry="25" fill="#32dcff" opacity=".17" filter="url(#bloom)"/><use href="#platform" transform="translate(0 8) scale(.88)"/><use href="#serverStack" transform="translate(0 -10) scale(1.1)"/>
-  <path class="provider-shape" d="M-53 -17H31L48 -7V19H-36L-53 9Z"/><path d="M-42 -8H24M-42 -2H11M-42 4H27" stroke="#63eaff" stroke-width="1.7"/><text class="label" x="-2" y="15" text-anchor="middle" font-size="10">EVIDENCE</text>
- </g>
-</g>
-<g fill="#a1d7e2" opacity=".8" font-size="10" letter-spacing="1.5"><text x="28" y="35">DRAYN / DISTRIBUTED INTELLIGENCE</text><text x="972" y="35" text-anchor="end">ILLUSTRATIVE LIVE NETWORK</text><text x="28" y="733">AGENTS · ROUTING · INDEPENDENT PROVIDERS</text></g>
-</svg>
-<div class="legend"><span><i></i>Agent</span><span><i class="r"></i>DRAYN coordination</span><span><i class="s"></i>Provider node</span><span>Type is a secondary label</span></div></div>
+<div id="myNetworkGraph" class="diagram-removed" aria-live="polite">Network visualisation removed pending a fresh implementation.</div>
+</div>
 <aside class="side"><div class="selected"><div class="row"><span>SELECTED COMPONENT</span><span class="online">● DEMO</span></div><h2 id="nodeName">DRAYN</h2><p id="nodeDetail">Coordination, routing and accounting layer</p><div class="details"><span>Identity</span><b id="nodeId">DRN-ROUTER-004</b><span>Role / type</span><b id="capability">routing.match</b></div></div><div class="feedhead"><div><b>Agent activity</b><small>Illustrative events · newest first</small></div><span class="stream"><i class="live"></i>DEMO</span></div><div id="events"></div></aside></section>
 </section>
 
@@ -343,9 +235,6 @@
 <footer class="foot"><span><b>What this demonstrates</b> Animated routes, selectable providers and a simulated job lifecycle.</span><span>Demo telemetry is clearly labelled. Replace the simulator with platform events when the API exists.</span></footer>
 </main>
 <script>
-const data={router:['DRAYN','Coordination, routing and accounting layer','DRN-COORDINATION','routing.match'],market:['Market Scout','Agent · market research','AGT-MARKET-001','research.market'],data:['Data Inspector','Agent · data quality','AGT-DATA-002','data.fitness'],research:['Research Agent','Agent · source synthesis','AGT-RESEARCH-003','research.synthesis'],trader:['Trading Agent','Agent · paper trading','AGT-TRADE-004','trading.paper'],risk:['Risk Coordinator','Agent · risk checks','AGT-RISK-005','risk.evaluate'],synth:['Inference Node','Node type · inference','NODE-INFERENCE-001','inference.run'],archive:['Evidence Node','Node type · provenance and evidence','NODE-EVIDENCE-004','evidence.record']};
-const routes={market:['agentPath1'],data:['agentPath2','nodePath2'],research:['agentPath3'],trader:['agentPath4'],risk:['agentPath5','nodePath3'],router:['agentPath1','agentPath2','agentPath3','agentPath4','agentPath5','nodePath1','nodePath2','nodePath3','nodePath4'],synth:['nodePath1'],archive:['nodePath4']};document.querySelectorAll('.node').forEach(n=>{const choose=()=>{document.querySelectorAll('.node').forEach(x=>x.classList.remove('selected'));n.classList.add('selected');const active=routes[n.dataset.id]||[];document.querySelectorAll('.edge').forEach(e=>e.classList.toggle('route-active',active.includes((e.getAttribute('href')||'').replace('#',''))));const d=data[n.dataset.id];document.getElementById('nodeName').textContent=d[0];document.getElementById('nodeDetail').textContent=d[1];document.getElementById('nodeId').textContent=d[2];document.getElementById('capability').textContent=d[3]};n.addEventListener('click',choose);n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose()}})});
-document.getElementById('showAgents')?.addEventListener('change',e=>{document.getElementById('agentLayer').style.display=e.target.checked?'':'none';document.querySelectorAll('.edge').forEach(edge=>{if((edge.getAttribute('href')||'').includes('agentPath'))edge.style.display=e.target.checked?'':'none'});});document.getElementById('showNodes')?.addEventListener('change',e=>{document.getElementById('nodeLayer').style.display=e.target.checked?'':'none';document.querySelectorAll('.edge').forEach(edge=>{if((edge.getAttribute('href')||'').includes('nodePath'))edge.style.display=e.target.checked?'':'none'});});document.querySelectorAll('#myNetworkGraph .node').forEach(n=>{const choose=()=>{document.querySelectorAll('#myNetworkGraph .node').forEach(x=>x.classList.remove('selected'));n.classList.add('selected');const d=data[n.dataset.id];if(!d)return;document.getElementById('nodeName').textContent=d[0];document.getElementById('nodeDetail').textContent=d[1];document.getElementById('nodeId').textContent=d[2];document.getElementById('capability').textContent=d[3];};n.addEventListener('click',choose);n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}});});
 const events=[['JOB_RECEIVED','Agent request received','Market Scout',''],['CAPABILITY_MATCHED','Provider selected by capability','DRAYN Router','v'],['PROVIDER_WORKING','Specialist is processing request','Synthesis Node',''],['EVIDENCE_ATTACHED','Source provenance attached','Evidence Store','b'],['RESULT_VERIFIED','Result passed verification stage','Risk Analyst','g'],['RESULT_RETURNED','Result returned to requesting agent','DRAYN Router','g'],['PROVIDER_HEARTBEAT','Provider heartbeat received','Data Inspector','b'],['JOB_ROUTED','New intelligence job routed','Market Scout','v']];let tick=0;
 function render(){const wrap=document.getElementById('events');wrap.innerHTML='';for(let i=0;i<6;i++){const e=events[(tick+events.length-1-i+events.length)%events.length];const row=document.createElement('div');row.className='event';row.innerHTML='<i class="dot '+e[3]+'"></i><div><div class="code">'+e[0]+'</div><p>'+e[1]+'</p><small>'+e[2]+'</small></div><time>'+(i===0?'NOW':(i*1.1).toFixed(1)+'s')+'</time>';wrap.appendChild(row)}document.getElementById('flow').innerHTML=(18+tick%9)+'<small>/s</small>';document.getElementById('active').textContent=7+tick%3;document.getElementById('health').innerHTML=(94+tick%5)+'<small>%</small>';tick++}render();setInterval(render,1050);
 
