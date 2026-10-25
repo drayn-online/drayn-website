@@ -9,6 +9,7 @@ on:
       - 'login.html'
       - 'favicon.svg'
       - 'preview/network-demo.html'
+      - 'preview/agent-builder.html'
       - '.github/workflows/network-demo-pages.yml'
   workflow_dispatch:
 
