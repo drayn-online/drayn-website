@@ -42,6 +42,7 @@ jobs:
           cp login.html _site/login.html
           cp favicon.svg _site/favicon.svg
           cp preview/network-demo.html _site/preview/network-demo.html
+          cp preview/agent-builder.html _site/preview/agent-builder.html
           touch _site/.nojekyll
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
