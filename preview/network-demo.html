@@ -43,7 +43,7 @@ const providers=[
 {name:'Verify',desc:'Verification and provenance checks.',x:.27,z:.96},
 {name:'Evidence',desc:'Evidence records and auditable outputs.',x:.77,z:.83}];
 const items=[...agents.map(a=>({...a,type:'AGENT'})),...providers.map(p=>({...p,type:'PROVIDER'}))];
-let selected=null,rot=0,drag=null,last=null,frame=0,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let selected=null,rot=0,drag=null,last=null,frame=0,W=0,H=0,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function resize(){const r=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,1.5);canvas.width=Math.round(r.width*d);canvas.height=Math.round(r.height*d);ctx.setTransform(d,0,0,d,0,0);draw(performance.now()/1000)}
 function project(x,y,z,w,h){const scale=Math.min(w/27,h/18);const a=x*9,b=z*6;return {x:w*.5+(a-b)*.88*scale,y:h*.49+(a+b)*.38*scale-y*scale*1.18};}
@@ -76,7 +76,7 @@ ctx.beginPath();ctx.moveTo(-5,-29);ctx.lineTo(-12,-23);ctx.lineTo(-14,-9);ctx.li
 line([{x:-5,y:-24},{x:0,y:-18},{x:5,y:-24}],'#c6ffff',1,.85);
 for(let i=0;i<5;i++){ctx.globalAlpha=.17+i*.045;line([{x:-12-i*.5,y:-29+i*5},{x:12+i*.5,y:-29+i*5}],'#b9ffff',.7)}
 ctx.globalAlpha=1;ctx.restore()}
-function draw(seconds=0){if(!ctx)return;const W=canvas.clientWidth,H=canvas.clientHeight;if(!W||!H)return;
+function draw(seconds=0){if(!ctx)return;W=canvas.clientWidth;H=canvas.clientHeight;if(!W||!H)return;
 const bg=ctx.createRadialGradient(W*.5,H*.45,0,W*.5,H*.45,Math.max(W,H)*.7);bg.addColorStop(0,'#07334a');bg.addColorStop(.58,'#031827');bg.addColorStop(1,'#010711');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
 const floor=[];for(let x=-1.4;x<=1.41;x+=.14){floor.push([x,0,-1.1],[x,0,1.2])}for(let z=-1.1;z<=1.21;z+=.14){floor.push([-1.4,0,z],[1.4,0,z])}
 for(let i=0;i<floor.length;i+=2)line([project(...floor[i],W,H),project(...floor[i+1],W,H)],'#14516a',.65,.34);
