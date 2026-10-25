@@ -2,141 +2,105 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DRAYN · Isometric Network Demo</title>
+<title>DRAYN · Network Environment</title>
 <style>
-:root{color-scheme:dark;--bg:#030914;--panel:#071522;--cyan:#31efff;--blue:#168dff;--mint:#8efff2;--orange:#ff9c45;--text:#e8fbff;--muted:#83a9bd}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-body{background:radial-gradient(ellipse at 50% 45%,#073044 0,#041421 44%,#020710 100%)}
-.app{max-width:1800px;margin:auto;min-height:100vh;overflow:hidden}
-.topbar{height:82px;display:flex;align-items:center;gap:34px;padding:0 30px;border-bottom:1px solid #123449;background:#020914d9;position:relative;z-index:3}
-.brand{font-size:30px;line-height:.95;font-weight:850;letter-spacing:-1.5px}.brand small{display:block;font-size:12px;letter-spacing:1.4px;color:var(--cyan);font-weight:650;margin-top:7px}
-.metrics{display:flex;border:1px solid #154057;border-radius:13px;overflow:hidden;background:#071725}.metric{padding:12px 17px;border-right:1px solid #15384c;font-size:13px;color:#c9e5f2;white-space:nowrap}.metric:last-child{border:0}.metric strong{margin-left:8px;color:#fff}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;background:#00efd5;box-shadow:0 0 13px currentColor}.dot.blue{background:#258bff;color:#258bff}.dot.orange{background:var(--orange);color:var(--orange)}
-.spacer{flex:1}.live{border:1px solid #075b64;border-radius:12px;padding:13px 18px;color:#75fff0;background:#04222b;font-size:13px;white-space:nowrap}.live .dot{width:9px;height:9px}
-.view{background:#071522;border:1px solid #23465d;color:#cdeaf5;padding:13px 17px;border-radius:12px;font:inherit;cursor:pointer}
-.scene-wrap{position:relative;isolation:isolate;background:radial-gradient(ellipse at 51% 48%,#06415a 0,#06253a 43%,#03101e 100%);border-bottom:1px solid #12374b}
-.scene-wrap:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.27;background-image:linear-gradient(#1c6a84 1px,transparent 1px),linear-gradient(90deg,#1c6a84 1px,transparent 1px);background-size:54px 54px;transform:perspective(650px) rotateX(59deg) scale(1.65);transform-origin:50% 48%;mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent)}
-.scene{display:block;width:100%;height:auto;max-height:none;min-height:540px;filter:contrast(1.08) saturate(1.12)}
-.scene text{font-family:Inter,ui-sans-serif,system-ui,sans-serif;text-rendering:geometricPrecision}.scene-wrap:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,transparent 38%,rgba(0,5,15,.34) 100%),linear-gradient(180deg,rgba(0,4,13,.2),transparent 18%,transparent 82%,rgba(0,4,13,.3));z-index:1}.scene{position:relative;z-index:0}
-.hud{position:absolute;left:24px;right:24px;top:20px;display:flex;align-items:flex-start;justify-content:space-between;pointer-events:none;z-index:2}.hud-label{font-size:10px;letter-spacing:2px;color:#72a7c1}.hud-label b{display:block;color:#dffbff;font-size:13px;letter-spacing:1px;margin-top:5px}
-svg .station{cursor:pointer;outline:none;transition:opacity .2s ease;filter:drop-shadow(0 0 8px #00bde966)}svg .station:hover,svg .station.selected{filter:drop-shadow(0 0 15px #4bfaff);opacity:1}svg .station:focus-visible .platform-top{stroke:#fff;stroke-width:3}
-svg .station-label{fill:#e8fbff;font-size:16px;font-weight:750}svg .station-sub{fill:#78d8ee;font-size:11px}svg .panel{fill:#041b2bdc;stroke:#0bbbe7;stroke-width:1.3}
-svg .flow{fill:none;stroke-linecap:round;stroke-width:3;stroke-dasharray:4 13;animation:flow 2.6s linear infinite}svg .flow.wide{stroke-width:6;stroke-dasharray:2 16;opacity:.85}svg .flow.orange{stroke:#ff9c45;filter:url(#glowOrange)}svg .flow.cyan{stroke:#49f4ff;filter:url(#glowCyan)}svg .flow.blue{stroke:#168dff;filter:url(#glowBlue)}
-svg .node-dot{fill:#d6ffff;stroke:#39eaff;stroke-width:2;filter:url(#glowCyan)}
-.bottom-caption{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 28px;color:#75a3b8;font-size:11px;letter-spacing:.08em;background:#020a13}
-.bottom-caption strong{color:#b7f7ff;font-weight:650}
-.detail{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:16px 28px;border-top:1px solid #103346;background:#04101c;color:#82a9bd;font-size:12px}.detail b{color:#d9faff}.detail .pill{padding:5px 9px;border:1px solid #16465b;border-radius:99px;color:#8bfff2}
-@keyframes flow{to{stroke-dashoffset:-68}}@keyframes pulse{50%{opacity:.45}}
-@media(max-width:800px){.topbar{height:auto;min-height:70px;padding:14px;gap:13px;flex-wrap:wrap}.brand{font-size:24px}.brand small{font-size:9px}.metrics{order:3;width:100%;justify-content:space-between}.metric{padding:9px 8px;font-size:10px}.metric strong{margin-left:3px}.live{margin-left:auto;padding:9px;font-size:10px}.view{padding:9px;font-size:11px}.hud{top:10px;left:12px;right:12px}.hud-label{font-size:7px}.scene{min-height:400px;max-height:none}.bottom-caption{padding:10px 13px;font-size:9px}.detail{padding:12px;font-size:11px}}
-@media(prefers-reduced-motion:reduce){svg .flow{animation:none}}
+:root{color-scheme:dark;--bg:#020812;--cyan:#5cf6ff;--muted:#83b4c8}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:#e9fbff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+body{background:radial-gradient(ellipse at 50% 36%,#09283b 0,#030d19 56%,#01040a 100%)}
+.app{max-width:1800px;margin:auto;min-height:100vh}
+header{min-height:70px;padding:12px 22px;display:flex;align-items:center;gap:20px;background:#020812eF;border-bottom:1px solid #174052;position:relative;z-index:2}
+.brand{font-size:25px;font-weight:850;letter-spacing:-1px;line-height:1}.brand small{display:block;color:var(--cyan);font-size:9px;letter-spacing:2px;margin-top:5px}
+.metrics{display:flex;gap:8px;flex-wrap:wrap}.metric,.live,button{border:1px solid #1a4c60;background:#071a29;border-radius:9px;padding:9px 12px;font-size:12px;color:#cdeaf3}.metric b{color:white;margin-left:5px}.live{margin-left:auto;color:#80fff2}.led{display:inline-block;width:7px;height:7px;border-radius:50%;background:#42ffe8;box-shadow:0 0 10px #42ffe8;margin-right:7px}button{cursor:pointer}
+.stage{position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#06334a 0,#031524 55%,#010712 100%);border-bottom:1px solid #164155}
+canvas{display:block;width:100%;height:min(70vw,760px);min-height:440px;outline:none}
+.hud{position:absolute;top:16px;left:20px;right:20px;display:flex;justify-content:space-between;gap:12px;pointer-events:none;text-transform:uppercase;letter-spacing:1.5px;font-size:9px;color:#7eacbf}.hud strong{display:block;color:#dffbff;font-size:11px;margin-top:5px;letter-spacing:1px}
+.caption{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 20px;background:#020a12;color:#79a8bc;font-size:10px;letter-spacing:.04em}.caption b{color:#c7faff}
+.detail{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 20px;background:#04101b;border-top:1px solid #15394b;color:#9ab9c8;font-size:12px}.pill{border:1px solid #1c5366;border-radius:99px;padding:5px 9px;color:#80fff2}.detail b{color:#e8fcff}.detail .note{margin-left:auto}
+noscript{display:block;padding:20px;color:#fff}
+@media(max-width:650px){header{padding:10px 12px;gap:10px;flex-wrap:wrap}.brand{font-size:21px}.metrics{order:3;width:100%;gap:5px}.metric{font-size:10px;padding:8px}.live{margin-left:auto;font-size:10px;padding:8px}.hud{top:10px;left:12px;right:12px;font-size:7px}.hud strong{font-size:9px}.caption{padding:10px 12px;font-size:9px}.detail{padding:11px 12px;font-size:11px}canvas{height:78vw;min-height:360px;max-height:520px}.detail .note{margin-left:0;width:100%}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
 </style>
 </head>
-<body>
-<div class="app">
-<header class="topbar">
-  <div class="brand">DRAYN<small>NETWORK DEMO</small></div>
-  <div class="metrics" aria-label="Network summary"><div class="metric"><i class="dot"></i>Agents <strong>5</strong></div><div class="metric"><i class="dot blue"></i>Providers <strong>4</strong></div><div class="metric"><i class="dot orange"></i>Active Jobs <strong id="jobCount">12</strong></div></div>
-  <div class="spacer"></div><div class="live"><i class="dot"></i>Live Simulation</div><button class="view" id="viewToggle">View&nbsp;⌄</button>
-</header>
-<main class="scene-wrap">
-<div class="hud"><div class="hud-label">DISTRIBUTED INTELLIGENCE<b>ISOMETRIC NETWORK</b></div><div class="hud-label" style="text-align:right">ILLUSTRATIVE ENVIRONMENT<b>AGENT → ROUTE → PROVIDER</b></div></div>
-<svg class="scene" id="networkScene" viewBox="0 0 1600 1000" role="img" aria-label="Cinematic isometric network of AI agents and distributed provider infrastructure connected by luminous data streams">
-<defs>
- <linearGradient id="floor" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#092c42"/><stop offset=".55" stop-color="#061b30"/><stop offset="1" stop-color="#020b18"/></linearGradient>
- <linearGradient id="platformSide" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#0b94b5"/><stop offset="1" stop-color="#06111f"/></linearGradient>
- <linearGradient id="platformTop" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#135c79"/><stop offset=".5" stop-color="#0b304a"/><stop offset="1" stop-color="#06192b"/></linearGradient>
- <linearGradient id="holo" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f4ffff"/><stop offset=".35" stop-color="#5ff5ff"/><stop offset="1" stop-color="#177dff"/></linearGradient>
- <linearGradient id="wire" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#29eaff" stop-opacity=".05"/><stop offset=".45" stop-color="#baffff"/><stop offset="1" stop-color="#20baff" stop-opacity=".1"/></linearGradient>
- <radialGradient id="centerGlow"><stop stop-color="#00dfff" stop-opacity=".35"/><stop offset="1" stop-color="#00dfff" stop-opacity="0"/></radialGradient>
- <filter id="glowCyan" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
- <filter id="glowBlue" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
- <filter id="glowOrange" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
- <filter id="soft"><feGaussianBlur stdDeviation="16"/></filter>
- <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse" patternTransform="skewY(-28) scale(1 .78)"><path d="M50 0H0V50" fill="none" stroke="#16718c" stroke-width="1" opacity=".4"/></pattern>
- <g id="server"><path d="M-43 -25L0 -45L43 -25L0 -5Z" fill="#0b3045" stroke="#2187a5"/><path d="M-43 -25L0 -5L43 -25L43 28L0 51L-43 28Z" fill="#061523" stroke="#12617d" stroke-width="1.5"/><path d="M-31 -23L0 -9L31 -23M-31 -11L0 4L31 -11M-31 1L0 16L31 1" fill="none" stroke="#117c9b" stroke-width="2"/><path d="M-36 13V25L0 43L36 25V13" fill="none" stroke="#0c4d6c"/><circle cx="0" cy="7" r="4" fill="#3ef7ff" filter="url(#glowCyan)"/></g>
- <g id="platform"><path d="M-115 0L0 -56L115 0L0 58Z" fill="#06101c" stroke="#0f789a" stroke-width="2"/><path d="M-115 0L0 58L115 0L115 21L0 83L-115 21Z" fill="url(#platformSide)" stroke="#0e6784" stroke-width="1.5"/><path class="platform-top" d="M-115 0L0 -56L115 0L0 58Z" fill="url(#platformTop)" stroke="#38eaff" stroke-width="2"/><path d="M-91 0L0 -44L91 0L0 44Z" fill="none" stroke="#1686a7" stroke-width="1.4"/><path d="M-72 0L0 -34L72 0L0 34Z" fill="none" stroke="#0e5576" stroke-width="1"/></g>
- <g id="hologram"><ellipse cy="6" rx="54" ry="15" fill="#16dfff" opacity=".22" filter="url(#glowCyan)"/><path d="M-35 4L-39 -14Q-35 -39 -20 -46L-13 -52L-11 -63Q0 -73 11 -63L13 -52L24 -45Q39 -34 39 -12L34 4L22 12H-22Z" fill="#0bc9ff" opacity=".17" stroke="#73faff" stroke-width="1.6"/><path d="M-25 -12Q-28 -35 -12 -44L-9 -51L-10 -61Q0 -69 10 -61L9 -51L14 -44Q28 -35 25 -12L18 -4H-18Z" fill="url(#holo)" opacity=".9" filter="url(#glowCyan)"/><ellipse cy="-57" rx="15" ry="18" fill="url(#holo)" stroke="#c8ffff" stroke-width="1.2" filter="url(#glowCyan)"/><path d="M-12 -60Q0 -68 12 -60M-13 -53Q0 -47 13 -53M-8 -49L0 -45L8 -49" fill="none" stroke="#e4ffff" stroke-width="1.4" opacity=".95"/><path d="M-19 -34L-31 -20L-28 -5M19 -34L31 -20L28 -5" fill="none" stroke="#9affff" stroke-width="4" stroke-linecap="round"/><path d="M-15 -39L-5 -29L0 -34L5 -29L15 -39M-17 -18H17M-14 -9H14M-10 0H10" fill="none" stroke="#d9ffff" stroke-width="1.6" opacity=".92"/><path d="M-23 -43H23M-25 -36H25M-21 -28H21M-17 -20H17M-13 -12H13" stroke="#26e9ff" stroke-width="1" opacity=".8"/><path d="M-17 -35L-8 -18L0 -26L8 -18L17 -35" fill="none" stroke="#1c8dff" stroke-width="2"/><path d="M-9 -4L-7 7M9 -4L7 7" stroke="#7effff" stroke-width="2"/><circle cx="-5" cy="-57" r="2" fill="#fff"/><circle cx="5" cy="-57" r="2" fill="#fff"/></g>
-</defs>
-<rect width="1600" height="1000" fill="url(#floor)"/><rect width="1600" height="1000" fill="url(#grid)" opacity=".8"/><ellipse cx="800" cy="500" rx="650" ry="420" fill="url(#centerGlow)"/>
-<!-- Isometric city floor and tiered compute districts -->
-<g fill="none" stroke="#12516d" stroke-width="2" opacity=".65"><path d="M-100 250L800 -130L1700 250L800 680Z"/><path d="M-100 340L800 -40L1700 340L800 770Z"/><path d="M-100 430L800 50L1700 430L800 860Z"/><path d="M-100 520L800 140L1700 520L800 950Z"/></g>
-<g opacity=".98">
- <path d="M280 310L515 205L730 300L495 414Z" fill="#041321" stroke="#11617e" stroke-width="2"/>
- <path d="M895 280L1135 174L1370 280L1130 395Z" fill="#041321" stroke="#11617e" stroke-width="2"/>
- <g transform="translate(465 285)"><use href="#server"/><use href="#server" transform="translate(85 38) scale(.8)"/><use href="#server" transform="translate(-83 39) scale(.8)"/><use href="#server" transform="translate(0 82) scale(.72)"/></g>
- <g transform="translate(1135 258)"><use href="#server"/><use href="#server" transform="translate(84 39) scale(.8)"/><use href="#server" transform="translate(-83 39) scale(.8)"/><use href="#server" transform="translate(0 82) scale(.72)"/></g>
-</g>
-<!-- Mesh network behind the foreground agents -->
-<ellipse cx="800" cy="540" rx="590" ry="330" fill="url(#centerGlow)" opacity=".9"/>
-<g fill="none" stroke="#168dc0" stroke-width="1.5" opacity=".8">
- <path d="M90 390L240 470L355 405L470 505L590 420L710 500L820 415L935 510L1055 420L1185 500L1320 400L1500 470"/>
- <path d="M90 390L270 610L470 505L535 720L710 500L825 690L935 510L1080 710L1185 500L1390 620L1500 470"/>
- <path d="M240 470L270 610L390 675L535 720L650 635L825 690L960 640L1080 710L1240 645L1390 620"/>
- <path d="M355 405L390 675M590 420L650 635M820 415L825 690M1055 420L960 640M1320 400L1240 645"/>
- <path d="M90 390L470 505L820 415L1185 500L1500 470M240 470L590 420L935 510L1320 400M270 610L470 505L710 500L960 640L1185 500"/>
-</g>
-<g fill="none" stroke-width="3" opacity=".94">
- <path class="flow wide cyan" d="M170 335C330 380 420 520 590 555S930 390 1120 350S1340 400 1450 430"/>
- <path class="flow cyan" d="M175 335C320 500 400 420 550 505S860 615 1020 520S1280 365 1450 430"/>
- <path class="flow wide blue" d="M270 690C430 620 490 430 680 450S980 650 1150 680"/>
- <path class="flow orange" d="M170 335C370 270 480 325 680 440S1050 560 1450 430"/>
- <path class="flow cyan" d="M800 190C780 300 710 380 680 450S780 610 800 820"/>
- <path class="flow blue" d="M380 710C550 620 620 500 800 510S1050 610 1250 700"/>
- <path class="flow orange" d="M340 450C500 540 560 350 800 510S1120 490 1320 390"/>
-</g>
-
- <path d="M145 445Q280 365 410 455T685 458T955 452T1220 440T1475 468" stroke="#3ff7ff" stroke-width="2.5" opacity=".9" fill="none" filter="url(#glowCyan)"/>
- <path d="M180 520C360 420 460 590 650 525S940 390 1110 520S1330 600 1450 510" stroke="#6cfbff" stroke-width="1.8" opacity=".85" fill="none"/>
- <path d="M250 370C380 500 530 365 680 470S930 620 1080 485S1290 360 1415 465" stroke="#22b9ff" stroke-width="2" opacity=".8" fill="none"/>
- <path d="M300 670Q420 530 590 610T875 575T1150 610T1330 675" stroke="#42eaff" stroke-width="2" opacity=".65" fill="none"/>
- <path d="M170 335L355 405L590 420L710 500L935 510L1055 420L1320 400L1450 430M300 700L390 675L650 635L825 690L960 640L1280 700" stroke="url(#wire)" stroke-width="2" fill="none"/>
- <path d="M170 335L270 610L590 420L825 690L1055 420L1390 620L1450 430M800 190L590 420L470 505L650 635L935 510L1185 500L1280 700" stroke="#32cce8" stroke-width="1.6" opacity=".8" fill="none"/>
- <path d="M90 390Q250 540 470 505T820 415T1185 500T1500 470M240 470Q430 350 590 420T935 510T1320 400" stroke="#9afcff" stroke-width="1.2" opacity=".7" fill="none"/>
-
-<!-- Dense mesh points -->
-<g class="mesh-points" filter="url(#glowCyan)">
- <circle class="node-dot" cx="205" cy="445" r="5"/><circle class="node-dot" cx="310" cy="520" r="6"/><circle class="node-dot" cx="425" cy="445" r="5"/><circle class="node-dot" cx="535" cy="465" r="5"/><circle class="node-dot" cx="630" cy="565" r="6"/><circle class="node-dot" cx="755" cy="455" r="5"/><circle class="node-dot" cx="875" cy="460" r="6"/><circle class="node-dot" cx="1000" cy="565" r="5"/><circle class="node-dot" cx="1110" cy="475" r="6"/><circle class="node-dot" cx="1260" cy="535" r="5"/><circle class="node-dot" cx="1380" cy="470" r="5"/><circle class="node-dot" cx="460" cy="600" r="5"/><circle class="node-dot" cx="740" cy="620" r="5"/><circle class="node-dot" cx="1060" cy="625" r="5"/>
- <circle class="node-dot" cx="355" cy="405" r="7"/><circle class="node-dot" cx="470" cy="505" r="10"/><circle class="node-dot" cx="590" cy="420" r="8"/><circle class="node-dot" cx="710" cy="500" r="10"/><circle class="node-dot" cx="820" cy="415" r="8"/><circle class="node-dot" cx="935" cy="510" r="10"/><circle class="node-dot" cx="1055" cy="420" r="8"/><circle class="node-dot" cx="1185" cy="500" r="10"/><circle class="node-dot" cx="1320" cy="400" r="8"/>
- <circle class="node-dot" cx="270" cy="610" r="6"/><circle class="node-dot" cx="390" cy="675" r="6"/><circle class="node-dot" cx="535" cy="720" r="7"/><circle class="node-dot" cx="650" cy="635" r="6"/><circle class="node-dot" cx="825" cy="690" r="7"/><circle class="node-dot" cx="960" cy="640" r="6"/><circle class="node-dot" cx="1080" cy="710" r="7"/><circle class="node-dot" cx="1240" cy="645" r="6"/><circle class="node-dot" cx="1390" cy="620" r="6"/>
-</g>
-<!-- Human-like holographic agents on raised platforms -->
-<g class="station selected" data-name="Market Scout" data-desc="Finds and evaluates opportunities from market data." tabindex="0" role="button" aria-label="Market Scout agent" transform="translate(170 330)">
- <ellipse cy="30" rx="140" ry="70" fill="#00dfff" opacity=".14" filter="url(#soft)"/><use href="#platform" transform="translate(0 24) scale(.82)"/><use href="#hologram" transform="translate(0 -14) scale(1.1)"/>
- <rect class="panel" x="18" y="-130" width="220" height="82" rx="9"/><path d="M35 -105h22m-22 8h14m-14 8h18" stroke="#21d9ff" stroke-width="2"/><text class="station-label" x="70" y="-108">Market Scout</text><text class="station-sub" x="70" y="-87">Find opportunities</text><path d="M35 -67h20v-10h8v10h8v-18h8v18h8v-28h8v28h8" fill="none" stroke="#1ceaff" stroke-width="2"/>
-</g>
-<g class="station" data-name="Research Agent" data-desc="Synthesises information from specialist providers." tabindex="0" role="button" aria-label="Research Agent" transform="translate(800 190)">
- <ellipse cy="30" rx="140" ry="70" fill="#00dfff" opacity=".13" filter="url(#soft)"/><use href="#platform" transform="translate(0 24) scale(.82)"/><use href="#hologram" transform="translate(0 -14) scale(1.1)"/>
- <rect class="panel" x="18" y="-130" width="220" height="82" rx="9"/><path d="M35 -105h22m-22 8h14m-14 8h18" stroke="#21d9ff" stroke-width="2"/><text class="station-label" x="70" y="-108">Research Agent</text><text class="station-sub" x="70" y="-87">Market analysis</text><path d="M35 -67h20v-10h8v10h8v-18h8v18h8v-28h8v28h8" fill="none" stroke="#1ceaff" stroke-width="2"/>
-</g>
-<g class="station" data-name="Trading Agent" data-desc="Evaluates strategies and simulates execution within policy." tabindex="0" role="button" aria-label="Trading Agent" transform="translate(1450 430)">
- <ellipse cy="30" rx="140" ry="70" fill="#00dfff" opacity=".15" filter="url(#soft)"/><use href="#platform" transform="translate(0 24) scale(.82)"/><use href="#hologram" transform="translate(0 -14) scale(1.1)"/>
- <rect class="panel" x="-240" y="-130" width="220" height="82" rx="9"/><path d="M-222 -105h22m-22 8h14m-14 8h18" stroke="#21d9ff" stroke-width="2"/><text class="station-label" x="-187" y="-108">Trading Agent</text><text class="station-sub" x="-187" y="-87">Execute strategy</text><path d="M-222 -67h20v-10h8v10h8v-18h8v18h8v-28h8v28h8" fill="none" stroke="#1ceaff" stroke-width="2"/>
-</g>
-<g class="station" data-name="Data Inspector" data-desc="Checks datasets for completeness, consistency and suspicious values." tabindex="0" role="button" aria-label="Data Inspector" transform="translate(300 700)">
- <ellipse cy="30" rx="140" ry="70" fill="#00dfff" opacity=".13" filter="url(#soft)"/><use href="#platform" transform="translate(0 24) scale(.82)"/><use href="#hologram" transform="translate(0 -14) scale(1.1)"/>
- <rect class="panel" x="18" y="-130" width="220" height="82" rx="9"/><path d="M35 -106h18v21H35zM39 -101h10M39 -96h10M39 -91h10" fill="none" stroke="#21d9ff" stroke-width="2"/><text class="station-label" x="70" y="-108">Data Inspector</text><text class="station-sub" x="70" y="-87">Validate data</text><path d="M35 -67h20v-10h8v10h8v-18h8v18h8v-28h8v28h8" fill="none" stroke="#1ceaff" stroke-width="2"/>
-</g>
-<g class="station" data-name="Risk Coordinator" data-desc="Checks constraints and raises alerts before a proposed action proceeds." tabindex="0" role="button" aria-label="Risk Coordinator" transform="translate(1280 700)">
- <ellipse cy="30" rx="140" ry="70" fill="#00dfff" opacity=".13" filter="url(#soft)"/><use href="#platform" transform="translate(0 24) scale(.82)"/><use href="#hologram" transform="translate(0 -14) scale(1.1)"/>
- <rect class="panel" x="-240" y="-130" width="220" height="82" rx="9"/><path d="M-222 -105l10 -7 10 7v12l-10 7-10-7z" fill="none" stroke="#21d9ff" stroke-width="2"/><text class="station-label" x="-187" y="-108">Risk Coordinator</text><text class="station-sub" x="-187" y="-87">Monitor &amp; alert</text><path d="M-222 -67h20v-10h8v10h8v-18h8v18h8v-28h8v28h8" fill="none" stroke="#1ceaff" stroke-width="2"/>
-</g>
-<!-- Four provider districts are part of the same 3D city -->
-<g class="provider" transform="translate(300 855)"><use href="#platform" transform="scale(.72)"/><use href="#server" transform="translate(0 -20) scale(.75)"/><rect class="panel" x="-70" y="25" width="140" height="49" rx="7"/><text class="station-label" x="0" y="45" text-anchor="middle" font-size="15">Inference</text><text class="station-sub" x="0" y="62" text-anchor="middle">Model providers</text></g>
-<g class="provider" transform="translate(635 905)"><use href="#platform" transform="scale(.72)"/><use href="#server" transform="translate(0 -20) scale(.75)"/><rect class="panel" x="-70" y="25" width="140" height="49" rx="7"/><text class="station-label" x="0" y="45" text-anchor="middle">Data</text><text class="station-sub" x="0" y="62" text-anchor="middle">Market data</text></g>
-<g class="provider" transform="translate(965 905)"><use href="#platform" transform="scale(.72)"/><use href="#server" transform="translate(0 -20) scale(.75)"/><rect class="panel" x="-70" y="25" width="140" height="49" rx="7"/><text class="station-label" x="0" y="45" text-anchor="middle">Verify</text><text class="station-sub" x="0" y="62" text-anchor="middle">Provenance</text></g>
-<g class="provider" transform="translate(1300 855)"><use href="#platform" transform="scale(.72)"/><use href="#server" transform="translate(0 -20) scale(.75)"/><rect class="panel" x="-70" y="25" width="140" height="49" rx="7"/><text class="station-label" x="0" y="45" text-anchor="middle">Evidence</text><text class="station-sub" x="0" y="62" text-anchor="middle">Audit &amp; record</text></g>
-<!-- animated packet glints travelling along the mesh -->
-<g filter="url(#glowCyan)"><circle r="5" fill="#fff"><animateMotion dur="4s" repeatCount="indefinite" path="M170 330 C360 340 440 510 710 500 S1100 390 1450 430"/></circle><circle r="4" fill="#fff"><animateMotion dur="5.5s" repeatCount="indefinite" path="M300 700 C450 610 590 420 800 510 S1100 650 1280 700"/></circle><circle r="4" fill="#ffb15b"><animateMotion dur="6s" repeatCount="indefinite" path="M800 190 C820 360 650 430 470 505 S800 690 965 905"/></circle></g>
-</svg>
-<div class="bottom-caption"><span><strong>ISOMETRIC NETWORK</strong> · Agents route through DRAYN to independent providers</span><span>Illustrative topology · simulated activity</span></div>
-</main>
-<section class="detail" aria-live="polite"><span class="pill" id="selectedType">AGENT SELECTED</span><b id="selectedName">Market Scout</b><span id="selectedDesc">Finds and evaluates opportunities from market data.</span><span style="margin-left:auto">Demo only — no live jobs or provider calls</span></section>
+<body><div class="app">
+<header><div class="brand">DRAYN<small>NETWORK ENVIRONMENT</small></div><div class="metrics"><div class="metric"><i class="led"></i>Agents <b>5</b></div><div class="metric">Providers <b>4</b></div><div class="metric">Mode <b>Illustrative</b></div></div><div class="live"><i class="led"></i>Simulated network</div><button id="resetView" type="button">Reset view ↺</button></header>
+<main class="stage"><div class="hud"><div>DISTRIBUTED INTELLIGENCE<strong>Living network environment</strong></div><div style="text-align:right">ILLUSTRATIVE TOPOLOGY<strong>AGENT → ROUTE → PROVIDER</strong></div></div><canvas id="world" tabindex="0" aria-label="Interactive three-dimensional DRAYN network environment. Select an agent or provider."></canvas><noscript>This interactive scene requires JavaScript and a WebGL-capable browser.</noscript></main>
+<div class="caption"><span><b>DRAYN NETWORK</b> · Persistent agents, shared intelligence routes, independent providers</span><span>Simulated activity · no live jobs or provider calls</span></div>
+<section class="detail" aria-live="polite"><span class="pill" id="kind">NETWORK OVERVIEW</span><b id="name">Distributed intelligence</b><span id="desc">Select a holographic agent or provider platform to inspect its role.</span><span class="note">Drag to orbit · tap a platform to inspect</span></section>
 </div>
-<script>
-const stations=[...document.querySelectorAll('.station')];
-function selectStation(station){stations.forEach(s=>s.classList.toggle('selected',s===station));document.getElementById('selectedName').textContent=station.dataset.name;document.getElementById('selectedDesc').textContent=station.dataset.desc;document.getElementById('selectedType').textContent='AGENT SELECTED';}
-stations.forEach(s=>{s.addEventListener('click',()=>selectStation(s));s.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectStation(s)}})});
-let jobs=12;setInterval(()=>{jobs=jobs>=16?9:jobs+1;document.getElementById('jobCount').textContent=jobs},2400);
-document.getElementById('viewToggle').addEventListener('click',()=>{const svg=document.getElementById('networkScene');const compact=svg.classList.toggle('reduced');svg.style.filter=compact?'saturate(.72) brightness(.8)':'';document.getElementById('viewToggle').textContent=compact?'View · Soft':'View ⌄';});
-</script>
-</body>
-</html>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.166.1/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+const canvas=document.querySelector('#world'),stage=document.querySelector('.stage');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.7));renderer.setSize(canvas.clientWidth,canvas.clientHeight,false);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
+const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x031322,.035);
+const camera=new THREE.PerspectiveCamera(37,canvas.clientWidth/canvas.clientHeight,.1,120);camera.position.set(0,13,23);camera.lookAt(0,1,0);
+scene.add(new THREE.HemisphereLight(0x72eaff,0x06101c,2.1));
+const key=new THREE.DirectionalLight(0x9cefff,3.4);key.position.set(-5,12,7);scene.add(key);
+const rim=new THREE.PointLight(0x00bfff,38,28);rim.position.set(0,5,-1);scene.add(rim);
+const cyan=0x3beeff,ice=0xb5ffff,blue=0x128bff,amber=0xffa44f;
+const mat=(color,metalness=.45,roughness=.32,emissive=0,intensity=0)=>new THREE.MeshStandardMaterial({color,metalness,roughness,emissive,emissiveIntensity:intensity});
+const floorMat=mat(0x061b2b,.6,.5,0x031b2a,.4),dark=mat(0x06101b,.7,.4,0x001c2b,.4),metal=mat(0x0a3147,.65,.3,0x06354a,.6),edge=mat(0x0a2737,.7,.25,0x00bfe8,1.2),glow=mat(0x6ffaff,.2,.25,0x00cfff,2.6),holo=mat(0x65eaff,.15,.22,0x00aaff,2.3),glass=new THREE.MeshPhysicalMaterial({color:0x1598c0,metalness:.2,roughness:.16,transparent:true,opacity:.34,emissive:0x006b96,emissiveIntensity:1});
+const world=new THREE.Group();scene.add(world);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(60,48),floorMat);floor.rotation.x=-Math.PI/2;floor.position.y=-.6;world.add(floor);
+const grid=new THREE.GridHelper(60,48,0x14627c,0x0b3b54);grid.position.y=-.57;grid.material.transparent=true;grid.material.opacity=.38;world.add(grid);
+function box(parent,w,h,d,material,x,y,z){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);m.position.set(x,y,z);parent.add(m);return m}
+function line(points,color=cyan,opacity=.8,radius=.018){const curve=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p)));const mesh=new THREE.Mesh(new THREE.TubeGeometry(curve,Math.max(24,points.length*8),radius,5,false),new THREE.MeshBasicMaterial({color,transparent:opacity<1,opacity}));world.add(mesh);return mesh}
+function platform(parent,x,z,w=2.2,d=1.7,y=.3){const g=new THREE.Group();g.position.set(x,y,z);parent.add(g);
+const base=box(g,w,.28,d,dark,0,0,0);const slab=box(g,w-.12,.09,d-.12,metal,0,.18,0);const top=box(g,w-.3,.025,d-.3,glass,0,.235,0);
+for(const [sx,sz] of [[-1,-1],[-1,1],[1,-1],[1,1]]){const p=new THREE.PointLight(0x13dfff,1.2,3);p.position.set(sx*w*.36,.4,sz*d*.36);g.add(p)}
+const outline=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(w-.1,.1,d-.1)),new THREE.LineBasicMaterial({color:cyan,transparent:true,opacity:.8}));outline.position.y=.2;g.add(outline);
+return g}
+function serverCluster(x,z,scale=1){const g=new THREE.Group();g.position.set(x,-.25,z);world.add(g);
+for(let i=0;i<5;i++){const xx=(i%3-1)*.63,zz=(Math.floor(i/3)-.5)*.85;const h=(.65+(i%3)*.2)*scale;box(g,.48,h,.54,dark,xx,h/2,zz);box(g,.44,.035,.5,metal,xx,h+.02,zz);for(let j=0;j<3;j++)box(g,.26,.018,.012,j===1?glow:edge,xx,h*.25+j*.13,zz+.276)}
+const halo=new THREE.PointLight(0x00bde9,2.8,5);halo.position.set(0,1,0);g.add(halo);return g}
+const agents=[
+{name:'Market Scout',desc:'Finds and evaluates opportunities from market data.',x:-8,z:-4,px:-8.6,pz:-5.1},
+{name:'Research Agent',desc:'Synthesises information from specialist providers.',x:-2.4,z:-7,px:-2.7,pz:-8},
+{name:'Trading Agent',desc:'Evaluates strategies and simulates execution within policy.',x:8,z:-3.5,px:8.6,pz:-4.7},
+{name:'Data Inspector',desc:'Checks datasets for completeness, consistency and suspicious values.',x:-6.1,z:4.4,px:-7.1,pz:3.5},
+{name:'Risk Coordinator',desc:'Checks constraints and raises alerts before a proposed action proceeds.',x:6.2,z:4.4,px:7.1,pz:3.5}
+];
+const providers=[
+{name:'Inference',desc:'Model inference and synthesis services.',x:-8,z:8},
+{name:'Data',desc:'Independent market and reference data.',x:-2.8,z:9.5},
+{name:'Verify',desc:'Verification and provenance checks.',x:2.8,z:9.5},
+{name:'Evidence',desc:'Evidence records and auditable outputs.',x:8,z:8}
+];
+const selectable=[];
+function hologram(parent){const g=new THREE.Group();parent.add(g);
+const aura=new THREE.Mesh(new THREE.CylinderGeometry(.12,.48,1.9,18,1,true),new THREE.MeshBasicMaterial({color:0x24dfff,transparent:true,opacity:.11,side:THREE.DoubleSide}));aura.position.y=1.05;g.add(aura);
+const torso=new THREE.Mesh(new THREE.CapsuleGeometry(.34,.7,5,12),holo);torso.position.y=1.15;torso.scale.set(1,.95,.65);g.add(torso);
+const shoulders=new THREE.Mesh(new THREE.SphereGeometry(.43,16,10),glass);shoulders.position.set(0,1.53,0);shoulders.scale.set(1,.48,.65);g.add(shoulders);
+const head=new THREE.Mesh(new THREE.SphereGeometry(.245,20,16),glow);head.position.y=1.92;g.add(head);
+const neck=box(g,.13,.17,.14,holo,0,1.68,0);
+for(const s of [-1,1]){const arm=new THREE.Mesh(new THREE.CapsuleGeometry(.095,.58,4,8),holo);arm.position.set(s*.42,1.17,0);arm.rotation.z=s*.18;g.add(arm);
+const leg=new THREE.Mesh(new THREE.CapsuleGeometry(.105,.48,4,8),holo);leg.position.set(s*.17,.48,0);g.add(leg)}
+for(let i=0;i<7;i++){const scan=new THREE.Mesh(new THREE.TorusGeometry(.3+i*.025,.008,4,28),new THREE.MeshBasicMaterial({color:ice,transparent:true,opacity:.32}));scan.position.y=.75+i*.19;g.add(scan)}
+const core=new THREE.PointLight(0x12dfff,2.8,4);core.position.set(0,1.4,0);g.add(core);return g}
+function addLabel(text,x,y,z,color='#c9faff'){const c=document.createElement('canvas'),ctx=c.getContext('2d');c.width=512;c.height=100;ctx.clearRect(0,0,512,100);ctx.font='600 32px system-ui';ctx.fillStyle=color;ctx.textAlign='center';ctx.fillText(text,256,42);ctx.font='20px system-ui';ctx.fillStyle='#70c9df';ctx.fillText('DRAYN NETWORK',256,73);const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;const sprite=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthWrite:false}));sprite.scale.set(2.7,.53,1);sprite.position.set(x,y,z);world.add(sprite);return sprite}
+const nodes=[];
+agents.forEach((a,i)=>{serverCluster(a.x*.45,a.z*.48,.72);const p=platform(world,a.x,a.z,2.6,2,.38);const hg=hologram(p);hg.position.y=.28;hg.scale.setScalar(.88);const label=addLabel(a.name,a.x,3.15,a.z);const data={...a,type:'AGENT',group:p,figure:hg,label};selectable.push(data);nodes.push([a.x,.9,a.z]);});
+providers.forEach((p,i)=>{serverCluster(p.x,p.z,.8);const pl=platform(world,p.x,p.z,2.8,2.2,.15);const stack=box(pl,.72,.65,.72,metal,0,.63,0);for(let k=0;k<4;k++)box(stack,.55,.025,.56,k===2?glow:edge,0,-.22+k*.14,.01);addLabel(p.name,p.x,1.65,p.z);selectable.push({...p,type:'PROVIDER',group:pl,figure:stack});nodes.push([p.x,.7,p.z]);});
+// A distributed mesh, not a hub-and-spoke diagram.
+const meshPoints=[];for(let row=0;row<5;row++){for(let col=0;col<9;col++){meshPoints.push([-10+col*2.5,.18+Math.sin(col*1.7+row)*.38,-4+row*2.05]);}}
+for(let row=0;row<5;row++)for(let col=0;col<9;col++){const i=row*9+col,p=meshPoints[i];if(col<8)line([p,meshPoints[i+1]],0x24cce8,.42,.012);if(row<4)line([p,meshPoints[i+9]],0x158cbe,.46,.012);if(col<8&&row<4&&((row+col)%2===0))line([p,meshPoints[i+10]],0x62f5ff,.36,.009);if(col<7&&row>0&&((row*3+col)%3===0))line([p,meshPoints[i-1+9]],0x168dff,.28,.008)}
+agents.forEach((a,i)=>{const start=new THREE.Vector3(a.x,.9,a.z);for(let j=0;j<5;j++){const target=meshPoints[(i*7+j*9+4)%meshPoints.length];line([[a.x,.9,a.z],[a.x*.55,.45,a.z*.5],[target[0],target[1],target[2]]],j%3===0?amber:cyan,j%3===0?.45:.62,j%3===0?.014:.018)}});
+providers.forEach((p,i)=>{for(let j=0;j<4;j++){const target=meshPoints[(i*11+j*7+16)%meshPoints.length];line([[p.x,.6,p.z],[p.x*.7,.3,p.z*.65],[target[0],target[1],target[2]]],0x36dff2,.5,.014)}});
+// Network junctions and luminous data packets.
+const dotGeo=new THREE.SphereGeometry(.055,8,8),dotMat=new THREE.MeshBasicMaterial({color:0xbaffff});meshPoints.forEach((p,i)=>{const d=new THREE.Mesh(dotGeo,dotMat);d.position.set(...p);world.add(d);if(i%5===0){const light=new THREE.PointLight(0x12cfff,1.15,2.3);light.position.set(...p);world.add(light)}});
+const packets=[];for(let i=0;i<20;i++){const m=new THREE.Mesh(new THREE.SphereGeometry(i%4===0?.075:.045,8,8),new THREE.MeshBasicMaterial({color:i%5===0?amber:ice}));world.add(m);packets.push({mesh:m,offset:i/20,path:[meshPoints[(i*7)%meshPoints.length],meshPoints[(i*7+13)%meshPoints.length],meshPoints[(i*7+31)%meshPoints.length]]})}
+const stars=new THREE.BufferGeometry(),positions=[];for(let i=0;i<650;i++)positions.push((Math.random()-.5)*55,Math.random()*12-1,(Math.random()-.5)*40);stars.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));const starfield=new THREE.Points(stars,new THREE.PointsMaterial({color:0x59dff4,size:.025,transparent:true,opacity:.42}));world.add(starfield);
+const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();let selected=null,dragging=false,lastX=0,lastY=0,rotY=0,rotX=0.08;
+function choose(item){selected=item;document.querySelector('#kind').textContent=item.type||'NETWORK OVERVIEW';document.querySelector('#name').textContent=item.name||'Distributed intelligence';document.querySelector('#desc').textContent=item.desc||'Select a holographic agent or provider platform to inspect its role.';selectable.forEach(s=>{const active=s===item;s.group.traverse(o=>{if(o.material&&o.material.emissive)o.material.emissiveIntensity=active?3.2:1.1})})}
+canvas.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;canvas.setPointerCapture(e.pointerId)});
+canvas.addEventListener('pointermove',e=>{if(dragging){rotY+=(e.clientX-lastX)*.004;rotX=Math.max(-.2,Math.min(.35,rotX+(e.clientY-lastY)*.002));lastX=e.clientX;lastY=e.clientY}});
+canvas.addEventListener('pointerup',e=>{if(!dragging)return;dragging=false;const dx=e.clientX-lastX,dy=e.clientY-lastY;if(Math.abs(dx)+Math.abs(dy)>8)return;const r=canvas.getBoundingClientRect();pointer.x=((e.clientX-r.left)/r.width)*2-1;pointer.y=-((e.clientY-r.top)/r.height)*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(selectable.map(s=>s.group),true);if(hits.length){const item=selectable.find(s=>{let o=hits[0].object;while(o){if(o===s.group)return true;o=o.parent}return false});if(item)choose(item)}});
+canvas.addEventListener('keydown',e=>{if(e.key==='Escape')choose({name:'Distributed intelligence',desc:'Select a holographic agent or provider platform to inspect its role.',type:'NETWORK OVERVIEW'})});
+document.querySelector('#resetView').addEventListener('click',()=>{rotY=0;rotX=.08;camera.position.set(0,13,23);camera.lookAt(0,1,0)});
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;const clock=new THREE.Clock();
+function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+new ResizeObserver(resize).observe(canvas);resize();
+function animate(){requestAnimationFrame(animate);const t=clock.getElapsedTime();if(!reduced){world.rotation.y+=(rotY-world.rotation.y)*.06;world.rotation.x+=(rotX-world.rotation.x)*.06;selectable.forEach((s,i)=>{if(s.figure?.isGroup)s.figure.position.y=.28+Math.sin(t*1.1+i)*.035});packets.forEach(p=>{const q=(t*.11+p.offset)%1,seg=q*2,k=Math.min(1,seg%1),a=p.path[Math.floor(seg)],b=p.path[Math.min(2,Math.floor(seg)+1)];p.mesh.position.set(THREE.MathUtils.lerp(a[0],b[0],k),THREE.MathUtils.lerp(a[1],b[1],k)+Math.sin(q*Math.PI)*.18,THREE.MathUtils.lerp(a[2],b[2],k))})}renderer.render(scene,camera)}
+animate();
+</script></body></html>
