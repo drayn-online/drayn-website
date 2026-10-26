@@ -10,6 +10,7 @@ on:
       - 'network.html'
       - 'favicon.svg'
       - 'preview/network-demo.html'
+      - 'preview/terminal.html'
       - 'preview/agent-builder.html'
       - 'preview/worm-lab.html'
       - 'preview/agent-composer.html'
@@ -46,6 +47,7 @@ jobs:
           cp network.html _site/network.html
           cp favicon.svg _site/favicon.svg
           cp preview/network-demo.html _site/preview/network-demo.html
+          cp preview/terminal.html _site/preview/terminal.html
           cp preview/agent-builder.html _site/preview/agent-builder.html
           cp preview/worm-lab.html _site/preview/worm-lab.html
           cp preview/agent-composer.html _site/preview/agent-composer.html
