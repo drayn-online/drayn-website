@@ -14,6 +14,7 @@ on:
       - 'preview/agent-builder.html'
       - 'preview/worm-lab.html'
       - 'preview/agent-composer.html'
+      - 'preview/agent-market.html'
       - '.github/workflows/network-demo-pages.yml'
   workflow_dispatch:
 
@@ -51,6 +52,7 @@ jobs:
           cp preview/agent-builder.html _site/preview/agent-builder.html
           cp preview/worm-lab.html _site/preview/worm-lab.html
           cp preview/agent-composer.html _site/preview/agent-composer.html
+          cp preview/agent-market.html _site/preview/agent-market.html
           touch _site/.nojekyll
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
