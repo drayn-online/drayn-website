@@ -6,7 +6,7 @@ compatibility_date = "2026-10-29"
 [[d1_databases]]
 binding = "DRAYN_SIGNUPS"
 database_name = "drayn-signup"
-database_id = "REPLACE_WITH_REAL_D1_DATABASE_ID"
+database_id = "564764a4-79b7-43fc-af39-6c6666e16a2e"
 
 [vars]
 # Exact origins only. Add a preview origin temporarily during testing.
