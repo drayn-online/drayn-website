@@ -1,9 +1,9 @@
-name: DRAYN Website Preview
+name: DRAYN Website Production
 
 on:
   push:
     branches:
-      - network-demo-preview
+      - main
     paths:
       - 'index.html'
       - 'login.html'
@@ -24,7 +24,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: drayn-website-preview
+  group: drayn-website-production
   cancel-in-progress: true
 
 jobs:
@@ -34,10 +34,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout preview branch
+      - name: Checkout production branch
         uses: actions/checkout@v4
         with:
-          ref: network-demo-preview
+          ref: main
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Prepare complete website
