@@ -1,0 +1,13 @@
+name = "drayn-signup"
+main = "src/index.js"
+compatibility_date = "2026-10-29"
+
+# Deployed separately from the public website; build root is backend/signup-worker.
+[[d1_databases]]
+binding = "DRAYN_SIGNUPS"
+database_name = "drayn-signup"
+database_id = "564764a4-79b7-43fc-af39-6c6666e16a2e"
+
+[vars]
+# Exact origins only. Add a preview origin temporarily during testing.
+ALLOWED_ORIGINS = "https://drayn.online"

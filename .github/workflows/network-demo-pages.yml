@@ -1,0 +1,63 @@
+name: DRAYN Website Preview
+
+on:
+  push:
+    branches:
+      - network-demo-preview
+    paths:
+      - 'index.html'
+      - 'login.html'
+      - 'network.html'
+      - 'favicon.svg'
+      - 'preview/network-demo.html'
+      - 'preview/terminal.html'
+      - 'preview/agent-builder.html'
+      - 'preview/worm-lab.html'
+      - 'preview/agent-composer.html'
+      - 'preview/agent-market.html'
+      - '.github/workflows/network-demo-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: drayn-website-preview
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout preview branch
+        uses: actions/checkout@v4
+        with:
+          ref: network-demo-preview
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Prepare complete website
+        run: |
+          mkdir -p _site/preview
+          cp index.html _site/index.html
+          cp login.html _site/login.html
+          cp network.html _site/network.html
+          cp favicon.svg _site/favicon.svg
+          cp preview/network-demo.html _site/preview/network-demo.html
+          cp preview/terminal.html _site/preview/terminal.html
+          cp preview/agent-builder.html _site/preview/agent-builder.html
+          cp preview/worm-lab.html _site/preview/worm-lab.html
+          cp preview/agent-composer.html _site/preview/agent-composer.html
+          cp preview/agent-market.html _site/preview/agent-market.html
+          touch _site/.nojekyll
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
