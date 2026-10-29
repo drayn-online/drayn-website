@@ -4,6 +4,7 @@ const JSON_HEADERS = {
 };
 
 const CONSENT_VERSION = "drayn-launch-form-v1";
+const MAX_REQUEST_BYTES = 10000;
 
 function json(body, status = 200, extraHeaders = {}) {
   return new Response(JSON.stringify(body), {
@@ -69,15 +70,23 @@ export default {
     }
 
     const declaredLength = Number(request.headers.get("content-length") || "0");
-    if (declaredLength > 10000) {
+    if (declaredLength > MAX_REQUEST_BYTES) {
       return json({ error: "Request too large" }, 413, corsHeaders(origin));
     }
 
     let input;
     try {
-      input = await request.json();
+      const rawBody = await request.text();
+      if (new TextEncoder().encode(rawBody).length > MAX_REQUEST_BYTES) {
+        return json({ error: "Request too large" }, 413, corsHeaders(origin));
+      }
+      input = JSON.parse(rawBody);
     } catch {
       return json({ error: "Invalid JSON" }, 400, corsHeaders(origin));
+    }
+
+    if (!input || typeof input !== "object" || Array.isArray(input)) {
+      return json({ error: "Expected a JSON object" }, 400, corsHeaders(origin));
     }
 
     if (cleanText(input.website, 200)) {
