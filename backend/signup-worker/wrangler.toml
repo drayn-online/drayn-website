@@ -2,7 +2,7 @@ name = "drayn-signup"
 main = "src/index.js"
 compatibility_date = "2026-10-29"
 
-# The public website remains hosted by GitHub Pages.
+# This Worker is deployed separately; the public website remains on GitHub Pages.
 [[d1_databases]]
 binding = "DRAYN_SIGNUPS"
 database_name = "drayn-signup"
