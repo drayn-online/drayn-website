@@ -116,15 +116,20 @@ document.getElementById('earlyAccessForm').addEventListener('submit', function(e
   if (early) choices.push('Early access and release updates');
   if (newsletter) choices.push('Optional newsletter and product news');
   if (partner) choices.push('Referral / affiliate partnership interest');
+  const params = new URLSearchParams(window.location.search);
+  const attribution = ['ref', 'utm_source', 'utm_medium', 'utm_campaign']
+    .map(key => [key, params.get(key)].filter(Boolean).join(': '))
+    .filter(Boolean);
   const body = [
     'DRAYN website preview request',
     '',
     'Name: ' + (name || '(not provided)'),
     'Email: ' + email,
     'Interests: ' + (choices.join(', ') || 'Please clarify my request'),
+    'Referral / campaign attribution: ' + (attribution.join(' | ') || '(none)'),
     '',
     'Sent by the DRAYN launch preview form.'
-  ].join('\n');
+  ].join('\\n');
   const subject = encodeURIComponent(partner && !early && !newsletter ? 'DRAYN partner programme interest' : 'DRAYN early access request');
   document.getElementById('formStatus').textContent = 'Your email app should open with your request prepared. Nothing is submitted until you send that email.';
   window.location.href = 'mailto:drayn.online@gmail.com?subject=' + subject + '&body=' + encodeURIComponent(body);
