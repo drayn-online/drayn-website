@@ -1,0 +1,14 @@
+name = "drayn-signup"
+main = "src/index.js"
+compatibility_date = "2026-10-29"
+
+# Create the D1 database and replace this placeholder before deployment.
+# The public website remains hosted by GitHub Pages.
+[[d1_databases]]
+binding = "DRAYN_SIGNUPS"
+database_name = "drayn-signups"
+database_id = "REPLACE_WITH_REAL_D1_DATABASE_ID"
+
+[vars]
+# Exact origins only. Add a preview origin temporarily during testing.
+ALLOWED_ORIGINS = "https://drayn.online"
