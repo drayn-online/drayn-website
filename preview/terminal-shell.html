@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d13">
+  <meta name="description" content="DRAYN intelligence terminal product preview with local illustrative fixtures.">
+  <title>DRAYN · Intelligence Terminal Preview</title>
+  <style>
+    :root{color-scheme:dark;--bg:#080d13;--surface:#0c141e;--surface-raised:#101b26;--line:#243443;--line-strong:#35515e;--muted:#91a4b4;--quiet:#718695;--text:#e7f1f6;--mint:#83f1dd;--blue:#83c8ff;--amber:#f1c27d;--red:#ef9a9a;--radius:11px;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--mono:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}
+    *{box-sizing:border-box}html{min-height:100%;background:var(--bg)}body{min-height:100vh;margin:0;background:radial-gradient(ellipse at 70% -10%,#14303b 0,transparent 35rem),var(--bg);color:var(--text);font:13px/1.55 var(--sans)}button{font:inherit;color:inherit}button:focus-visible,a:focus-visible{outline:2px solid var(--mint);outline-offset:3px}a{color:inherit;text-decoration:none}
+    .app{min-height:100vh;display:grid;grid-template-columns:232px minmax(0,1fr)}.sidebar{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:22px 13px 16px;background:#09111a;border-right:1px solid var(--line);z-index:5}.brand{display:flex;align-items:center;gap:10px;padding:0 8px 23px;border-bottom:1px solid var(--line);font-size:13px;font-weight:850;letter-spacing:.2em}.mark{height:30px;width:30px;flex:none;border:1px solid var(--mint);border-radius:50%;display:grid;place-items:center;position:relative;color:var(--mint);letter-spacing:0;box-shadow:0 0 22px #83f1dd22}.mark:after{content:"";position:absolute;inset:7px;border:1px solid #83f1dd99;border-radius:50%}.brand small{display:block;margin-top:3px;color:#8095a4;font-size:8px;letter-spacing:.13em;font-weight:550}.navlabel{padding:23px 10px 9px;color:#718695;font:9px var(--mono);letter-spacing:.13em;text-transform:uppercase}.nav{display:grid;gap:4px}.nav button{width:100%;min-height:42px;display:flex;align-items:center;gap:11px;padding:9px 10px;border:1px solid transparent;border-radius:8px;background:transparent;color:#a6bac7;text-align:left;cursor:pointer;transition:background .16s,border-color .16s,color .16s}.nav button:hover{background:#101e29;color:white}.nav button[aria-current="page"]{background:#102622;border-color:#2e6259;color:var(--mint)}.nav button[aria-current="page"] .ico{color:var(--mint)}.ico{width:19px;flex:none;text-align:center;color:#83a5b7;font-size:15px}.navname{font-size:11px;font-weight:650}.navhint{margin-left:auto;color:#718695;font:8px var(--mono);letter-spacing:.04em}.sidefoot{margin-top:auto}.account-note{margin:14px 2px;padding:11px;border:1px solid #2c3e49;border-radius:9px;background:#0d1822}.micro{color:#718695;font:8px var(--mono);letter-spacing:.12em;text-transform:uppercase}.session-entry{width:100%;display:flex;align-items:center;gap:9px;margin:0 2px;padding:12px 6px 2px;border:0;border-top:1px solid var(--line);background:transparent;text-align:left;cursor:pointer}.avatar{width:29px;height:29px;flex:none;display:grid;place-items:center;border:1px solid #36515d;border-radius:50%;background:#13242f;color:#c7dce5;font-size:9px;font-weight:800}.session-label{min-width:0}.session-name{display:block;font-size:10px;font-weight:700}.session-state{display:block;margin-top:2px;color:#91d9c9;font:8px var(--mono);letter-spacing:.05em}.session-more{margin-left:auto;color:#8ba0ab}
+    .main{min-width:0;min-height:100vh;display:flex;flex-direction:column}.topbar{position:sticky;top:0;z-index:4;height:59px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 clamp(16px,3vw,38px);border-bottom:1px solid var(--line);background:#0a121beF;backdrop-filter:blur(12px)}.crumb{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:10px}.crumb strong{color:var(--text);font-weight:650}.slash{color:#526a78}.topright{display:flex;align-items:center;gap:10px}.demo-pill{padding:5px 7px;border:1px solid #37675f;border-radius:5px;background:#102622;color:var(--mint);font:8px var(--mono);letter-spacing:.08em}.mobile-menu{display:none}
+    .content{width:min(100%,1330px);margin:0 auto;padding:34px clamp(16px,3vw,38px) 40px}.eyebrow{display:flex;align-items:center;gap:8px;color:var(--mint);font:9px var(--mono);letter-spacing:.14em;text-transform:uppercase}.eyebrow:before{content:"";width:14px;height:1px;background:var(--mint)}h1{margin:12px 0 9px;font-size:clamp(27px,3.2vw,38px);line-height:1.1;letter-spacing:-.055em;font-weight:620}.intro{max-width:690px;margin:0;color:#aebfcb;font-size:12px;line-height:1.75}.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:23px}.hero-actions{display:flex;gap:8px;flex:none}.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:34px;padding:8px 11px;border:1px solid #35515e;border-radius:7px;background:#12222e;color:#d8e8ef;font-size:10px;font-weight:700;cursor:pointer;transition:background .16s,border-color .16s}.button:hover{border-color:var(--mint);background:#153137}.button.primary{border-color:var(--mint);background:var(--mint);color:#071411}.button.primary:hover{background:#a0f7e4}.button.quiet{background:#101a24;border-color:#2a3c4a;color:#d7e5ee}
+    .preview-banner{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding:11px 13px;border:1px solid #31504f;border-radius:8px;background:#0d1b20;color:#b1c4c8;font-size:9px}.preview-mark{width:16px;height:16px;flex:none;display:grid;place-items:center;border:1px solid #4f8880;border-radius:50%;color:var(--mint);font:9px var(--mono)}.preview-banner strong{color:#e1efed}.banner-spacer{margin-left:auto}
+    .foundation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.foundation-card{position:relative;min-height:123px;padding:15px 15px 14px;border:1px solid var(--line);border-radius:10px;background:linear-gradient(145deg,#0e1822,#0a1119);overflow:hidden}.foundation-card:after{content:"";position:absolute;top:-34px;right:-27px;width:78px;height:78px;border-radius:50%;background:#83f1dd0b}.card-top{display:flex;align-items:center;justify-content:space-between;gap:9px}.card-icon{width:26px;height:26px;display:grid;place-items:center;border:1px solid #31534f;border-radius:7px;background:#11231f;color:var(--mint);font-size:12px}.card-status{color:#91d9c9;font:8px var(--mono);letter-spacing:.04em}.card-status.pending{color:var(--amber)}.card-title{margin-top:12px;font-size:11px;font-weight:750}.card-copy{margin-top:4px;color:var(--muted);font-size:9px;line-height:1.55}
+    .section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:25px 0 10px}.section-heading h2{margin:0;font-size:12px;font-weight:700}.section-heading p{margin:4px 0 0;color:var(--quiet);font-size:9px}.mono-label{color:var(--quiet);font:8px var(--mono);letter-spacing:.06em}.panel{border:1px solid var(--line);border-radius:10px;background:linear-gradient(145deg,#0c151f,#0a121a);overflow:hidden}.sequence{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;padding:15px 16px}.sequence-step{min-width:0;position:relative;padding:0 11px 0 0}.sequence-step:not(:last-child):after{content:"›";position:absolute;top:2px;right:6px;color:#62847c;font-size:15px}.step-number{display:flex;align-items:center;gap:7px;color:var(--mint);font:8px var(--mono);letter-spacing:.04em}.step-number span{width:16px;height:16px;display:grid;place-items:center;border:1px solid #37675f;border-radius:50%;font-size:8px}.step-title{margin-top:7px;font-size:9px;font-weight:700}.step-copy{margin-top:3px;color:var(--muted);font-size:8px;line-height:1.55}
+    .context-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:11px;margin-top:11px}.context-panel{padding:15px}.panel-title{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;font-weight:700}.panel-description{margin:4px 0 12px;color:var(--muted);font-size:9px;line-height:1.6}.context-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid #1c2c38;color:#b9c9d0;font-size:9px}.context-row strong{font-weight:650}.context-value{color:var(--muted);font:8px var(--mono);text-align:right}.context-value.mint{color:var(--mint)}.state-strip{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.state-chip{padding:4px 6px;border:1px solid #2a414b;border-radius:5px;color:#a8bbc7;font:7px var(--mono);letter-spacing:.02em}.state-chip.loading{border-color:#36546d;color:var(--blue)}.state-chip.stale{border-color:#5b4a2b;color:var(--amber)}.state-chip.error{border-color:#654040;color:var(--red)}
+    .upcoming{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}.upcoming-item{padding:11px;border:1px solid #20313e;border-radius:8px;background:#0a131c}.upcoming-top{display:flex;justify-content:space-between;gap:8px;color:#dae6eb;font-size:9px;font-weight:700}.upcoming-meta{margin-top:5px;color:var(--muted);font-size:8px;line-height:1.5}.upcoming-badge{color:var(--amber);font:7px var(--mono);white-space:nowrap}
+    .agent-page{padding-top:2px}.agent-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}.agent-heading h1{margin-top:8px}.agent-count{color:var(--muted);font:8px var(--mono);white-space:nowrap}.agent-layout{display:grid;grid-template-columns:minmax(245px,.82fr) minmax(0,1.65fr);gap:12px;align-items:start}.agent-list{padding:8px}.agent-list-title{padding:8px 8px 10px;color:var(--quiet);font:8px var(--mono);letter-spacing:.08em;text-transform:uppercase}.agent-choice{display:block;width:100%;margin:0 0 6px;padding:12px;border:1px solid transparent;border-radius:8px;background:transparent;text-align:left;cursor:pointer}.agent-choice:hover{background:#101e29}.agent-choice[aria-pressed=true]{border-color:#37675f;background:#102622}.agent-choice-name{display:block;color:var(--text);font-size:10px;font-weight:750}.agent-choice-meta{display:block;margin-top:4px;color:var(--muted);font-size:8px;line-height:1.5}.agent-choice-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.agent-tag{padding:3px 5px;border:1px solid #2b414b;border-radius:4px;color:#b1c5ce;font:7px var(--mono)}.agent-detail{padding:16px}.agent-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--line)}.agent-avatar{width:38px;height:38px;flex:none;display:grid;place-items:center;border:1px solid #37675f;border-radius:10px;background:#102622;color:var(--mint);font-size:15px}.agent-identity{display:flex;gap:11px;min-width:0}.agent-detail-title{margin:0;color:var(--text);font-size:16px;letter-spacing:-.025em}.agent-purpose{margin:4px 0 0;color:var(--muted);font-size:9px;line-height:1.55}.agent-state{padding:4px 6px;border:1px solid #66522c;border-radius:5px;color:var(--amber);font:7px var(--mono);white-space:nowrap}.agent-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.agent-info{min-height:95px;padding:11px;border:1px solid #20313e;border-radius:8px;background:#0a131c}.agent-info-label{color:var(--quiet);font:7px var(--mono);letter-spacing:.08em;text-transform:uppercase}.agent-info-value{margin-top:8px;color:#dce8ed;font-size:9px;font-weight:650;line-height:1.5}.agent-info-note{margin-top:4px;color:var(--muted);font-size:8px;line-height:1.5}.agent-capabilities{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.agent-blocked{margin-top:11px;padding:11px 12px;border:1px solid #51472f;border-radius:8px;background:#17150f;color:#c5b99b;font-size:8px;line-height:1.6}.agent-blocked strong{color:#f0d49e}.agent-links{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}.agent-links .button{min-height:30px;font-size:8px}.agent-subtitle{margin:14px 0 7px;color:var(--text);font-size:9px;font-weight:750}.agent-empty{padding:11px;border:1px dashed #2b414b;border-radius:7px;color:var(--muted);font-size:8px;line-height:1.6}
+    .workspace-overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:15px 0 20px}.workspace-card{padding:14px;border:1px solid var(--line);border-radius:9px;background:linear-gradient(145deg,#0e1822,#0a1119)}.workspace-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.workspace-card h2{margin:0;font-size:10px}.workspace-number{color:var(--mint);font:16px var(--mono)}.workspace-card p{margin:7px 0 0;color:var(--muted);font-size:8px;line-height:1.6}.workspace-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.workspace-actions .button{min-height:29px;font-size:8px}.workspace-feed{display:grid;gap:7px;margin-top:10px}.feed-row{display:flex;align-items:flex-start;gap:9px;padding:9px;border-top:1px solid #1c2c38}.feed-dot{width:7px;height:7px;flex:none;margin-top:4px;border-radius:50%;background:var(--blue)}.feed-dot.warn{background:var(--amber)}.feed-copy{min-width:0;color:#cfdae0;font-size:8px;line-height:1.5}.feed-copy small{display:block;color:var(--quiet);font:7px var(--mono)}.build-notes{margin-top:22px;border-top:1px solid var(--line);padding-top:12px}.build-notes>summary{cursor:pointer;color:var(--muted);font:8px var(--mono);letter-spacing:.07em;text-transform:uppercase}.build-notes[open]>summary{margin-bottom:8px}.intelligence-page{padding-top:2px}.intelligence-grid{display:grid;grid-template-columns:minmax(230px,.78fr) minmax(0,1.6fr);gap:12px;align-items:start}.job-list{padding:8px}.job-choice{display:block;width:100%;padding:10px;border:1px solid transparent;border-radius:7px;background:transparent;text-align:left;cursor:pointer}.job-choice:hover{background:#101e29}.job-choice[aria-pressed=true]{border-color:#37675f;background:#102622}.job-title{display:block;color:var(--text);font-size:9px;font-weight:700}.job-meta{display:flex;justify-content:space-between;gap:8px;margin-top:4px;color:var(--muted);font:7px var(--mono)}.job-status{color:var(--mint)}.job-status.refused,.job-status.failed{color:var(--amber)}.job-detail{padding:16px}.job-detail-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.job-route{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:15px 0}.route-node{position:relative;min-height:64px;padding:9px 8px;border:1px solid #2a414b;border-radius:7px;background:#0a131c}.route-node:not(:last-child):after{content:'›';position:absolute;right:-7px;top:22px;z-index:1;color:var(--mint)}.route-node strong{display:block;color:#dce8ed;font-size:7px}.route-node span{display:block;margin-top:5px;color:var(--muted);font-size:7px;line-height:1.4}.route-node[data-state=done]{border-color:#37675f}.route-node[data-state=issue]{border-color:#66522c}.job-event{display:grid;grid-template-columns:88px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid #1c2c38}.job-event time{color:#9bb1bd;font:7px var(--mono)}.job-event strong{display:block;color:#dce8ed;font-size:8px}.job-event p{margin:3px 0 0;color:var(--muted);font-size:8px;line-height:1.5}.job-source{margin-top:10px;padding:9px 10px;border:1px solid #243943;border-radius:7px;color:var(--muted);font-size:7px;line-height:1.5}
+    .build-notes .foundation-grid{margin-top:13px}
+    .network-page{padding-top:2px}.network-switch{display:flex;gap:6px;padding:4px;border:1px solid var(--line);border-radius:8px;background:#09131c}.network-switch button{min-height:30px;padding:6px 9px;border:1px solid transparent;border-radius:5px;background:transparent;color:var(--muted);font-size:8px;cursor:pointer}.network-switch button[aria-pressed=true]{border-color:#37675f;background:#102622;color:var(--mint)}.network-layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(220px,.65fr);gap:12px;align-items:start}.topology-scene{position:relative;min-height:410px;padding:22px 18px;border:1px solid #1b4051;border-radius:12px;overflow:hidden;background:radial-gradient(ellipse at 50% 43%,#0b2c38,#071722 65%,#050d14);perspective:1100px}.topology-scene:before{content:"";position:absolute;inset:30% 10% 8%;transform:rotateX(54deg);transform-origin:center top;border:1px solid #224252;background:repeating-linear-gradient(0deg,transparent 0 29px,#1a3b4928 30px),repeating-linear-gradient(90deg,transparent 0 29px,#1a3b4928 30px);pointer-events:none}.topology-caption{position:relative;z-index:1;display:flex;justify-content:space-between;gap:12px;color:var(--muted);font:7px var(--mono);letter-spacing:.08em}.topology-stack{position:relative;z-index:1;display:grid;gap:13px;margin:20px auto 0;max-width:680px;transform:rotateX(8deg);transform-style:preserve-3d}.topology-layer{position:relative;padding:10px 12px;border:1px solid #31515f;border-radius:9px;background:linear-gradient(145deg,#10232fdd,#09141ddd);box-shadow:0 10px 20px #0005;transform:translateZ(10px)}.topology-layer:nth-child(2){transform:translateZ(0);border-color:#37675f;background:linear-gradient(145deg,#102522ee,#091615ee)}.topology-layer:nth-child(3){transform:translateZ(-10px)}.topology-layer-label{display:flex;justify-content:space-between;gap:9px;margin-bottom:8px;color:#91aab7;font:7px var(--mono);letter-spacing:.09em;text-transform:uppercase}.topology-nodes{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}.topology-node{min-width:120px;max-width:180px;padding:9px 10px;border:1px solid #376075;border-radius:7px;background:#0a1b27;color:#dcebf0;text-align:left;cursor:pointer;box-shadow:0 5px 15px #0004}.topology-node:hover,.topology-node[aria-pressed=true]{border-color:var(--mint);background:#102a30}.topology-node[data-kind=service]{border-color:#377469;background:#0c211f}.topology-node[data-kind=provider]{border-color:#395b80;background:#0c1b2b}.topology-node strong{display:block;font-size:8px}.topology-node small{display:block;margin-top:4px;color:var(--muted);font:7px var(--mono)}.topology-link{width:1px;height:12px;margin:-4px auto;background:linear-gradient(#64cabc,#578cad);box-shadow:0 0 8px #67ead0aa}.topology-detail{padding:15px}.topology-detail h2{margin:8px 0 5px;font-size:12px}.topology-detail p{margin:0;color:var(--muted);font-size:8px;line-height:1.65}.topology-facts{margin-top:10px}.topology-fact{padding:8px 0;border-top:1px solid #1c2c38}.topology-fact span{display:block;color:var(--quiet);font:7px var(--mono);text-transform:uppercase;letter-spacing:.06em}.topology-fact strong{display:block;margin-top:4px;color:#dce8ed;font-size:8px;font-weight:600}.topology-disclaimer{margin-top:10px;padding:9px;border:1px solid #51472f;border-radius:7px;background:#17150f;color:#c5b99b;font-size:7px;line-height:1.55}
+    .footer{display:flex;justify-content:space-between;gap:12px;margin-top:24px;padding-top:13px;border-top:1px solid var(--line);color:var(--quiet);font:8px var(--mono);letter-spacing:.04em}.footer a{color:#9ab0bc}.view-placeholder{min-height:60vh;display:grid;place-items:center;padding:28px}.placeholder-card{width:min(100%,510px);padding:32px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(145deg,#0e1822,#0a1119);text-align:center}.placeholder-icon{width:44px;height:44px;margin:0 auto 16px;display:grid;place-items:center;border:1px solid #37675f;border-radius:13px;background:#102622;color:var(--mint);font-size:18px}.placeholder-kicker{color:var(--amber);font:8px var(--mono);letter-spacing:.1em;text-transform:uppercase}.placeholder-card h1{margin:9px 0;font-size:23px}.placeholder-card p{margin:0;color:var(--muted);font-size:10px;line-height:1.75}[hidden]{display:none!important}
+    @media(max-width:960px){.app{grid-template-columns:205px minmax(0,1fr)}.foundation-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.context-grid{grid-template-columns:1fr}.sequence{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:18px}.sequence-step:nth-child(3):after{display:none}}
+    @media(max-width:760px){.agent-layout{grid-template-columns:1fr}.agent-list{display:grid;grid-template-columns:1fr 1fr;gap:4px}.agent-list-title{grid-column:1/-1}.agent-choice{margin:0}}
+    @media(max-width:760px){.workspace-overview{grid-template-columns:1fr 1fr}.intelligence-grid{grid-template-columns:1fr}.job-route{grid-template-columns:1fr}.route-node{min-height:0}.route-node:not(:last-child):after{content:'⌄';top:auto;right:10px;bottom:-10px}}
+    @media(max-width:1100px){.network-layout{grid-template-columns:minmax(0,1fr)}.topology-detail{min-width:0}.topology-fact strong{overflow-wrap:anywhere}}
+    @media(max-width:760px){.network-layout{grid-template-columns:1fr}.topology-scene{padding:16px 10px;min-height:0}.topology-node{min-width:112px}.topology-caption{font-size:6px}.agent-heading{align-items:flex-start;flex-direction:column}.network-switch{max-width:100%}.preview-banner{flex-wrap:wrap}.banner-spacer{display:none}#networkScopeLabel{margin-left:32px}}
+    @media(max-width:650px){.app{display:block}.sidebar{position:fixed;left:0;top:0;bottom:0;width:min(285px,86vw);height:100dvh;transform:translateX(-103%);transition:transform .2s;box-shadow:16px 0 40px #0008}.sidebar.open{transform:translateX(0)}.main{min-height:100vh}.topbar{height:52px;padding:0 12px}.mobile-menu{display:grid;width:30px;height:30px;place-items:center;border:1px solid var(--line);border-radius:7px;background:#101e29;color:var(--text);cursor:pointer}.crumb{margin-right:auto}.topright{gap:6px}.demo-pill{font-size:7px}.content{padding:25px 13px 27px}.hero{display:block}.hero-actions{margin-top:14px}.hero-actions .button{flex:1}.foundation-grid{grid-template-columns:1fr 1fr;gap:7px}.foundation-card{min-height:115px;padding:12px}.sequence{grid-template-columns:1fr 1fr;gap:14px 4px;padding:13px}.sequence-step{padding-right:15px}.sequence-step:after{display:none}.sequence-step:last-child{grid-column:1/-1}.upcoming{grid-template-columns:1fr}.footer{display:block;line-height:1.9}.footer span{display:block}.view-placeholder{min-height:calc(100vh - 52px);padding:16px}.placeholder-card{padding:24px 18px}}
+    @media(max-width:480px){.agent-detail-grid{grid-template-columns:1fr}.agent-detail-head{flex-direction:column}.agent-detail{padding:13px}.agent-info{min-height:0}}
+    @media(max-width:380px){.demo-pill{display:none}.foundation-grid{grid-template-columns:1fr}.foundation-card{min-height:100px}.sequence{grid-template-columns:1fr 1fr}.card-copy{font-size:8px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+  <style>.state-examples{margin-top:14px;border-top:1px solid #1c2c38;padding-top:11px;color:#b9c9d0;font-size:9px}.state-examples summary{cursor:pointer;color:var(--mint);font-weight:650}.state-examples ul{display:grid;gap:6px;padding-left:18px;line-height:1.5}.state-examples li strong{color:#e4edf1}.state-examples p{color:var(--muted);font-size:8px;line-height:1.5}.parallel-track{display:flex;align-items:center;gap:13px;margin:0 16px 15px;padding:10px 12px;border:1px dashed #35515e;border-radius:8px;background:#0b1820;color:#b5c8d0;font-size:9px;line-height:1.5}.parallel-track-label{flex:none;color:var(--blue);font:8px var(--mono);letter-spacing:.05em}.parallel-track strong{color:#e5f0f4}@media(max-width:650px){.parallel-track{align-items:flex-start;flex-direction:column;gap:5px;margin:0 12px 13px}}</style>
+  <style>.topology-scene{min-height:0;padding:10px}.topology-scene:before{display:none}.topology-caption{position:absolute;top:13px;left:14px;right:14px;display:flex;flex-wrap:wrap;align-items:center;color:#9bb7c4;text-shadow:0 1px 8px #000}.topology-caption span{max-width:100%}.topology-caption span:last-child{text-align:right}.topology-canvas{display:block;width:100%;height:520px;outline:none;touch-action:none}.topology-canvas:focus-visible{outline:2px solid var(--mint);outline-offset:-3px}.topology-fallback{position:absolute;right:12px;bottom:10px;left:12px;padding:9px;border:1px solid #51472f;border-radius:7px;background:#17150f;color:#f0d49e;font-size:8px}.topology-node-list{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}.topology-node-choice{padding:5px 7px;border:1px solid #2b414b;border-radius:5px;background:#0b1721;color:#a9bec9;font-size:7px;cursor:pointer}.topology-node-choice[data-kind=agent]{border-color:#39727a}.topology-node-choice[data-kind=service]{border-color:#4a7668}.topology-node-choice[data-kind=provider]{border-color:#3f6384}.topology-node-choice[aria-pressed=true]{background:#15333a;color:#c5fff5;border-color:var(--mint)}@media(max-width:760px){.topology-canvas{height:420px}.topology-caption{display:grid;gap:3px}.topology-caption span:last-child{text-align:left}}</style>
+  <style>.work-context-chip{display:flex;align-items:center;gap:7px;min-width:0;margin-right:auto;padding-left:12px;border-left:1px solid var(--line);color:#91aab7}.work-context-chip>span{flex:none;color:var(--mint);font:7px var(--mono);letter-spacing:.06em}.work-context-chip strong{max-width:200px;overflow:hidden;color:#dce8ed;text-overflow:ellipsis;white-space:nowrap;font-size:9px;font-weight:650}.work-context-chip #globalWorkChain{padding-left:7px;border-left:1px solid #2a3b45;color:#9bb1bd}@media(max-width:650px){.work-context-chip{max-width:155px;padding-left:8px}.work-context-chip>span:first-child{display:none}.work-context-chip strong{max-width:130px}}@media(max-width:480px){.work-context-chip{max-width:120px}.work-context-chip strong{max-width:112px}.work-context-chip #globalWorkChain{display:none}}</style>
+  <style>@media(max-width:480px){.crumb{margin-right:0}.crumb span{display:none}.work-context-chip{max-width:112px}.work-context-chip strong{max-width:100px}}</style>
+  <style>.state-preview-label{display:block;margin:10px 0 5px;color:#b7c8d0;font-size:8px;font-weight:650}.account-state-select{width:100%;min-height:31px;padding:6px 8px;border:1px solid #35515e;border-radius:6px;background:#101b26;color:var(--text);font:8px var(--sans)}.account-state-select:focus-visible{outline:2px solid var(--mint);outline-offset:2px}.account-state-output{display:grid;gap:4px;margin-top:8px;padding:8px;border:1px solid #2a414b;border-radius:6px;background:#09131c}.account-state-output strong{color:var(--mint);font:7px var(--mono);letter-spacing:.05em}.account-state-output span{color:#c0d0d8;font-size:8px;line-height:1.5}.account-state-notice{margin:6px 0 0;color:var(--quiet);font-size:7px;line-height:1.5}</style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
+      <a class="brand" href="#my-drayn" data-view="my-drayn" aria-label="DRAYN terminal, My DRAYN"><span class="mark">D</span><span>DRAYN<small>INTELLIGENCE TERMINAL</small></span></a>
+      <div class="navlabel">Workspace</div>
+      <nav class="nav" id="primaryNav" aria-label="Terminal navigation">
+        <button type="button" data-view="my-drayn" aria-current="page"><span class="ico" aria-hidden="true">⌂</span><span class="navname">My DRAYN</span><span class="navhint">T1</span></button>
+        <button type="button" data-view="my-agents"><span class="ico" aria-hidden="true">◇</span><span class="navname">My Agents</span><span class="navhint">T2</span></button>
+        <button type="button" data-view="my-network"><span class="ico" aria-hidden="true">⌘</span><span class="navname">My Network</span><span class="navhint">T3</span></button>
+        <button type="button" data-view="agent-studio"><span class="ico" aria-hidden="true">✧</span><span class="navname">Agent Studio</span><span class="navhint">PLANNED</span></button>
+        <button type="button" data-view="intelligence"><span class="ico" aria-hidden="true">⌁</span><span class="navname">Intelligence</span><span class="navhint">71</span></button>
+      </nav>
+      <div class="sidefoot">
+        <button class="session-entry" id="sessionButton" type="button" aria-expanded="false" aria-controls="sessionNote"><span class="avatar" aria-hidden="true">D</span><span class="session-label"><span class="session-name">Demo workspace</span><span class="session-state">SIGNED-OUT PREVIEW</span></span><span class="session-more" aria-hidden="true">···</span></button>
+        <div id="sessionNote" class="account-note" hidden><div class="micro">Account integration pending</div><p class="panel-description" style="margin:7px 0 10px">Authentication and account state stay behind the interface agreed with Neil. This preview does not sign in or create a session.</p><label class="state-preview-label" for="accountStateSelect">Preview account UI state</label><select id="accountStateSelect" class="account-state-select" aria-describedby="accountStateNotice"><option value="signed-out">Signed out · demo</option><option value="signing-in">Signing in · example</option><option value="signed-in">Signed in · example only</option><option value="account-loading">Account loading</option><option value="account-error">Account error</option><option value="session-expired">Session expired</option><option value="access-denied">Access denied</option></select><div id="accountStateOutput" class="account-state-output" role="status" aria-live="polite"><strong>UI PREVIEW · SIGNED OUT</strong><span>Signed-out demo. Authentication is not connected.</span></div><p id="accountStateNotice" class="account-state-notice">Illustrative copy only · no authentication, account lookup or permission check is performed.</p></div>
+      </div>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="menuButton" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">☰</button>
+        <div class="crumb" aria-label="Current location"><span>Workspace</span><span class="slash" aria-hidden="true">/</span><strong id="breadcrumb" aria-live="polite">My DRAYN</strong></div>
+        <div class="work-context-chip" id="globalWorkContext" hidden aria-live="polite"><span id="globalWorkKind">AGENT</span><strong id="globalWorkLabel"></strong><span id="globalWorkChain" hidden></span></div>
+        <div class="topright"><span class="demo-pill">DEMO PREVIEW</span><span class="avatar" aria-label="Signed-out demo workspace">D</span></div>
+      </header>
+      <div class="content" id="mainContent">
+        <section id="homeView">
+          <div class="hero">
+            <div><div class="eyebrow">T1 · MY DRAYN · DEMO WORKSPACE</div><h1>Your work, at a glance.</h1><p class="intro">A personal overview of example agents, activity and network context. Live user-scoped data is not connected.</p></div>
+            <div class="hero-actions"><button class="button" type="button" id="sessionAction">Account state <span aria-hidden="true">↗</span></button><button class="button primary" type="button" data-view="my-agents">Open My Agents <span aria-hidden="true">→</span></button></div>
+          </div>
+          <div class="preview-banner"><span class="preview-mark" aria-hidden="true">i</span><span><strong>Illustrative workspace.</strong> Agent and activity examples are fixtures; no live jobs, ownership, API calls, authentication or payments are connected.</span><span class="banner-spacer"></span><span class="mono-label">DEMO DATA</span></div>
+          <div class="workspace-overview" aria-label="Personal workspace overview">
+            <article class="workspace-card"><div class="workspace-card-head"><h2>Example agents</h2><span class="workspace-number">04</span></div><p>Four illustrative profiles. Ownership and live status are unavailable.</p><div class="workspace-actions"><button class="button" type="button" data-view="my-agents">Review agents</button></div></article>
+            <article class="workspace-card"><div class="workspace-card-head"><h2>Recent activity</h2><span class="workspace-number">02</span></div><div class="workspace-feed"><div class="feed-row"><span class="feed-dot" aria-hidden="true"></span><span class="feed-copy">Example job completed · source review<small>ILLUSTRATIVE FIXTURE · timing not measured</small></span></div><div class="feed-row"><span class="feed-dot warn" aria-hidden="true"></span><span class="feed-copy">Example request refused · needs review<small>ILLUSTRATIVE FIXTURE · details in Intelligence</small></span></div></div><div class="workspace-actions"><button class="button" type="button" data-view="intelligence">Inspect activity</button></div></article>
+            <article class="workspace-card"><div class="workspace-card-head"><h2>Personal network</h2><span class="workspace-number">—</span></div><p>No relationship data is connected. The network summary will appear when user-scoped relationship contracts are available.</p><div class="workspace-actions"><button class="button" type="button" data-view="my-network">My Network</button></div></article>
+          </div>
+          <details class="build-notes"><summary>Shared shell and build reference</summary>
+          <div class="foundation-grid" aria-label="Shared shell foundations">
+            <article class="foundation-card"><div class="card-top"><span class="card-icon" aria-hidden="true">⌂</span><span class="card-status">SHELL ACTIVE</span></div><div class="card-title">One shared workspace</div><div class="card-copy">Responsive navigation, page context and a consistent place for the terminal areas.</div></article>
+            <article class="foundation-card"><div class="card-top"><span class="card-icon" aria-hidden="true">◎</span><span class="card-status">ACTIVE CONTEXT</span></div><div class="card-title">Page and work context</div><div class="card-copy">The active area is clear, with agent, job and chain details attached to selected work.</div></article>
+            <article class="foundation-card"><div class="card-top"><span class="card-icon" aria-hidden="true">◌</span><span class="card-status pending">CONTRACT PENDING</span></div><div class="card-title">Account entry point</div><div class="card-copy">Signed-out state is visible; authentication waits for Neil’s agreed auth/API contract.</div></article>
+          </div>
+          <div class="section-heading"><div><h2>Terminal build sequence</h2><p>Foundation first, then personal areas in order.</p></div><span class="mono-label">BUILD ORDER</span></div>
+          <section class="panel" aria-label="Agreed terminal build sequence">
+            <div class="sequence">
+              <div class="sequence-step"><div class="step-number"><span>01</span> CARD 70</div><div class="step-title">App shell</div><div class="step-copy">Establish shared navigation, page context and responsive terminal frame.</div></div>
+              <div class="sequence-step"><div class="step-number"><span>02</span> CARD 71</div><div class="step-title">Graph + activity</div><div class="step-copy">Begins after the app shell is in place.</div></div>
+              <div class="sequence-step"><div class="step-number"><span>03</span> T1</div><div class="step-title">My DRAYN</div><div class="step-copy">Personal workspace after Cards 70, 71 and 74.</div></div>
+              <div class="sequence-step"><div class="step-number"><span>04</span> T2</div><div class="step-title">My Agents</div><div class="step-copy">Follows the My DRAYN workspace.</div></div>
+              <div class="sequence-step"><div class="step-number"><span>05</span> T3</div><div class="step-title">My Network</div><div class="step-copy">Follows My Agents.</div></div>
+            </div>
+            <div class="parallel-track"><span class="parallel-track-label">PARALLEL TRACK · CARD 74</span><span><strong>UI data contracts</strong> proceed alongside Cards 70 and 71 and are a prerequisite for T1.</span></div>
+          </section>
+          <div class="context-grid">
+            <section class="panel context-panel"><div class="panel-title">Shared page context <span class="mono-label">SHELL PATTERN</span></div><p class="panel-description">Keep the current area and selected work visible as users move through the terminal. Chain context belongs to an agent or job, not the whole shell.</p><div class="context-row"><strong>Current area</strong><span class="context-value mint" id="contextPage">My DRAYN</span></div><div class="context-row"><strong>Selected agent / job</strong><span class="context-value" id="contextWork">None selected</span></div><div class="context-row"><strong>Chain context</strong><span class="context-value" id="contextChain">No agent or job selected</span></div></section>
+            <section class="panel context-panel"><div class="panel-title">Shared state patterns <span class="mono-label">REFERENCE</span></div><p class="panel-description">Area cards reuse clear state labels with text plus color, including incomplete and access-limited states.</p><div class="state-strip" aria-label="Shared interface states"><span class="state-chip loading">LOADING</span><span class="state-chip">EMPTY</span><span class="state-chip stale">STALE / PARTIAL</span><span class="state-chip error">ERROR</span><span class="state-chip">PARTIAL EVIDENCE</span><span class="state-chip">PROVIDER FAILURE</span><span class="state-chip">DISCONNECTED ACCOUNT</span><span class="state-chip">UNSUPPORTED CHAIN</span><span class="state-chip">ACCESS DENIED</span><span class="state-chip">SESSION EXPIRED</span><span class="state-chip">SIGNED OUT</span><span class="state-chip">SIGNING IN</span><span class="state-chip">SIGNED IN</span><span class="state-chip">ACCOUNT LOADING / ERROR</span></div><details class="state-examples"><summary>View example messages</summary><ul><li><strong>Loading:</strong> “Loading your workspace…”</li><li><strong>Empty:</strong> “No agents here yet. Create an agent to get started.”</li><li><strong>Stale:</strong> “Showing the last saved update from 10:42.”</li><li><strong>Partial:</strong> “Some activity could not be loaded.”</li><li><strong>Error:</strong> “We couldn’t load this view. Try again.”</li><li><strong>Partial evidence:</strong> “Evidence is incomplete.”</li><li><strong>Provider failure:</strong> “A provider did not return data. Retry later.”</li><li><strong>Disconnected account:</strong> “Connect an account to view account data.”</li><li><strong>Unsupported chain:</strong> “This chain is not supported for this view.”</li><li><strong>Access denied:</strong> “You don’t have access to this workspace.”</li><li><strong>Session expired:</strong> “Your session expired. Sign in again to continue.”</li><li><strong>Signing in:</strong> “Checking your session…”</li><li><strong>Signed in:</strong> “Account details appear after the auth contract is connected.”</li><li><strong>Account loading/error:</strong> “Loading account details…” / “Account details couldn’t be loaded.”</li></ul><p>Illustrative copy only. Authentication, permissions and session behavior remain behind the agreed account contract.</p></details></section>
+          </div>
+          <div class="section-heading"><div><h2>Later work</h2><p>These stay behind their agreed timing and dependency gates.</p></div><span class="mono-label">PARKED / GATED</span></div>
+          <div class="upcoming">
+            <div class="upcoming-item"><div class="upcoming-top"><span>Paper Trading</span><span class="upcoming-badge">CARD 73 · LATER</span></div><div class="upcoming-meta">Specialist experience stays parked until the core terminal areas are established.</div></div>
+            <div class="upcoming-item"><div class="upcoming-top"><span>User access + account state</span><span class="upcoming-badge">CARD 75 · PREP NOW</span></div><div class="upcoming-meta">Prepare the UI states now; integrate authentication only after Neil’s auth/API contract is agreed.</div></div>
+          </div>
+          </details>
+          <footer class="footer"><span>T1 · MY DRAYN · ILLUSTRATIVE WORKSPACE</span><span><a href="terminal-design-system.md">Design reference</a> · <a href="terminal-ui-contracts.md">UI contract draft</a></span></footer>
+        </section>
+        <section id="agentPage" class="agent-page" hidden aria-labelledby="agentsTitle">
+          <div class="agent-heading"><div><div class="eyebrow">T2 · MY AGENTS</div><h1 id="agentsTitle">Agents in your workspace</h1><p class="intro">Review agent identity, purpose and declared capabilities. Example profiles below are local fixtures and do not represent live or owned agents.</p></div><span class="demo-pill">DEMO FIXTURES</span></div>
+          <div class="preview-banner"><span class="preview-mark" aria-hidden="true">i</span><span><strong>Agent preview.</strong> No ownership lookup, agent runtime, provider connections, history or persistence is connected.</span></div>
+          <div class="agent-layout">
+            <section class="panel agent-list" aria-label="Example agents"><div class="agent-list-title">Example agent list · 4 fixtures</div>
+              <button type="button" class="agent-choice" data-agent="scout" aria-pressed="true"><span class="agent-choice-name">Market Context Scout</span><span class="agent-choice-meta">DEMO · sample research assistant</span><span class="agent-choice-tags"><span class="agent-tag">Market summaries · example</span><span class="agent-tag">Source review · example</span></span></button>
+              <button type="button" class="agent-choice" data-agent="evidence" aria-pressed="false"><span class="agent-choice-name">Evidence Monitor</span><span class="agent-choice-meta">DEMO · sample evidence assistant</span><span class="agent-choice-tags"><span class="agent-tag">Evidence checks · example</span><span class="agent-tag">Change alerts · example</span></span></button>
+              <button type="button" class="agent-choice" data-agent="portfolio" aria-pressed="false"><span class="agent-choice-name">Portfolio Lens</span><span class="agent-choice-meta">DEMO · sample portfolio assistant</span><span class="agent-choice-tags"><span class="agent-tag">Portfolio context · example</span><span class="agent-tag">Risk summaries · example</span></span></button>
+              <button type="button" class="agent-choice" data-agent="policy" aria-pressed="false"><span class="agent-choice-name">Policy Watch</span><span class="agent-choice-meta">DEMO · sample policy assistant</span><span class="agent-choice-tags"><span class="agent-tag">Policy checks · example</span><span class="agent-tag">Change summaries · example</span></span></button>
+            </section>
+            <article class="panel agent-detail" aria-live="polite" aria-label="Selected agent detail">
+              <div class="agent-detail-head"><div class="agent-identity"><span class="agent-avatar" id="agentAvatar" aria-hidden="true">M</span><div><h2 class="agent-detail-title" id="agentName">Market Context Scout</h2><p class="agent-purpose" id="agentPurpose">Example research assistant for collecting and summarising market context.</p></div></div><span class="agent-state" id="agentStatus">UNKNOWN · DEMO FIXTURE</span></div>
+              <div class="agent-detail-grid">
+                <section class="agent-info"><div class="agent-info-label">Identity &amp; purpose</div><div class="agent-info-value" id="agentIdentity">Example profile · not connected to an agent registry</div><div class="agent-info-note">Ownership and authorised access are unavailable in this preview.</div></section>
+                <section class="agent-info"><div class="agent-info-label">Declared capabilities</div><div class="agent-capabilities" id="agentCapabilities"><span class="agent-tag">Market summaries · illustrative</span><span class="agent-tag">Source review · illustrative</span></div></section>
+                <section class="agent-info"><div class="agent-info-label">Context &amp; memory</div><div class="agent-info-value">Unavailable</div><div class="agent-info-note">No persistence contract is connected; memory state is not inferred.</div></section>
+                <section class="agent-info"><div class="agent-info-label">Working history</div><div class="agent-info-value">Unavailable</div><div class="agent-info-note">No sourced history references are connected.</div></section>
+                <section class="agent-info"><div class="agent-info-label">Connected providers</div><div class="agent-info-value">Unavailable</div><div class="agent-info-note">No provider relationship data is connected.</div></section>
+                <section class="agent-info"><div class="agent-info-label">Portability &amp; continuity</div><div class="agent-info-value">Unavailable</div><div class="agent-info-note">No continuity or portability state is asserted.</div></section>
+              </div>
+              <h3 class="agent-subtitle">Recent jobs and results</h3><div class="agent-empty">Related job IDs and results are unavailable. Add sourced job, evidence and provenance references when the Card 71 event model and Card 74 UI data contracts provide them.</div>
+              <div class="agent-links"><button class="button quiet" type="button" data-agent-link="jobs">Jobs &amp; results</button><button class="button quiet" type="button" data-agent-link="evidence">Evidence &amp; provenance</button><button class="button quiet" type="button" data-agent-link="network">Network relationships</button></div>
+              <div class="agent-blocked" id="agentLinkNote" hidden><strong>Foundation pending.</strong> This drill-through is reserved for the agreed job, evidence and relationship contracts; the preview does not invent records.</div>
+            </article>
+          </div>
+          <footer class="footer"><span>T2 · AGENT LIST AND DETAIL · LOCAL FIXTURES</span><span>Requires T1 plus Cards 70, 71 and 74 foundation</span></footer>
+        </section>
+        <section id="placeholderView" class="view-placeholder" hidden>
+          <div class="placeholder-card"><div class="placeholder-icon" id="placeholderIcon" aria-hidden="true">◇</div><div class="placeholder-kicker" id="placeholderKicker">NEXT IN SEQUENCE</div><h1 id="placeholderTitle">My Agents</h1><p id="placeholderCopy">This area has a place in the shared navigation. Its experience will be built in sequence using the agreed UI contracts.</p></div>
+        </section>
+        <section id="intelligencePage" class="intelligence-page" hidden aria-labelledby="intelligenceTitle">
+          <div class="agent-heading"><div><div class="eyebrow">CARD 71 · INTELLIGENCE</div><h1 id="intelligenceTitle">Job activity and execution path</h1><p class="intro">Follow a request through routing, provider work, result and evidence. Every row here is a static example fixture, not live telemetry.</p></div><span class="demo-pill">DEMO / ILLUSTRATIVE DATA</span></div>
+          <div class="preview-banner"><span class="preview-mark" aria-hidden="true">i</span><span><strong>Fixture scenarios only.</strong> Event timestamps order the example timeline; elapsed time, throughput and provider health are not inferred.</span></div>
+          <div class="intelligence-grid">
+            <section class="panel job-list" aria-label="Example job activity"><div class="agent-list-title">Example jobs · lifecycle fixtures</div><div id="jobChoices"></div></section>
+            <article class="panel job-detail" aria-live="polite" aria-label="Selected job detail"><div class="job-detail-head"><div><h2 class="agent-detail-title" id="jobTitle">Example source review</h2><p class="agent-purpose" id="jobSummary">Illustrative lifecycle record</p></div><span class="agent-state" id="jobStatus">DEMO · COMPLETED</span></div><div class="job-route" id="jobRoute" aria-label="Execution stages"></div><h3 class="agent-subtitle">Event timeline</h3><div id="jobTimeline"></div><div class="job-source">Source and freshness: static local fixture · no upstream source · no live freshness claim. Provenance and accounting details remain unavailable unless supplied by an agreed contract.</div></article>
+          </div>
+          <footer class="footer"><span>CARD 71 · REQUEST → RESULT / EVIDENCE</span><span>Requires agreed telemetry contract before live connection</span></footer>
+        </section>
+        <section id="networkPage" class="network-page" hidden aria-labelledby="networkTitle">
+          <div class="agent-heading"><div><div class="eyebrow">T3 · MY NETWORK</div><h1 id="networkTitle">Inspect the network layers</h1><p class="intro">Separate a personal agent view from the wider DRAYN topology. Node relationships and statuses shown here are explicit fixtures.</p></div><div class="network-switch" role="group" aria-label="Network scope"><button type="button" data-network-scope="my" aria-pressed="true">My Network</button><button type="button" data-network-scope="drayn" aria-pressed="false">DRAYN Network</button></div></div>
+          <div class="preview-banner"><span class="preview-mark" aria-hidden="true">i</span><span><strong>Illustrative topology.</strong> No account ownership, live routing, provider eligibility, jobs, or provider health are connected.</span><span class="banner-spacer"></span><span class="mono-label" id="networkScopeLabel">MY NETWORK · DEMO</span></div>
+          <div class="network-layout">
+            <section class="topology-scene" aria-label="Interactive three-dimensional network topology"><div class="topology-caption"><span>AGENTS · DRAYN NODES · PROVIDERS</span><span>DRAG ORBIT · SHIFT/RIGHT PAN · WHEEL ZOOM</span></div><canvas id="topologyCanvas" class="topology-canvas" tabindex="0" aria-label="Three-dimensional network topology. It slowly rotates when idle. Drag to orbit, shift-drag or right-drag to pan, scroll to zoom, and use the accessible node list to inspect nodes."></canvas><p id="topologyFallback" class="topology-fallback" hidden>3D rendering is unavailable in this browser. Use the node list to inspect the illustrative network details.</p></section>
+            <aside class="panel topology-detail" aria-live="polite" aria-label="Selected network node details"><div class="micro" id="topologyKind">AGENT · EXAMPLE</div><h2 id="topologyName">Market Context Scout</h2><p id="topologyDescription">Example agent fixture. Select another node to inspect this illustrative topology.</p><div class="topology-facts"><div class="topology-fact"><span>Capability</span><strong id="topologyCapability">Market summaries · illustrative</strong></div><div class="topology-fact"><span>Relationship</span><strong id="topologyRelationship">Example route only · not a live connection</strong></div><div class="topology-fact"><span>Status</span><strong id="topologyStatus">Unknown · no live status source</strong></div><div class="topology-fact"><span>Source / freshness</span><strong>Local static fixture · freshness unknown</strong></div></div><div class="topology-node-list" id="topologyNodeList" aria-label="Select a topology node"></div><div class="topology-disclaimer">Connections are illustrative paths through DRAYN nodes. They do not represent live routing, provider eligibility or task activity. Job links remain unavailable until relationship data is agreed.</div></aside>
+          </div>
+          <footer class="footer"><span>T3 · MY NETWORK / DRAYN NETWORK · FIXTURE TOPOLOGY</span><span>Follows T2 · user-scoped relationships remain unconnected</span></footer>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script>
+    /**
+     * UI models stay separate from presentation so this fixture adapter can be
+     * replaced by the agreed Card 74 API view models without changing the shell.
+     * @typedef {'my-drayn'|'my-agents'|'my-network'|'agent-studio'|'intelligence'} TerminalArea
+     * @typedef {'Base'|'Robinhood Chain'|'Solana'} ChainName
+     * @typedef {{kind: 'agent'|'job', label: string, chain?: ChainName}} ActiveWorkContext
+     * @typedef {{area: TerminalArea, session: 'signed-out-demo', activeWork: ActiveWorkContext|null}} TerminalShellState
+     * @typedef {{getInitialState: () => TerminalShellState}} TerminalShellDataAdapter
+     * @typedef {'accepted'|'routed'|'started'|'completed'|'refused'|'failed'|'evidence-recorded'} JobEventType
+     * @typedef {{eventId:string, jobId:string, eventType:JobEventType, timestamp:string, status:'completed'|'running'|'refused'|'failed'|'blocked', provider?:string, capability?:string, resultRef?:string, reason?:string, provenanceRefs?:string[], sourceLabel:string}} JobEventViewModel
+     * @typedef {{id:string, title:string, summary:string, status:'completed'|'refused'|'failed', events:JobEventViewModel[], sourceLabel:string, freshnessAt?:string}} JobActivityViewModel
+     * @typedef {{jobs:JobActivityViewModel[]}} IntelligenceViewModel
+     */
+    const fixture = Object.freeze({ initialArea: 'my-drayn', session: 'signed-out-demo', activeWork: null });
+    /** @type {TerminalShellDataAdapter} */
+    const localFixtureAdapter = Object.freeze({
+      getInitialState: function () {
+        return { area: fixture.initialArea, session: fixture.session, activeWork: fixture.activeWork };
+      }
+    });
+    const areas = Object.freeze({
+      'my-drayn': { title: 'My DRAYN', icon: '⌂', stage: 'T1 · AFTER FOUNDATION', text: 'The personal workspace view follows the shared shell, graph/activity and UI data contracts. This preview shows the shell only.' },
+      'my-agents': { title: 'My Agents', icon: '◇', stage: 'T2 · AFTER MY DRAYN', text: 'Agent list and detail views will follow the personal workspace and reuse the shared shell and UI data contracts.' },
+      'my-network': { title: 'My Network', icon: '⌘', stage: 'T3 · AFTER MY AGENTS', text: 'The personal network view will follow My Agents and reuse the shared shell and UI data contracts.' },
+      'agent-studio': { title: 'Agent Studio', icon: '✧', stage: 'PLANNED AREA', text: 'This navigation destination is reserved. Its area experience is not part of the shell build.' },
+      'intelligence': { title: 'Intelligence', icon: '⌁', stage: 'CARD 71 · AFTER SHELL', text: 'Graph and job activity will be built after the application shell. UI data contracts proceed in parallel with Cards 70 and 71.' }
+    });
+    const state = localFixtureAdapter.getInitialState();
+    const sidebar = document.getElementById('sidebar');
+    const homeView = document.getElementById('homeView');
+    const placeholderView = document.getElementById('placeholderView');
+    const agentPage = document.getElementById('agentPage');
+    const intelligencePage = document.getElementById('intelligencePage');
+    const networkPage = document.getElementById('networkPage');
+    function renderArea(area) {
+      const item = areas[area] || areas['my-drayn'];
+      state.area = area;
+      window.draynCurrentArea = area;
+      document.querySelectorAll('[data-view]').forEach(function (button) {
+        if (button.dataset.view === area) button.setAttribute('aria-current', 'page');
+        else button.removeAttribute('aria-current');
+      });
+      document.getElementById('breadcrumb').textContent = item.title;
+      document.title = item.title + ' · DRAYN Intelligence Terminal';
+      document.getElementById('contextPage').textContent = item.title;
+      renderWorkContext();
+      const isHome = area === 'my-drayn';
+      const isAgents = area === 'my-agents';
+      const isIntelligence = area === 'intelligence';
+      const isNetwork = area === 'my-network';
+      if (isAgents) {
+        const selectedAgent = document.querySelector('[data-agent][aria-pressed="true"]');
+        const matchingAgent = state.activeWork && state.activeWork.kind === 'agent' && Array.from(document.querySelectorAll('[data-agent]')).find(function (button) { return agentFixtures[button.dataset.agent].name === state.activeWork.label; });
+        const nextAgent = matchingAgent || selectedAgent;
+        if (nextAgent) nextAgent.click();
+      }
+      if (isIntelligence) {
+        const selectedJob = document.querySelector('[data-job][aria-pressed="true"]');
+        const selectedRecord = selectedJob && intelligenceFixture.jobs.find(function (job) { return job.id === selectedJob.dataset.job; });
+        if (selectedRecord) {
+          state.activeWork = { kind: 'job', label: selectedRecord.title };
+          renderWorkContext();
+        }
+      }
+      homeView.hidden = !isHome;
+      agentPage.hidden = !isAgents;
+      intelligencePage.hidden = !isIntelligence;
+      networkPage.hidden = !isNetwork;
+      placeholderView.hidden = isHome || isAgents || isIntelligence || isNetwork;
+      if (!isHome && !isAgents && !isIntelligence && !isNetwork) {
+        document.getElementById('placeholderIcon').textContent = item.icon;
+        document.getElementById('placeholderKicker').textContent = item.stage;
+        document.getElementById('placeholderTitle').textContent = item.title;
+        document.getElementById('placeholderCopy').textContent = item.text;
+      }
+      sidebar.classList.remove('open');
+      document.getElementById('menuButton').setAttribute('aria-expanded', 'false');
+      document.getElementById('menuButton').setAttribute('aria-label', 'Open navigation');
+      window.scrollTo(0, 0);
+      window.dispatchEvent(new CustomEvent('drayn-area-change', { detail: { area: area } }));
+    }
+    function renderWorkContext() {
+      const work = state.activeWork;
+      document.getElementById('contextWork').textContent = work ? (work.kind === 'agent' ? 'Agent: ' : 'Job: ') + work.label : 'None selected';
+      document.getElementById('contextChain').textContent = work ? (work.chain || 'No chain context supplied') : 'No agent or job selected';
+      const globalContext = document.getElementById('globalWorkContext');
+      globalContext.hidden = !work;
+      document.getElementById('globalWorkKind').textContent = work ? work.kind.toUpperCase() : '';
+      document.getElementById('globalWorkLabel').textContent = work ? work.label : '';
+      const globalChain = document.getElementById('globalWorkChain');
+      globalChain.hidden = !work || !work.chain;
+      globalChain.textContent = work && work.chain ? work.chain : '';
+    }
+    document.querySelectorAll('[data-view]').forEach(function (button) {
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
+        renderArea(button.dataset.view);
+      });
+    });
+    const agentFixtures = Object.freeze({
+      scout: { name: 'Market Context Scout', avatar: 'M', purpose: 'Example research assistant for collecting and summarising market context.', identity: 'Example profile · not connected to an agent registry', capabilities: ['Market summaries · illustrative', 'Source review · illustrative'] },
+      evidence: { name: 'Evidence Monitor', avatar: 'E', purpose: 'Example assistant for reviewing evidence quality and noting changes.', identity: 'Example profile · not connected to an agent registry', capabilities: ['Evidence checks · illustrative', 'Change alerts · illustrative'] },
+      portfolio: { name: 'Portfolio Lens', avatar: 'P', purpose: 'Example assistant for summarising portfolio context and illustrative risk signals.', identity: 'Example profile · not connected to an agent registry', capabilities: ['Portfolio context · illustrative', 'Risk summaries · illustrative'] },
+      policy: { name: 'Policy Watch', avatar: 'W', purpose: 'Example assistant for checking policy notes and summarising changes.', identity: 'Example profile · not connected to an agent registry', capabilities: ['Policy checks · illustrative', 'Change summaries · illustrative'] }
+    });
+    document.querySelectorAll('[data-agent]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        const item = agentFixtures[button.dataset.agent];
+        if (!item) return;
+        document.querySelectorAll('[data-agent]').forEach(function (choice) { choice.setAttribute('aria-pressed', String(choice === button)); });
+        state.activeWork = { kind: 'agent', label: item.name };
+        renderWorkContext();
+        document.getElementById('agentAvatar').textContent = item.avatar;
+        document.getElementById('agentName').textContent = item.name;
+        document.getElementById('agentPurpose').textContent = item.purpose;
+        document.getElementById('agentIdentity').textContent = item.identity;
+        document.getElementById('agentCapabilities').replaceChildren(...item.capabilities.map(function (label) { const tag = document.createElement('span'); tag.className = 'agent-tag'; tag.textContent = label; return tag; }));
+        document.getElementById('agentLinkNote').hidden = true;
+      });
+    });
+    document.querySelectorAll('[data-agent-link]').forEach(function (button) {
+      button.addEventListener('click', function () { document.getElementById('agentLinkNote').hidden = false; });
+    });
+    /**
+     * Card 74's frontend shape: presentation receives normalized events and
+     * source/freshness metadata. These fixtures are deliberately static and
+     * contain no measured elapsed-time or live provider-health claims.
+     * @type {IntelligenceViewModel}
+     */
+    const intelligenceFixture = Object.freeze({ jobs: [
+      { id: 'demo-job-source-review', title: 'Example source review', summary: 'Illustrative request that completed with a sample result and evidence reference.', status: 'completed', sourceLabel: 'Local static fixture', events: [
+        { eventId: 'demo-001-a', jobId: 'demo-job-source-review', eventType: 'accepted', timestamp: '2026-10-30T09:00:00Z', status: 'completed', sourceLabel: 'Local static fixture' },
+        { eventId: 'demo-001-b', jobId: 'demo-job-source-review', eventType: 'routed', timestamp: '2026-10-30T09:01:00Z', status: 'completed', provider: 'Example specialist · illustrative', capability: 'Source review · illustrative', sourceLabel: 'Local static fixture' },
+        { eventId: 'demo-001-c', jobId: 'demo-job-source-review', eventType: 'started', timestamp: '2026-10-30T09:02:00Z', status: 'completed', sourceLabel: 'Local static fixture' },
+        { eventId: 'demo-001-d', jobId: 'demo-job-source-review', eventType: 'completed', timestamp: '2026-10-30T09:03:00Z', status: 'completed', resultRef: 'example-result-01', sourceLabel: 'Local static fixture' },
+        { eventId: 'demo-001-e', jobId: 'demo-job-source-review', eventType: 'evidence-recorded', timestamp: '2026-10-30T09:04:00Z', status: 'completed', provenanceRefs: ['example-evidence-01'], sourceLabel: 'Local static fixture' }
+      ] },
+      { id: 'demo-job-access-refusal', title: 'Example access check', summary: 'Illustrative request refused; no provider was selected.', status: 'refused', sourceLabel: 'Local static fixture', events: [
+        { eventId: 'demo-002-a', jobId: 'demo-job-access-refusal', eventType: 'accepted', timestamp: '2026-10-30T09:10:00Z', status: 'completed', sourceLabel: 'Local static fixture' },
+        { eventId: 'demo-002-b', jobId: 'demo-job-access-refusal', eventType: 'refused', timestamp: '2026-10-30T09:11:00Z', status: 'refused', reason: 'Example refusal reason · illustrative only', sourceLabel: 'Local static fixture' }
+      ] },
+      { id: 'demo-job-provider-failure', title: 'Example provider failure', summary: 'Illustrative request that failed after work started; retry data is not connected.', status: 'failed', sourceLabel: 'Local static fixture', events: [
+        { eventId: 'demo-003-a', jobId: 'demo-job-provider-failure', eventType: 'accepted', timestamp: '2026-10-30T09:20:00Z', status: 'completed', sourceLabel: 'Local static fixture' },
+        { eventId: 'demo-003-b', jobId: 'demo-job-provider-failure', eventType: 'routed', timestamp: '2026-10-30T09:21:00Z', status: 'completed', provider: 'Example provider · illustrative', capability: 'Evidence check · illustrative', sourceLabel: 'Local static fixture' },
+        { eventId: 'demo-003-c', jobId: 'demo-job-provider-failure', eventType: 'started', timestamp: '2026-10-30T09:22:00Z', status: 'completed', sourceLabel: 'Local static fixture' },
+        { eventId: 'demo-003-d', jobId: 'demo-job-provider-failure', eventType: 'failed', timestamp: '2026-10-30T09:23:00Z', status: 'failed', reason: 'Example provider error · illustrative only', sourceLabel: 'Local static fixture' }
+      ] }
+    ] });
+    function renderJob(jobId, updateContext = false) {
+      const job = intelligenceFixture.jobs.find(function (entry) { return entry.id === jobId; }) || intelligenceFixture.jobs[0];
+      if (updateContext) {
+        state.activeWork = { kind: 'job', label: job.title };
+        renderWorkContext();
+      }
+      document.getElementById('jobTitle').textContent = job.title;
+      document.getElementById('jobSummary').textContent = job.summary;
+      document.getElementById('jobStatus').textContent = 'DEMO · ' + job.status.toUpperCase();
+      document.querySelectorAll('[data-job]').forEach(function (choice) { choice.setAttribute('aria-pressed', String(choice.dataset.job === job.id)); });
+      const hasRoute = job.events.some(function (event) { return event.eventType === 'routed'; });
+      const hasProviderWork = job.events.some(function (event) { return event.eventType === 'started'; });
+      const hasResult = job.events.some(function (event) { return event.eventType === 'completed'; });
+      const hasEvidence = job.events.some(function (event) { return event.eventType === 'evidence-recorded'; });
+      const stages = [
+        ['Request', 'accepted', true],
+        ['Capability route', 'routed', hasRoute],
+        ['Specialist work', 'started', hasProviderWork],
+        ['Result', 'completed', hasResult],
+        ['Evidence / provenance', 'evidence-recorded', hasEvidence]
+      ];
+      document.getElementById('jobRoute').replaceChildren(...stages.map(function (stage) {
+        const node = document.createElement('div'); node.className = 'route-node';
+        node.dataset.state = stage[2] ? 'done' : (job.status === 'refused' || job.status === 'failed' ? 'issue' : 'pending');
+        const title = document.createElement('strong'); title.textContent = stage[0];
+        const value = document.createElement('span'); value.textContent = stage[2] ? 'Example event present' : (job.status === 'refused' && stage[1] === 'routed' ? 'No provider selected' : job.status === 'failed' && stage[1] === 'completed' ? 'Not produced' : 'Unavailable');
+        node.append(title, value); return node;
+      }));
+      document.getElementById('jobTimeline').replaceChildren(...job.events.map(function (event) {
+        const row = document.createElement('div'); row.className = 'job-event';
+        const time = document.createElement('time'); time.dateTime = event.timestamp; time.textContent = event.timestamp.replace('T', ' ').replace('Z', ' UTC');
+        const copy = document.createElement('div'); const title = document.createElement('strong'); title.textContent = event.eventType.replaceAll('-', ' ');
+        const description = document.createElement('p');
+        description.textContent = [event.provider, event.capability, event.resultRef ? 'Result: ' + event.resultRef : '', event.provenanceRefs ? 'Evidence: ' + event.provenanceRefs.join(', ') : '', event.reason].filter(Boolean).join(' · ') || 'Example lifecycle event.';
+        copy.append(title, description); row.append(time, copy); return row;
+      }));
+    }
+    const jobChoices = document.getElementById('jobChoices');
+    intelligenceFixture.jobs.forEach(function (job) {
+      const choice = document.createElement('button'); choice.type = 'button'; choice.className = 'job-choice'; choice.dataset.job = job.id; choice.setAttribute('aria-pressed', 'false');
+      const name = document.createElement('span'); name.className = 'job-title'; name.textContent = job.title;
+      const meta = document.createElement('span'); meta.className = 'job-meta';
+      const fixtureLabel = document.createElement('span'); fixtureLabel.textContent = 'EXAMPLE FIXTURE';
+      const status = document.createElement('span'); status.className = 'job-status ' + job.status; status.textContent = job.status.toUpperCase();
+      meta.append(fixtureLabel, status); choice.append(name, meta);
+      choice.addEventListener('click', function () { renderJob(job.id, true); }); jobChoices.append(choice);
+    });
+    renderJob(intelligenceFixture.jobs[0].id);
+    /** @typedef {{id:string, kind:'agent'|'service'|'provider', name:string, description:string, capability:string, relationship:string, status:string}} NetworkNodeViewModel */
+    const networkFixtures = Object.freeze({
+      my: [
+        { id:'agent-scout', kind:'agent', name:'Market Context Scout', description:'Example personal agent profile. Ownership is not verified.', capability:'Market summaries · illustrative', relationship:'Example route to DRAYN coordination', status:'Unknown · no live status source' },
+        { id:'agent-evidence', kind:'agent', name:'Evidence Monitor', description:'Example personal agent profile. Ownership is not verified.', capability:'Evidence checks · illustrative', relationship:'Example route to DRAYN coordination', status:'Unknown · no live status source' },
+        { id:'agent-portfolio', kind:'agent', name:'Portfolio Lens', description:'Example personal agent profile. Ownership is not verified.', capability:'Portfolio context · illustrative', relationship:'Example route to DRAYN coordination', status:'Unknown · no live status source' },
+        { id:'agent-policy', kind:'agent', name:'Policy Watch', description:'Example personal agent profile. Ownership is not verified.', capability:'Policy checks · illustrative', relationship:'Example route to DRAYN coordination', status:'Unknown · no live status source' },
+        { id:'service-router', kind:'service', name:'DRAYN routing mesh', description:'Illustrative distributed network that carries requests between agents and provider nodes.', capability:'Distributed routing · illustrative', relationship:'Agent capabilities connect to DRAYN nodes, which relay example paths through the mesh.', status:'Illustrative · not a live service status' },
+        { id:'provider-index', kind:'provider', name:'Indexing Node', description:'Example provider/node placeholder.', capability:'Index lookup · illustrative', relationship:'Example endpoint only · no job links', status:'Unknown · no live status source' },
+        { id:'provider-evidence', kind:'provider', name:'Evidence Store', description:'Example provider/node placeholder.', capability:'Evidence retrieval · illustrative', relationship:'Example endpoint only · no job links', status:'Unknown · no live status source' }
+      ],
+      drayn: [
+        { id:'agent-research', kind:'agent', name:'Research Agent · example', description:'Illustrative agent endpoint in the wider topology.', capability:'Research synthesis · illustrative', relationship:'Conceptual link to DRAYN coordination', status:'Illustrative · not live' },
+        { id:'agent-monitor', kind:'agent', name:'Monitor Agent · example', description:'Illustrative agent endpoint in the wider topology.', capability:'Change monitoring · illustrative', relationship:'Conceptual link to DRAYN coordination', status:'Illustrative · not live' },
+        { id:'agent-evidence-wide', kind:'agent', name:'Evidence Agent · example', description:'Illustrative agent endpoint in the wider topology.', capability:'Evidence review · illustrative', relationship:'Conceptual link to DRAYN coordination', status:'Illustrative · not live' },
+        { id:'agent-policy-wide', kind:'agent', name:'Policy Agent · example', description:'Illustrative agent endpoint in the wider topology.', capability:'Policy checks · illustrative', relationship:'Conceptual link to DRAYN coordination', status:'Illustrative · not live' },
+        { id:'service-router', kind:'service', name:'DRAYN routing mesh', description:'Illustrative distributed network that carries requests between agents and provider nodes.', capability:'Distributed routing · illustrative', relationship:'Agent capabilities connect to DRAYN nodes, which relay example paths through the mesh.', status:'Illustrative · not a live service status' },
+        { id:'provider-compute', kind:'provider', name:'Compute Provider · example', description:'Illustrative provider placeholder.', capability:'Compute · illustrative', relationship:'Example endpoint only · no eligibility claim', status:'Unknown · no live status source' },
+        { id:'provider-data', kind:'provider', name:'Data Node · example', description:'Illustrative provider/node placeholder.', capability:'Data retrieval · illustrative', relationship:'Example endpoint only · no eligibility claim', status:'Unknown · no live status source' }
+      ]
+    });
+    let activeNetworkScope = 'my';
+    let activeTopologyNodes = [];
+    function selectNetworkNode(node, updateContext = false) {
+      if (updateContext) {
+        state.activeWork = node.kind === 'agent' ? { kind: 'agent', label: node.name } : null;
+        renderWorkContext();
+      }
+      document.querySelectorAll('[data-topology-node]').forEach(function (button) { button.setAttribute('aria-pressed', String(button.dataset.topologyNode === node.id)); });
+      document.getElementById('topologyKind').textContent = node.kind.toUpperCase() + ' · EXAMPLE';
+      document.getElementById('topologyName').textContent = node.name;
+      document.getElementById('topologyDescription').textContent = node.description;
+      document.getElementById('topologyCapability').textContent = node.capability;
+      document.getElementById('topologyRelationship').textContent = node.relationship;
+      document.getElementById('topologyStatus').textContent = node.status;
+      window.draynNetworkState = { scope: activeNetworkScope, nodes: activeTopologyNodes, selectedId: node.id };
+      window.dispatchEvent(new CustomEvent('drayn-network-update', { detail: window.draynNetworkState }));
+    }
+    window.addEventListener('drayn-network-node-select', function (event) {
+      const node = activeTopologyNodes.find(function (entry) { return entry.id === event.detail.id; });
+      if (node) selectNetworkNode(node, true);
+    });
+    function renderNetwork(scope, updateContext = false) {
+      activeNetworkScope = scope;
+      const nodes = networkFixtures[scope];
+      activeTopologyNodes = nodes;
+      document.querySelectorAll('[data-network-scope]').forEach(function (button) { button.setAttribute('aria-pressed', String(button.dataset.networkScope === scope)); });
+      document.getElementById('networkScopeLabel').textContent = (scope === 'my' ? 'MY NETWORK' : 'DRAYN NETWORK') + ' · DEMO';
+      document.getElementById('topologyNodeList').replaceChildren(...nodes.map(function (node) {
+        const button = document.createElement('button'); button.type = 'button'; button.className = 'topology-node-choice'; button.dataset.kind = node.kind; button.dataset.topologyNode = node.id; button.setAttribute('aria-pressed', 'false');
+        button.textContent = node.kind.toUpperCase() + ' · ' + node.name;
+        button.addEventListener('click', function () { selectNetworkNode(node, true); }); return button;
+      }));
+      selectNetworkNode(nodes[0], updateContext);
+    }
+    document.querySelectorAll('[data-network-scope]').forEach(function (button) { button.addEventListener('click', function () { renderNetwork(button.dataset.networkScope, true); }); });
+    renderNetwork(activeNetworkScope);
+    window.addEventListener('drayn-area-change', function (event) {
+      if (event.detail.area !== 'my-network') return;
+      const selectedButton = document.querySelector('[data-topology-node][aria-pressed="true"]');
+      const contextualAgent = state.activeWork && state.activeWork.kind === 'agent' && activeTopologyNodes.find(function (node) { return node.kind === 'agent' && node.name === state.activeWork.label; });
+      const selectedNode = contextualAgent || (selectedButton && activeTopologyNodes.find(function (node) { return node.id === selectedButton.dataset.topologyNode; }));
+      if (selectedNode) selectNetworkNode(selectedNode, true);
+    });
+    const sessionButton = document.getElementById('sessionButton');
+    const sessionNote = document.getElementById('sessionNote');
+    const accountStateCopy = Object.freeze({
+      'signed-out': ['UI PREVIEW · SIGNED OUT', 'Signed-out demo. Authentication is not connected.'],
+      'signing-in': ['UI PREVIEW · SIGNING IN', 'Checking your session… example copy only; no sign-in request is sent.'],
+      'signed-in': ['UI PREVIEW · SIGNED IN', 'Example signed-in screen. No user is authenticated and no account data is loaded.'],
+      'account-loading': ['UI PREVIEW · ACCOUNT LOADING', 'Loading account details… example copy only; no account request is sent.'],
+      'account-error': ['UI PREVIEW · ACCOUNT ERROR', 'Account details could not be loaded. No service request was sent.'],
+      'session-expired': ['UI PREVIEW · SESSION EXPIRED', 'Your session expired. Sign in again to continue. No session is being checked.'],
+      'access-denied': ['UI PREVIEW · ACCESS DENIED', 'You do not have access to this workspace. Demo copy only; permissions are not checked.']
+    });
+    document.getElementById('accountStateSelect').addEventListener('change', function (event) {
+      const copy = accountStateCopy[event.target.value] || accountStateCopy['signed-out'];
+      const output = document.getElementById('accountStateOutput');
+      output.replaceChildren();
+      const title = document.createElement('strong'); title.textContent = copy[0];
+      const message = document.createElement('span'); message.textContent = copy[1];
+      output.append(title, message);
+    });
+    function toggleSessionNote() {
+      const open = sessionNote.hidden;
+      sessionNote.hidden = !open;
+      sessionButton.setAttribute('aria-expanded', String(open));
+    }
+    sessionButton.addEventListener('click', toggleSessionNote);
+    document.getElementById('sessionAction').addEventListener('click', function () {
+      if (window.matchMedia('(max-width: 650px)').matches) {
+        sidebar.classList.add('open');
+        document.getElementById('menuButton').setAttribute('aria-expanded', 'true');
+      }
+      sessionNote.hidden = false;
+      sessionButton.setAttribute('aria-expanded', 'true');
+      sessionNote.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+    });
+    const menuButton = document.getElementById('menuButton');
+    menuButton.addEventListener('click', function () {
+      const open = sidebar.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape') return;
+      if (sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Open navigation');
+        menuButton.focus();
+      }
+    });
+    renderArea(fixture.initialArea);
+  </script>
+  <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js';
+    const canvas = document.getElementById('topologyCanvas');
+    const fallback = document.getElementById('topologyFallback');
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    } catch (error) {
+      fallback.hidden = false;
+    }
+    if (renderer) {
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.25;
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x06111a);
+      scene.fog = new THREE.FogExp2(0x06111a, .022);
+      const camera = new THREE.PerspectiveCamera(40, 1, .1, 80);
+      const target = new THREE.Vector3(0, .15, 0);
+      let theta = 1.48, phi = .98, distance = 18.5;
+      const world = new THREE.Group(); scene.add(world);
+      const ambient = new THREE.AmbientLight(0x6aa9c6, 1.8); scene.add(ambient);
+      const key = new THREE.DirectionalLight(0x75efff, 3.2); key.position.set(-6, 10, 8); scene.add(key);
+      const rim = new THREE.PointLight(0x18d8ff, 38, 25); rim.position.set(4, 3, -5); scene.add(rim);
+      const mint = new THREE.PointLight(0x23ffd1, 24, 20); mint.position.set(-5, 1, 4); scene.add(mint);
+      const floor = new THREE.Mesh(new THREE.PlaneGeometry(28, 22), new THREE.MeshStandardMaterial({ color: 0x071720, metalness: .34, roughness: .72, transparent: true, opacity: .82 }));
+      floor.rotation.x = -Math.PI / 2; floor.position.y = -2.03; world.add(floor);
+      const grid = new THREE.GridHelper(24, 40, 0x1b7790, 0x113347); grid.position.y = -2; grid.material.transparent = true; grid.material.opacity = .26; world.add(grid);
+      const raycaster = new THREE.Raycaster(); const pointer = new THREE.Vector2();
+      const nodeRoots = new Map(); let selectedId = ''; let currentScope = '';
+      const mat = (color, emissive, intensity, metalness, roughness, opacity = 1) => new THREE.MeshStandardMaterial({ color: color, emissive: emissive, emissiveIntensity: intensity, metalness: metalness, roughness: roughness, transparent: opacity < 1, opacity: opacity });
+      const agentMat = mat(0x54dff0, 0x1296aa, .95, .36, .24, .88);
+      const agentAccentMat = mat(0xc0ffff, 0x65f5ef, 1.25, .2, .2, .96);
+      const deckMat = mat(0x082c3c, 0x06445b, .62, .7, .3);
+      const edgeMat = new THREE.LineBasicMaterial({ color: 0x70f8ed, transparent: true, opacity: .8 });
+      const routeMat = new THREE.MeshBasicMaterial({ color: 0x3eeaff, transparent: true, opacity: .78, blending: THREE.AdditiveBlending });
+      const routeBright = new THREE.MeshBasicMaterial({ color: 0xb4fff8, transparent: true, opacity: .94, blending: THREE.AdditiveBlending });
+      const routeGlow = new THREE.MeshBasicMaterial({ color: 0x25cfff, transparent: true, opacity: .13, blending: THREE.AdditiveBlending, depthWrite: false });
+      const providerMat = mat(0x20527a, 0x0879bd, .72, .68, .27);
+      const darkMat = mat(0x09151f, 0x03111a, .3, .76, .36);
+      function box(parent, position, size, material, rotation = 0) {
+        const mesh = new THREE.Mesh(new THREE.BoxGeometry(size[0], size[1], size[2]), material);
+        mesh.position.set(position[0], position[1], position[2]); mesh.rotation.y = rotation; parent.add(mesh); return mesh;
+      }
+      function line(parent, points, material = routeMat, radius = .018) {
+        const curve = new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(p[0], p[1], p[2])));
+        const mesh = new THREE.Mesh(new THREE.TubeGeometry(curve, 36, radius, 6, false), material); parent.add(mesh); return mesh;
+      }
+      function glowLine(parent, points, material = routeMat, radius = .018) {
+        line(parent, points, routeGlow, radius * 2.6);
+        return line(parent, points, material, radius);
+      }
+      function dot(parent, position, radius = .075, color = 0x8dfff3) {
+        const mesh = new THREE.Mesh(new THREE.SphereGeometry(radius, 12, 10), new THREE.MeshBasicMaterial({ color: color, blending: THREE.AdditiveBlending }));
+        mesh.position.set(position[0], position[1], position[2]); parent.add(mesh); return mesh;
+      }
+      function labelSprite(title, subtitle, tint) {
+        const board = document.createElement('canvas'); board.width = 640; board.height = 144;
+        const ctx = board.getContext('2d'); ctx.clearRect(0, 0, board.width, board.height);
+        ctx.fillStyle = 'rgba(4,16,26,.97)'; ctx.strokeStyle = tint; ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.roundRect(7, 7, 626, 130, 16); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = '#f7ffff'; ctx.font = '700 38px system-ui'; ctx.fillText(title.slice(0, 28), 28, 58);
+        ctx.fillStyle = tint; ctx.font = '600 18px ui-monospace,monospace'; ctx.fillText(subtitle.toUpperCase().slice(0, 34), 28, 101);
+        const texture = new THREE.CanvasTexture(board); texture.colorSpace = THREE.SRGBColorSpace;
+        const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false }));
+        sprite.scale.set(2.5, .61, 1); return sprite;
+      }
+      function clearWorld() {
+        for (const child of [...world.children]) {
+          if (child === floor || child === grid) continue;
+          child.traverse(object => {
+            if (object.geometry) object.geometry.dispose();
+            if (object.material) (Array.isArray(object.material) ? object.material : [object.material]).forEach(material => { if (material.map) material.map.dispose(); material.dispose(); });
+          });
+          world.remove(child);
+        }
+        nodeRoots.clear();
+      }
+      function createAgent(node, position) {
+        const root = new THREE.Group(); root.position.set(...position); root.userData.networkId = node.id;
+        box(root, [0, -.34, 0], [1.95, .2, 1.5], darkMat, -.12);
+        box(root, [0, -.2, 0], [1.8, .1, 1.36], deckMat, -.12);
+        box(root, [0, -.12, 0], [1.55, .05, 1.15], darkMat, -.12);
+        const outline = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.92, .2, 1.48)), edgeMat); outline.position.y = -.34; outline.rotation.y = -.12; root.add(outline);
+        const deckEdge = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.78, .1, 1.34)), edgeMat); deckEdge.position.y = -.2; deckEdge.rotation.y = -.12; root.add(deckEdge);
+        for (const x of [-.55, .55]) dot(root, [x, -.09, .55], .035, 0x8ffff5);
+        const torso = new THREE.Mesh(new THREE.CylinderGeometry(.17, .25, .5, 16), agentMat); torso.position.y = .39; root.add(torso);
+        const shoulder = new THREE.Mesh(new THREE.SphereGeometry(.26, 16, 12), agentMat); shoulder.scale.set(1.15, .55, .72); shoulder.position.y = .55; root.add(shoulder);
+        const head = new THREE.Mesh(new THREE.SphereGeometry(.19, 20, 16), agentMat); head.position.y = .79; root.add(head);
+        const wireMesh = mesh => {
+          const wire = new THREE.LineSegments(new THREE.WireframeGeometry(mesh.geometry), new THREE.LineBasicMaterial({ color: 0xa6ffff, transparent: true, opacity: .58 }));
+          wire.position.copy(mesh.position); wire.quaternion.copy(mesh.quaternion); wire.scale.copy(mesh.scale); root.add(wire);
+        };
+        wireMesh(torso); wireMesh(shoulder); wireMesh(head);
+        const neck = new THREE.Mesh(new THREE.CylinderGeometry(.07, .09, .13, 12), agentAccentMat); neck.position.y = .68; root.add(neck);
+        const limb = (start, end, radius, material) => {
+          const a = new THREE.Vector3(...start), b = new THREE.Vector3(...end), direction = b.clone().sub(a);
+          const part = new THREE.Mesh(new THREE.CylinderGeometry(radius * .82, radius, direction.length(), 10), material);
+          part.position.copy(a.add(b).multiplyScalar(.5)); part.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.normalize()); root.add(part);
+          const joint = new THREE.Mesh(new THREE.SphereGeometry(radius * 1.08, 10, 8), material); joint.position.copy(b); root.add(joint);
+        };
+        limb([-.2, .52, 0], [-.34, .12, .02], .085, agentMat); limb([.2, .52, 0], [.34, .12, .02], .085, agentMat);
+        limb([-.12, .16, 0], [-.14, -.07, .02], .095, agentMat); limb([.12, .16, 0], [.14, -.07, .02], .095, agentMat);
+        box(root, [0, .4, .235], [.22, .12, .025], darkMat);
+        box(root, [0, .4, .252], [.15, .012, .009], agentAccentMat);
+        const visor = new THREE.Mesh(new THREE.TorusGeometry(.105, .012, 6, 32), edgeMat); visor.position.set(0, .8, .15); root.add(visor);
+        const halo = new THREE.Mesh(new THREE.TorusGeometry(.46, .014, 7, 48), edgeMat); halo.rotation.x = Math.PI / 2; halo.position.y = -.08; root.add(halo);
+        const screenX = position[0] * Math.cos(theta) - position[2] * Math.sin(theta);
+        const labelOffset = Math.sign(screenX || 1) * .38;
+        const label = labelSprite(node.name, 'AGENT ENDPOINT · DEMO', '#7df4ef'); label.position.set(labelOffset * Math.cos(theta), 1.74, -labelOffset * Math.sin(theta)); root.add(label);
+        world.add(root); nodeRoots.set(node.id, root); return root;
+      }
+      function createProvider(node, position) {
+        const root = new THREE.Group(); root.position.set(...position); root.userData.networkId = node.id;
+        box(root, [0, -.32, 0], [2.12, .12, 1.68], darkMat, .08);
+        box(root, [0, -.19, 0], [1.9, .2, 1.5], darkMat, .08);
+        box(root, [0, -.07, 0], [1.76, .08, 1.36], providerMat, .08);
+        const outline = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.9, .2, 1.5)), edgeMat); outline.position.y = -.19; outline.rotation.y = .08; root.add(outline);
+        const rim = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.76, .08, 1.36)), edgeMat); rim.position.y = -.07; rim.rotation.y = .08; root.add(rim);
+        for (let rack = 0; rack < 2; rack++) {
+          const x = rack === 0 ? -.38 : .38;
+          box(root, [x, .35, 0], [.52, .72, .58], darkMat, .08);
+          for (let shelf = 0; shelf < 3; shelf++) {
+            const panel = box(root, [x, .13 + shelf * .2, .3], [.31, .035, .025], providerMat, .08);
+            panel.material = panel.material.clone(); panel.material.emissive.setHex(0x1b9ee2); panel.material.emissiveIntensity = 1.35;
+            dot(root, [x + .18, .13 + shelf * .2, .32], .025, 0x9ddfff);
+          }
+        }
+        const label = labelSprite(node.name, 'PROVIDER / NODE · DEMO', '#69b8ff'); label.position.set(0, 1.14, 0); root.add(label);
+        world.add(root); nodeRoots.set(node.id, root); return root;
+      }
+      function createService(node) {
+        const root = new THREE.Group(); root.userData.networkId = node.id;
+        const positions = [], ringIds = [];
+        const meshLink = (from, to, index) => {
+          const middle = [(from[0] + to[0]) / 2 + Math.sin(index * 1.9) * .09,
+            (from[1] + to[1]) / 2 + .08 + Math.sin(index * .73) * .08,
+            (from[2] + to[2]) / 2 + Math.cos(index * 1.6) * .09];
+          const highlight = index % 5 === 0;
+          glowLine(root, [from, middle, to], highlight ? routeBright : routeMat, highlight ? .013 : .016);
+        };
+        const addNode = (point, index) => {
+          positions.push(point);
+          const nodeColor = index % 4 === 0 ? 0xc1fff4 : 0x4fe5fa;
+          const glow = new THREE.Mesh(new THREE.SphereGeometry(.3, 14, 10), new THREE.MeshBasicMaterial({ color: nodeColor, transparent: true, opacity: .14, blending: THREE.AdditiveBlending, depthWrite: false })); glow.position.set(...point); root.add(glow);
+          dot(root, point, .09, nodeColor);
+          const halo = new THREE.Mesh(new THREE.TorusGeometry(.2, .012, 6, 32), edgeMat); halo.position.set(...point); halo.rotation.x = Math.PI / 2; root.add(halo);
+          return positions.length - 1;
+        };
+        const center = addNode([0, 1.02, 0], 0);
+        const ringSpecs = [{ count: 6, radius: 1.15 }, { count: 12, radius: 2.45 }, { count: 16, radius: 4.05 }];
+        ringSpecs.forEach((ring, ringIndex) => {
+          const ids = [];
+          const domeHeight = [.7, .4, .1][ringIndex];
+          for (let i = 0; i < ring.count; i++) {
+            const phase = (Math.PI * 2 * i) / ring.count + ringIndex * .19 + Math.sin(i * 1.73 + ringIndex) * .07;
+            const radius = ring.radius + Math.sin(i * 2.11 + ringIndex * 1.4) * .2;
+            const point = [Math.cos(phase) * radius, domeHeight + Math.sin(i * 1.37 + ringIndex) * .1, Math.sin(phase) * radius * .9 + Math.cos(i * 1.51) * .16];
+            ids.push(addNode(point, positions.length));
+          }
+          ringIds.push(ids);
+        });
+        let linkIndex = 0;
+        ringIds.forEach(ids => {
+          ids.forEach((id, index) => { meshLink(positions[id], positions[ids[(index + 1) % ids.length]], linkIndex++); });
+        });
+        ringIds[0].forEach((id, index) => { if (index % 2 === 0) meshLink(positions[center], positions[id], linkIndex++); });
+        for (let ringIndex = 1; ringIndex < ringIds.length; ringIndex++) {
+          const inner = ringIds[ringIndex - 1], outer = ringIds[ringIndex];
+          outer.forEach(id => {
+            const here = positions[id];
+            const nearest = inner.map(other => ({ id: other, distance: Math.hypot(positions[other][0] - here[0], positions[other][2] - here[2]) })).sort((a, b) => a.distance - b.distance)[0];
+            meshLink(positions[id], positions[nearest.id], linkIndex++);
+          });
+        }
+        const outerRing = ringIds[2];
+        outerRing.forEach((id, index) => { if (index % 4 === 0) meshLink(positions[id], positions[outerRing[(index + 6) % outerRing.length]], linkIndex++); });
+        world.add(root); nodeRoots.set(node.id, root); return positions;
+      }
+      function buildScene(state) {
+        clearWorld();
+        currentScope = state.scope;
+        const nodes = state.nodes || [];
+        const agents = nodes.filter(node => node.kind === 'agent');
+        const providers = nodes.filter(node => node.kind === 'provider');
+        const service = nodes.find(node => node.kind === 'service');
+        const perimeter = (count, rx, rz, start) => count === 1 ? [[0, 0]] : Array.from({ length: count }, (_, i) => { const angle = start + (i * Math.PI * 2) / count; return [Math.cos(angle) * rx, Math.sin(angle) * rz]; });
+        const agentPositions = perimeter(agents.length, 6.1, 4.3, -Math.PI * .75).map(([x, z]) => [x, 2.45, z]);
+        const providerPositions = providers.map((node, i) => [(i - (providers.length - 1) / 2) * 8.4, -1.48, 3.05 + (i % 2) * .12]);
+        agents.forEach((node, i) => createAgent(node, agentPositions[i]));
+        providers.forEach((node, i) => createProvider(node, providerPositions[i]));
+        const draynNodes = service ? createService(service) : [];
+        const closestNodes = endpoint => draynNodes.slice().sort((a, b) => Math.hypot(a[0] - endpoint[0], a[2] - endpoint[2]) - Math.hypot(b[0] - endpoint[0], b[2] - endpoint[2])).slice(0, 2);
+        agents.forEach((node, i) => {
+          const from = agentPositions[i];
+          const start = [from[0], from[1] - .1, from[2]];
+          closestNodes(from).forEach((to, routeIndex) => {
+            const entry = [from[0] * .7, .75, from[2] * .66];
+            glowLine(world, [start, entry, to], routeIndex === 0 ? routeBright : routeMat, routeIndex === 0 ? .022 : .016);
+            dot(world, entry, .055, 0x9efff1);
+          });
+        });
+        providers.forEach((node, i) => {
+          const to = providerPositions[i];
+          closestNodes(to).forEach((from, routeIndex) => {
+            const exit = [to[0] * .76, -.48, to[2] * .68];
+            const destination = [to[0], to[1] + .72, to[2]];
+            glowLine(world, [from, exit, destination], routeIndex === 0 ? routeBright : routeMat, routeIndex === 0 ? .02 : .015);
+            dot(world, exit, .05, 0x8bdfff);
+          });
+        });
+        selectedId = state.selectedId || (agents[0] && agents[0].id) || (service && service.id) || '';
+        setSelection(selectedId); resize(); draw();
+      }
+      function setSelection(id) {
+        selectedId = id;
+        nodeRoots.forEach((root, nodeId) => {
+          const active = nodeId === id;
+          root.scale.setScalar(active ? 1.08 : 1);
+          root.traverse(object => { if (object.isSprite) object.material.opacity = active ? 1 : .78; });
+        });
+        draw();
+      }
+      function resize() {
+        const width = canvas.clientWidth, height = canvas.clientHeight;
+        if (!width || !height) return;
+        renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); updateCamera();
+      }
+      function updateCamera() {
+        camera.position.set(target.x + distance * Math.sin(phi) * Math.sin(theta), target.y + distance * Math.cos(phi), target.z + distance * Math.sin(phi) * Math.cos(theta));
+        camera.lookAt(target);
+      }
+      function draw() { renderer.render(scene, camera); }
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let lastInteractionAt = performance.now(), lastFrameAt = lastInteractionAt;
+      function animateCamera(time) {
+        const delta = Math.min((time - lastFrameAt) / 1000, .05);
+        lastFrameAt = time;
+        const networkVisible = window.draynCurrentArea === 'my-network' && !document.hidden;
+        if (networkVisible) {
+          if (!reduceMotion && time - lastInteractionAt > 2200) {
+            theta += delta * .045;
+            updateCamera();
+          }
+          draw();
+        }
+        requestAnimationFrame(animateCamera);
+      }
+      requestAnimationFrame(animateCamera);
+      let activePointer = null, downX = 0, downY = 0, moved = false, dragMode = 'orbit';
+      canvas.addEventListener('contextmenu', event => event.preventDefault());
+      canvas.addEventListener('pointerdown', event => { lastInteractionAt = performance.now(); activePointer = event.pointerId; downX = event.clientX; downY = event.clientY; moved = false; dragMode = event.button === 2 || event.button === 1 || event.shiftKey ? 'pan' : 'orbit'; canvas.setPointerCapture(event.pointerId); });
+      canvas.addEventListener('pointermove', event => {
+        if (activePointer !== event.pointerId) return;
+        const dx = event.clientX - downX, dy = event.clientY - downY;
+        if (Math.abs(dx) + Math.abs(dy) > 3) moved = true;
+        if (moved) {
+          lastInteractionAt = performance.now();
+          if (dragMode === 'pan') {
+            const scale = distance * 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) / canvas.clientHeight;
+            target.addScaledVector(new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion), -dx * scale);
+            target.addScaledVector(new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion), dy * scale);
+          } else { theta -= dx * .006; phi = THREE.MathUtils.clamp(phi + dy * .004, .5, 1.42); }
+          downX = event.clientX; downY = event.clientY; updateCamera(); draw();
+        }
+      });
+      canvas.addEventListener('pointerup', event => {
+        if (activePointer !== event.pointerId) return;
+        activePointer = null;
+        if (!moved && dragMode === 'orbit') {
+          const bounds = canvas.getBoundingClientRect(); pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1; pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1;
+          raycaster.setFromCamera(pointer, camera);
+          const hits = raycaster.intersectObjects([...nodeRoots.values()], true);
+          let object = hits[0] && hits[0].object;
+          while (object && !object.userData.networkId) object = object.parent;
+          if (object) window.dispatchEvent(new CustomEvent('drayn-network-node-select', { detail: { id: object.userData.networkId } }));
+        }
+      });
+      canvas.addEventListener('pointercancel', () => { activePointer = null; });
+      canvas.addEventListener('wheel', event => { event.preventDefault(); lastInteractionAt = performance.now(); distance = THREE.MathUtils.clamp(distance + event.deltaY * .012, 12, 26); updateCamera(); draw(); }, { passive: false });
+      new ResizeObserver(() => { resize(); draw(); }).observe(canvas);
+      window.addEventListener('drayn-area-change', event => { if (event.detail.area === 'my-network') { resize(); draw(); } });
+      window.addEventListener('drayn-network-update', event => {
+        const state = event.detail;
+        if (state.nodes && (currentScope !== state.scope || [...nodeRoots.keys()].sort().join('|') !== state.nodes.map(node => node.id).sort().join('|'))) buildScene(state);
+        else setSelection(state.selectedId);
+      });
+      updateCamera();
+      if (window.draynNetworkState) buildScene(window.draynNetworkState);
+      else window.addEventListener('drayn-network-update', event => buildScene(event.detail), { once: true });
+    }
+  </script>
+</body>
+</html>
