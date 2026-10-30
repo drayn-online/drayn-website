@@ -486,7 +486,7 @@
       scene.fog = new THREE.FogExp2(0x06111a, .022);
       const camera = new THREE.PerspectiveCamera(40, 1, .1, 80);
       const target = new THREE.Vector3(0, .15, 0);
-      let theta = 1.48, phi = .98, distance = 18.5;
+      let theta = 1.48, phi = 1.18, distance = 18.5;
       const world = new THREE.Group(); scene.add(world);
       const ambient = new THREE.AmbientLight(0x6aa9c6, 1.8); scene.add(ambient);
       const key = new THREE.DirectionalLight(0x75efff, 3.2); key.position.set(-6, 10, 8); scene.add(key);
