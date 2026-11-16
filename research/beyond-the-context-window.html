@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d13">
+  <meta name="description" content="David Bandtock on what an agent needs to carry forward between runs, and how DRAYN proposes to test continuity.">
+  <meta name="author" content="David Bandtock">
+  <title>Beyond the Context Window | DRAYN Research</title>
+  <link rel="canonical" href="https://drayn.online/research/beyond-the-context-window.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <style>
+    :root { color-scheme: dark; background: #080d13; color: #edf4f5; }
+    body { width: min(43rem, calc(100% - 2.5rem)); margin: auto; font: 1rem/1.7 "Instrument Sans", system-ui, sans-serif; }
+    a { color: #83f1dd; text-underline-offset: .22em; }
+    a:focus-visible { outline: 2px solid #83f1dd; outline-offset: 4px; }
+    nav, footer { padding-block: 1.2rem; }
+    nav { border-bottom: 1px solid #344854; }
+    footer { border-top: 1px solid #344854; margin-top: 3rem; }
+    header { margin-block: clamp(2rem, 8vw, 4rem) 2rem; }
+    h1 { font-size: clamp(2.25rem, 7vw, 4rem); line-height: 1.05; letter-spacing: -.045em; margin: 0; }
+    h2 { font-size: clamp(1.35rem, 4vw, 1.7rem); line-height: 1.25; margin: 2.3rem 0 .65rem; }
+    .subtitle { font-size: 1.2rem; color: #a7bac4; }
+    .byline { color: #a7bac4; }
+    li + li { margin-top: .6rem; }
+  </style>
+</head>
+<body>
+  <nav aria-label="Research navigation"><a href="../#research">DRAYN Research</a></nav>
+  <main>
+  <article>
+    <header>
+      <h1>Beyond the Context Window</h1>
+      <p class="subtitle">What an agent needs to carry forward between runs</p>
+      <p class="byline">David Bandtock · DRAYN Research · <time datetime="2026-11-16">16 November 2026</time></p>
+      <a href="./Beyond_the_Context_Window.pdf" download>Download PDF</a>
+    </header>
+    <p>On Friday, an agent is waiting for one more piece of information before it can finish a job. By Monday, the reply has arrived, but the process that started the work has stopped. The agent may even be running on a different model. Can it pick up where it left off?</p>
+    <p>A longer context window gives the model more of the record to work with. Kubicek and colleagues report attention experiments at ten million tokens using Latent Sparse Attention <a href="#ref-1">[1]</a>. To pick up an old job, the agent also needs to know which decisions still stand, what it has promised to do and who can approve its next step. The system has to carry that information from one run to the next.</p>
+    <h2>Resuming an unfinished task</h2>
+    <p>Say a purchasing agent has asked three suppliers for quotes. Two reply by Friday. The agent has been asked to compare all three when the last one comes in. It can update the comparison on its own, but it needs approval to place an order. On Monday the third quote arrives, after the workspace has moved to another runtime.</p>
+    <p>The reply should be enough to get the work moving again. The agent needs to find the original request, pull up the other two quotes and check which prices still apply. If one supplier has revised its price while the agent was idle, the comparison should use the new figure and keep a reference to the old one. The order still needs approval.</p>
+    <p>While the agent is idle, the task record needs to retain what it was asked to do, what it is waiting for, which quotes it has and what it has permission to do. The transcript can help explain how those decisions were made. When the next reply arrives, the system can load the relevant state and run the model again.</p>
+    <h2>When the record and the world disagree</h2>
+    <p>You could give the new model the whole transcript and ask it to reconstruct the job. For a short, low-risk task, that may be enough. The trade-off becomes clearer when the history contains several versions of the same quote. A message can say what the price was on Friday. The agent also needs to know whether the supplier replaced it, when the offer expires and which version the comparison actually used. Every fresh reconstruction gives the model another chance to make a different call about the same evidence.</p>
+    <p>A saved task record has its own failure mode. It can be perfectly preserved and still be out of date. Suppose the supplier withdraws the offer while the agent is idle. On Monday, the record gives the agent a place to start and a reason to check for changes before proceeding. Keeping a reference to the original messages matters here. If the stored summary and the supplier’s latest reply disagree, there is something to inspect and correct.</p>
+    <h2>Carrying authority across environments</h2>
+    <p>An agent can change models or runtimes if the new environment can read its saved state and enforce its permissions. Zhao and Zhao propose keeping identity, memory and executable state separate from the runtime components that can change <a href="#ref-2">[2]</a>. In the purchasing example, the new runtime might recover the quotes but have no way to enforce the original approval rule. In that case, the agent should flag the order for review and leave it pending.</p>
+    <p>Authority can change while the agent is away, too. Suppose someone approved an order on Friday, then the supplier raised the price on Monday. If approval covered only the original quote, the agent should send the revised order back for a decision. That means carrying forward the scope of the approval, including which quote it covered, and checking that it still applies when the agent is about to act. A line in the history saying “approved” is too little to make that call.</p>
+    <h2>What would count as continuity</h2>
+    <p>A provenance record can tell us where a quote came from and who approved a change. We also want to see what the agent does with that information. In our companion methods report <a href="#ref-3">[3]</a>, we propose testing an agent repeatedly before and after a move, using questions drawn from its own history. In this example, we would check whether it uses the revised price and still knows it needs approval to order.</p>
+    <p>A good answer on its own is weak evidence. A fresh agent might infer that purchases need approval from the wording of the question. We would ask the same questions of an agent that received no imported history, and repeat them in the original runtime to see how reliably it handled the task in the first place. The strongest probes depend on facts a fresh agent could not reasonably guess, such as which specific quote was superseded or which version an approval covered. If the migrated agent names the correct price but prepares the old order for approval, the failure belongs in the result.</p>
+    <h2>Using capabilities outside the agent</h2>
+    <p>The agent could ask an external service to compare the quotes. It can send the fields the service needs, keep a record of where the analysis came from and log any charge against the task. The task record and the approval decision stay with the agent and whoever has authority to approve the order.</p>
+    <p>For DRAYN, continuity is a property we can test on a particular task. In this case, success means the agent picks up the comparison, uses the right quote and stops at the point where someone else needs to decide. A useful test should also tell us where to look when that chain breaks. Losing the quote, misreading a revision and losing the ability to enforce approval are different failures, and each calls for a different fix.</p>
+    <h2>References</h2>
+    <ol>
+      <li id="ref-1">Kubicek et al. <a href="https://arxiv.org/abs/2610.42147">Latent Sparse Attention: Towards Subquadratic Ultra-Long Context Attention</a>. 2026.</li>
+      <li id="ref-2">Zhao and Zhao. <a href="https://arxiv.org/abs/2609.00546">Runtime-Independent Persistent Agents: Preserving Identity, Memory, and Code Across Models, Harnesses, and Servers</a>. 2026.</li>
+      <li id="ref-3">DRAYN Research. <a href="https://zenodo.org/records/24246854">Importing an Agent’s Memory Is Not the Same as Keeping the Agent</a>. Companion methods report, 2026.</li>
+    </ol>
+  </article>
+  </main>
+  <footer><a href="../#research">Back to DRAYN Research</a></footer>
+</body>
+</html>
